@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>accountActivationConstantScoped</name>
+        <script><![CDATA[function accountActivationConstantScoped() {
+	this.applicationName = "AccountActivation";
+	this.catItemDesc = "CBIIT Account Activation Application";
+	this.names = ['name', 'title', 'id_number', 'manager', 'tenure_track', 'senior_scientist', 'staff_scientist','administrative','substantial_research','need_access','oversight', 'type'];
+	this.checkboxNames = ['tenure_track','senior_scientist','staff_scientist','administrative','substantial_research','need_access','oversight'];
+	this.textField = ['name', 'title', 'id_number', 'manager'];
+	this.approvalAction = 'approved';
+	this.rejectAction = 'rejected';
+	this.dsRole = "Direct Supervisor";
+	this.sdsoRole = "Scientific Directors / Signing Official";
+	this.getApplicationName = function() {return this.applicationName;};
+	this.getCatItemDesc = function() {return this.catItemDesc;};
+	this.getNames = function(){return this.names};
+	this.getCheckboxNames = function() {return this.checkboxNames};
+	this.getTextField = function() {return this.textField;};
+	this.getApprovalAction = function() {return this.approvalAction;};
+	this.getRejectAction = function() {return this.rejectAction;};
+	this.getDsRole = function() {return this.dsRole;};
+	this.getSDSORole = function() {return this.sdsoRole;};
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-06-15 15:00:38</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>b3958190dbba134054d8ff621f96198f</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>accountActivationConstantScoped</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sp_angular_provider_b3958190dbba134054d8ff621f96198f</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-06-15 15:01:25</sys_updated_on>
+        <type>service</type>
+    </sp_angular_provider>
+</record_update>

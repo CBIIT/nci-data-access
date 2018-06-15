@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope, $http, accountActivationConstantScoped, saveRequestDataScoped, accountActivationSubmissionScoped, accountActivationCheckSubmitterScoped) {
+  /* widget controller */
+  var c = this;
+  var sessionId = c.data.info.sessionId;
+	var userId = c.data.info.userId;
+	var catId;
+	var itemArray;
+	
+	$.ajax({
+			dataType: "json",
+			type: "GET",
+			url: "/api/x_naci_account_act/accountactivationscoped/getCatId",
+			beforeSend: function(xhr){ xhr.setRequestHeader('X-UserToken', sessionId); },
+			async: false,
+			success: function(data){
+				catId = data.result.id;
+				console.log(catId);
+			},
+			error: function(data){
+				alert("ERROR");
+			}
+	});	
+	$.ajax({
+			dataType: "json",
+			type: "GET",
+			url: "/api/x_naci_account_act/accountactivationscoped/getItemArray",
+			beforeSend: function(xhr){ xhr.setRequestHeader('X-UserToken', sessionId); },
+			async: false,
+			success: function(data){
+				itemArray = data.result.variables;
+				console.log(JSON.stringify(itemArray));
+			},
+			error: function(data){
+				alert("ERROR");
+			}
+		});	
+	
+	$scope.form = {
+		name:"",
+		title:"",
+		id_number:"",
+		manager: "",
+		manager_id: "", 
+		tenure_track: false,
+		senior_scientist: false,
+		staff_scientist: false,
+		administrative: false,
+		substantial_research: false,
+		need_access: false,
+		oversight: false,
+		type: "",
+		userSelected: "No", 
+		confirm: ""
+	};
+	
+	window.setFormValues = function(value, doNotApply) {
+		for (var key in value) {
+			$scope.form[key] = value[key];
+		}
+		if (!doNotApply)
+			$scope.$apply();
+	};	
+
+	$("#piName").autocomplete({
+		delay: 500,
+		source: function(request, response) {
+			$('.ui-autocomplete').css('display', 'block');
+			var term = $('#piName').val();
+			var temp = '';
+			if (term.indexOf(',') >= 0) {
+				temp = term.split(',');
+				var length = temp.length;
+				if (length > 1) {
+					term = temp[1].trim() + " " + temp[0].trim();
+				} else {
+					term = temp[0];
+				}
+			}
+			var req = {
+				method: 'GET',
+				url: '/api/x_naci_account_act/accountactivationscoped/fetchUserList',
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader('X-UserToken', sessionId);
+				},
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				params: {
+					'term': term
+				}
+			};
+			$http(req).then(handleResponse, handleError);
+
+			function handleResponse(responseData) {
+				var result = responseData.data.result;
+				response(result);
+			}
+
+			function handleError(response) {
+				console.error(response);
+				alert('ERROR');
+			}
+		},
+		autoFocus: true,
+		select: function(event, ui) {
+			console.log(event, ui);
+			var title = ui.item.title;
+			var id_number = ui.item.id_number;
+			var manager = ui.item.manager;
+			var manager_id = ui.item.manager_id;
+			if (title != null && title.trim().length > 1) {
+				$scope.form.title = title;
+			} else {
+				$scope.form.title = "";
+			}
+			if(id_number != null && id_number.trim().length > 0){
+				$scope.form.id_number = id_number;
+			}else{
+				$scope.form.id_number = "";
+			}
+			if(manager != null && manager.trim().length > 0){
+				$scope.form.manager = manager;
+				$scope.form.manager_id = manager_id;
+			}else{
+				$scope.form.manager = "";
+				$scope.form.manager_id = "";
+			}
+			$scope.form.userSelected = "selected";
+			$scope.$apply();
+		}
+	});
+	
+	$scope.changeModalSize = function(){
+		if($scope.form.type == 'intramural'){
+			$('#content').css('height', '750px');
+		}
+		if($scope.form.type == 'extramural'){
+			$('#content').css('height', '850px');
+		}
+			$('#content').css('overflow-y', 'auto');
+			$('#content').css('overflow-x', 'hide');
+	}
+	$scope.saveData = function(){
+		//var type = $('#applicantType').val();
+		saveData();
+	};
+	
+	$scope.checkConfirm = function(answer){
+
+		if(answer == 'yes'){
+			if($scope.form.title.trim().length == 0 || $scope.form.id_number.trim().length == 0 || $scope.form.manager.trim().length == 0){
+				$('#userCheckMessage').html("All required fields cannot be empty, please contact the Authorizing Official to get NED updated");
+			  $('#userCheckDiv').modal('show');
+				$scope.form.confirm = '';
+			}else{
+				$scope.form.confirm = 'yes';
+				$scope.form.type = "intramural";
+				$scope.changeModalSize();
+			}
+		}else if(answer == 'no'){
+			 $('#userCheckMessage').html("Please contact the Authorizing Official to get NED updated");
+			 $('#userCheckDiv').modal('show');
+		}	
+	}
+	
+	$scope.loadSubmitRequest = function(){
+		$('#submitRequestMessage').html("<br/><b>Are you sure you want to submit this form?</b><br/>");
+		$('#submitRequestDiv').modal('show');
+	}
+	
+	$scope.closeRequestConfirm = function(){
+		$('#submitRequestDiv').modal('hide').on('hidden.bs.modal', function() {
+			$('body').addClass('modal-open');
+		})
+	}
+	$scope.closeUserCheckConfirm = function(){
+		$('#userCheckDiv').modal('hide').on('hidden.bs.modal', function() {
+			$('body').addClass('modal-open');
+		})
+	}	
+		
+	$scope.submitData = function(){
+		var variables = {};
+		var names = accountActivationConstantScoped.getNames();
+
+		for(var i = 0; i < names.length; i++){
+			if(names[i] == 'name'){
+				variables[names[i]] = $('#piName').val();
+			}else{
+				variables[names[i]] = $scope.form[names[i]];
+			}
+		}
+		if(!validation()){
+			$('#errMessage').hide();
+			variables.requested_for = userId;
+			variables.opened_by = userId;			
+			variables.cat_item = catId; 
+			variables.short_description ="CBIIT Account Activation Application";
+			variables.contact_type="Web";
+			variables.manager = $scope.form.manager_id;
+			variables.variables = itemArray;
+			var param = JSON.stringify(variables);
+			$('#submitRequestDiv').modal('hide').on('hidden.bs.modal', function() {
+					$('body').addClass('modal-open')
+			});
+			sendSubmitRequest(param);
+			$('#permissionForm').modal('hide');
+		}else{
+			$('#submitRequestDiv').modal('hide').on('hidden.bs.modal', function() {
+					$('body').addClass('modal-open')
+			});		
+			$('#errMessage').show();
+		}
+	};
+	
+	$scope.cancel = function(){
+		clearData();
+		$('#permissionForm').modal('hide');
+	};
+	
+	function sendSubmitRequest(param){
+		accountActivationSubmissionScoped.submitRequest(param, sessionId).then(handleRequest, handleError);
+		function handleRequest(response){
+			console.log('in handleRequest', response);
+			var saveId = $('#savedId').val();
+			if(saveId != null && saveId.trim().length > 0){
+				removeSavedData();
+			}
+		}
+		function handleError(error){
+			console.log(error);
+			alert("ERROR!");
+		}
+		
+	}
+	
+	function validation(){
+		cleanError();
+		var error = false;
+		var name = $('#piName').val();
+		
+		if(name == null || name.trim().length == 0){
+			$('#piName').css('background-color', "yellow");
+			error = true;
+		}else{
+			  var exist = checkSubmission(name);
+				if (exist){
+					$('#errMessage').html("<font color='red'>" + name + " has already submitted the permission form previously</font>" );
+					return true;
+				}
+		}
+		if($scope.form.title == null || $scope.form.title.trim().length == 0){
+			$('#title').css('background-color', "yellow");
+			error = true;			
+		}
+		if($scope.form.id_number == null || $scope.form.id_number.trim().length == 0){
+			$('#id_number').css('background-color', "yellow");
+			error = true;					
+		}
+		if($scope.form.type == 'intramural'){
+			if($scope.form.tenure_track == false && $scope.form.senior_scientist == false && $scope.form.staff_scientist == false){
+				$('#intramural').css('background-color','yellow');
+				error = true;
+			}
+		}else if($scope.form.type == 'extramural'){ //&& $scope.form.oversight == false
+			if($scope.form.administrative == false && $scope.form.substantial_research == false && $scope.form.need_access == false){
+				$('#extramural').css('background-color','yellow');
+				error = true;
+			}
+		}
+		if(error){
+			$('#errMessage').html("<font color='red'>Please fill in all required fields</font>" );
+		}
+		return error;
+	}
+	
+	function checkSubmission(name){
+			//validate if the user has been submitte a request before nor not
+		  var exist = accountActivationCheckSubmitterScoped.checkSubmitter(name, sessionId);
+		
+		  return exist;
+	}
+	function saveData() {
+		//$scope.form.type = type;
+		$scope.form.name = $('#piName').val();
+		var param = $scope.form;
+		param.applicationName = accountActivationConstantScoped.getApplicationName();
+		param.userId = userId;
+		param.action = $('#action').val();
+		if($('#action').val() == 'update'){
+			param.savedId = $('#savedId').val();
+		}	
+		var data = JSON.stringify(param);
+		saveRequestDataScoped.saveData(data, sessionId);
+		clearData();
+		$('#permissionForm').modal('hide');
+	}
+
+	function clearData(){
+		$scope.form.name = "";
+		$('#piName').val("");
+		$scope.form.title = "";
+		$scope.form.id_number = "";
+		$scope.form.manager = "";
+		$scope.form.tenure_track = false;
+		$scope.form.senior_scientist = false;
+		$scope.form.staff_scientist = false;
+		$scope.form.administrative = false;
+		$scope.form.substantial_research = false;
+		$scope.form.need_access = false;
+		$scope.form.oversight = false;
+		$scope.form.type =  "";
+		$scope.form.userSelected = "No";
+		$scope.form.confirm = "";
+		$('#content').css('height', '500px');
+		$('#content').css('overflow-y', 'auto');
+		$('#content').css('overflow-x', 'hide');
+		cleanError();
+	}
+	
+	function cleanError(){
+		  $('#errMessage').hide();
+			$('#piName').css('background-color','');
+			$('#title').css('background-color','');
+			$('#id_number').css('background-color','');		
+		  $('#intramural').css('background-color','');
+		  $('#extramural').css('background-color','');
+	}
+	
+	function removeSavedData(){
+		var param = {};
+		param.action = 'delete';
+		param.savedId = $('#savedId').val();
+		var data = JSON.stringify(param);
+		saveRequestDataScoped.saveData(data, sessionId);
+	}
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.modal-dialog1 {
+    width: 900px;
+    margin: 30px auto;
+    position: relative;
+}
+.input-margin {
+	margin-top:  10px; 
+}
+
+.label-margin {
+ 	margin-top: 15px; 
+  display: block;
+}
+
+.box {
+  border:solid 0.5px black;
+}
+
+legend.scheduler-border {
+  font-size: 16px;
+  font-weight: bold;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>aafs</id>
+        <internal>false</internal>
+        <link/>
+        <name>Account Activation Form Scoped</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	var session_id = gs.getSession().getSessionToken();
+	var my_sys_id = gs.getUserID();
+ 
+
+	data.info = {
+		userId: my_sys_id,
+		sessionId: session_id
+	};
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-06-14 20:32:36</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
+        <sys_mod_count>32</sys_mod_count>
+        <sys_name>Account Activation Form Scoped</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-06-15 20:17:41</sys_updated_on>
+        <template><![CDATA[<div>
+  <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
+	<div class="modal-dialog1">
+  	<div class="modal-content" id="content" style="height:500px; overflow-y:auto; overflow-x: hidden;">
+         <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" ng-click="cancel()" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+               <h4  class="modal-title">Permission Form for NIH Staff Access to Controlled-Access Data in dbGaP</h4>
+         </div>      
+         <div class="modal-body">
+             <div class="col-md-12" style="display:none;" id="errMessage"><font color="red">Please fill in all required fields</font> </div>
+             <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Principal Investigator</legend>
+                    <div class="row">
+                      <div class="col-md-3 form-group"><label class="label-margin control-label text-right"><font color="red">*</font>Name</label></div>
+                      <div class="col-md-9 ui-front"><input id="piName" class="form-control input-margin" placeholder="Please enter your name" size="80"/></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>Title</label></div>
+                      <div class="col-md-9"><input type="text" id="title" class="form-control input-margin" ng-model="form.title" placeholder="Please enter your title" size="80" readonly/></div>
+                    </div>  
+                    <div class="row">
+                      <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>NIH ID Number</label></div>
+                      <div class="col-md-9"><input type="text" id="id_number" class="form-control input-margin" ng-model="form.id_number" placeholder="Please enter your NIH ID Number" size="80" readonly/></div>
+                    </div>  
+                    <div class="row">
+                      <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>Project Manager</label></div>
+                      <div class="col-md-9"><input type="text" id="id_number" class="form-control input-margin" ng-model="form.manager" placeholder="Please enter your Project Namager's Name" size="80" readonly/></div>
+                   </div>
+                	 <div class="row"  ng-show="form.userSelected == 'selected'">
+                    	<div class="col-md-3 label-margin">&nbsp;</div>
+							      	<div class="col-md-9 label-margin"><label>Are you sure the information above are correct? &nbsp; &nbsp; &nbsp;<input type="radio" name="confirmed" ng-model="form.confirm" ng-click="checkConfirm('yes');" value="yes"/>&nbsp;Yes &nbsp;&nbsp;&nbsp;<input type="radio" name="confirmed" ng-model="form.confirm" ng-click="checkConfirm('no');" value="no"/>&nbsp; No</label></div>
+               		 </div>
+           	</fieldset>
+            <fieldset class="scheduler-border" ng-show="form.confirm == 'yes'">
+                   <legend class="scheduler-border"></legend>
+                	<div class="row">
+											<div class="col-md-6 label-margin"><label><input type="radio" name="typeApplicant" ng-model="form.type" ng-click="changeModalSize();" value="intramural" checked/>&nbsp;&nbsp;&nbsp;Eligible Intramural Scientist</label></div>                    
+                    	<div class="col-md-6 label-margin"><label><input type="radio" name="typeApplicant" ng-model="form.type" ng-click="changeModalSize();" value="extramural"/>&nbsp;&nbsp;&nbsp;Eligible Extramural Scientific Staff</label></div>
+               		</div>
+           	</fieldset> 
+             <fieldset class="scheduler-border" ng-show="form.type == 'intramural'">
+                   <legend class="scheduler-border"><font color='red'>*</font><label id="intramural">Professional Designations</label></legend>
+                   <div class="row">
+                     <div class="col-md-12">
+                       <label><input type="checkbox" ng-model="form.tenure_track"/>&nbsp;&nbsp;Tenure-track Investigator</label>
+                     </div>
+              	 	 </div>  
+                   <div class="row">
+               			 <div class="col-md-12">
+                       <label><input type="checkbox" ng-model="form.senior_scientist"/>&nbsp;&nbsp;Senior Scientist/Investigator/Clinician</label>
+                     </div>
+                   </div>
+                   <div class="row">  
+                     <div class="col-md-12">
+                       <label><input type="checkbox" ng-model="form.staff_scientist"/>&nbsp;&nbsp;Staff Scientist</label>
+                     </div>
+               		 </div>
+           	</fieldset> 
+             <fieldset class="scheduler-border" ng-show="form.type == 'extramural'">
+                   <legend class="scheduler-border"><font color='red'>*</font><label id="extramural">Reason for seeking access</label></legend>
+                   <div class="row">
+                     <div class="col-md-12">
+                       <label><input type="checkbox" ng-model="form.administrative"/>&nbsp;&nbsp; Administrative responsibility for dbGaP data</label>
+                     </div>
+               		 </div>  
+                   <div class="row">
+               				<div class="col-md-12">
+                       <label><input type="checkbox" ng-model="form.substantial_research"/>&nbsp;&nbsp;Substantial research involvement in the award that generated the data</label>
+                     </div>
+               		 </div>
+                   <div class="row"> 
+                     <div class="col-md-12">
+                       <label><input type="checkbox" ng-model="form.need_access"/>&nbsp;&nbsp;Need access to carry out research unrelated to portfolio management responsibilities</label>
+                     </div>
+               		 </div>
+               		 <div class="row">
+                     <div class="col-md-12">
+	                      <label><input type="checkbox" ng-model="form.oversight"/>&nbsp;&nbsp;My supervisor will provide oversight for my use of the dbGaP data </label>
+                     </div>
+               		 </div> 
+           	</fieldset> 
+            <fieldset class="scheduler-border" ng-show="form.type == 'extramural'">
+                   <legend class="scheduler-border"></legend>
+               		 <div class="row">
+                     <div class="col-md-12">
+	                      <label><input type="checkbox" ng-model="form.oversight"/>&nbsp;&nbsp;My supervisor will provide oversight for my use of the dbGaP data </label>
+                     </div>
+               		 </div> 
+           	</fieldset> 
+            <div class="row" style="text-align:center">
+              <button class="btn btn-primary" ng-click="saveData()" style="width: 80px;">SAVE</button>&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-primary" ng-click="loadSubmitRequest()" ng-show="form.type.trim().length != 0" style="width: 80px;">SUBMIT</button>&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-primary" ng-click="cancel()" style="width: 80px;">CANCEL</button>&nbsp;&nbsp;&nbsp;
+              <input type="hidden" id="action" value="save"/>
+              <input type="hidden" id="savedId"/>
+           </div>
+      	</div>
+    </div>
+   </div>
+  </div>
+</div>
+
+<div id="submitRequestDiv" class="modal fade" data-keyborad="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="height:200px; overflow-y:auto; overflow-x: hidden;">
+            <div class="modal-header">
+                <div>
+                    Confirmation Dialog
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="submitRequestMessage" align="center">
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="col-md-12" align="center">
+              <button class="btn btn-primary" ng-click="submitData()" data-dismiss="modal">YES</button> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-primary" ng-click="closeRequestConfirm();" data-dismiss="modal">NO</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="userCheckDiv" class="modal fade" data-keyborad="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="height:200px; overflow-y:auto; overflow-x: hidden;">
+            <div class="modal-header">
+                <div>
+                    Information Dialog
+                </div>
+            </div>
+            <div class="row">
+                 <br/><br/>
+                <div class="col-md-12" id="userCheckMessage" align="center">
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="col-md-12" align="center">
+              <button class="btn btn-primary" ng-click="closeUserCheckConfirm();" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+]]></template>
+    </sp_widget>
+</record_update>

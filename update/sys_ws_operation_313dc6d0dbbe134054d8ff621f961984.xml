@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>POST</http_method>
+        <name>submitRequestData</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	names = ['name', 'title', 'id_number', 'manager', 'tenure_track', 'senior_scientist', 'staff_scientist','administrative','substantial_research','need_access','oversight', 'type', 'projectId'];
+    var message = '';
+    var jsonData = [];
+    var variables = {};
+    var body = request.body.data; 
+	var requested_for = body.requested_for;
+	var opened_by = body.opened_by;
+	var manager = body.manager.toString();
+	var cat_item_id = body.cat_item;
+	var short_description = body.short_description;
+	var contact_type = body.contact_type;
+	var itemIds = body.variables;
+    var comments = body.comments;
+	
+	var gr_request = new GlideRecord('sc_request');
+	
+	gr_request.initialize();
+	gr_request.u_cms_submitted = true;
+	gr_request.requested_for = requested_for;
+	gr_request.opened_by = opened_by;
+	gr_request.contact_type = contact_type;
+	var request_id = gr_request.insert();
+	
+	//create a record in sc_requested_item table
+	var gr_requested_item = new GlideRecord("sc_req_item");
+	gr_requested_item.initialize();
+	gr_requested_item.u_cms_submitted = true;
+	gr_requested_item.cat_item = cat_item_id;
+	gr_requested_item.short_description = short_description;
+	gr_requested_item.request = request_id;
+	gr_requested_item.u_director = manager; //this is the approver
+	if(contact_type != null && contact_type != 'Web'){
+		var gr_tracking = new GlideRecord('u_ccr_tracking_t');
+		gr_tracking.addQuery('u_orgid',contact_type);
+		gr_tracking.query();
+		gr_tracking.next();
+		var version = gr_tracking.getValue('u_version');
+		contact_type = contact_type + "," + version;
+	}
+	gr_requested_item.contact_type = contact_type;
+	if(comments != null && comments.length > 20){
+		gr_requested_item.comments = comments;
+	}
+	var submitted_id = gr_requested_item.insert();
+	var number = gr_requested_item.number;
+	
+	//create records in sc_item_option table
+	for(var i = 0; i < names.length; i++){
+		var gr_answers = new GlideRecord("sc_item_option");
+		gr_answers.initialize();
+		gr_answers.item_option_new = itemIds[names[i]];
+		if(names[i] == 'projectId'){
+			var gdt = new GlideDateTime(); 
+			var year = gdt.getYear();
+			gr_answers.value = "CA-"+ year + "-" +number.substring(8);
+		}else{
+			gr_answers.value =  body[names[i]];			
+		}
+		gr_answers.order = i+1;
+		var answers_sys_id = gr_answers.insert();
+		
+		var gr_m2m = new GlideRecord("sc_item_option_mtom");
+		gr_m2m.initialize();
+		gr_m2m.sc_item_option = answers_sys_id;
+		gr_m2m.request_item = submitted_id;
+		gr_m2m.insert();
+	}
+     
+	//create a record in sc_req_item table
+	var gr_requested_item2 = new GlideRecord("sc_req_item");
+	gr_requested_item2.get(submitted_id);
+	var gdt1 = new GlideDateTime();
+	gr_requested_item2.due_date = gdt1.getDisplayValue();
+	gr_requested_item2.update();
+	
+	jsonData.push({
+           submit_id: (submitted_id).toString(),
+		   number: manager
+     });
+	
+	return jsonData[0];
+	
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_naci_account_act/accountactivationscoped/submitRequestData</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/submitRequestData</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-06-15 20:13:30</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>313dc6d0dbbe134054d8ff621f961984</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>submitRequestData</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sys_ws_operation_313dc6d0dbbe134054d8ff621f961984</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-06-15 20:13:30</sys_updated_on>
+        <web_service_definition display_value="accountActivationScoped">7e930e58db7e134054d8ff621f96195e</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

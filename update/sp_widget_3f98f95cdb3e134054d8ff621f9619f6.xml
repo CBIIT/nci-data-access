@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope,spUtil,accountActivationConstantScoped, getSavedRequestDataScoped, saveRequestDataScoped) {
+  /* widget controller */
+  var c = this;
+  $scope.count = c.data.savedData.length;
+  var sessionId = c.data.info.sessionId;
+  var userId = c.data.info.userId;
+	
+	setTimeout(function() {
+	  $('.collapse').on('shown.bs.collapse', function() {
+		  $(this).parent().find(".fa-plus-square").removeClass("fa-plus-square").addClass("fa-minus-square");
+		}).on('hidden.bs.collapse', function() {
+		  $(this).parent().find(".fa-minus-square").removeClass("fa-minus-square").addClass("fa-plus-square");
+	  });	
+	}, 0);
+	
+	$scope.sort = function(keyname){
+	   $scope.sortKey = keyname;
+	   $scope.reverse = !$scope.reverse;
+	};
+	
+	$scope.listDetails = function(id){
+		$('#errMessage').hide();
+		var textField = accountActivationConstantScoped.getTextField();
+		var checkbox = accountActivationConstantScoped.getCheckboxNames();
+		getSavedRequestDataScoped.getSavedData(id).then(handleRequest, handleError);
+		function handleRequest (result){
+			var type = result.type;
+			console.log(result);
+			$('#piName').val(result.name);
+			window.setFormValues(result);
+			$('#action').val('update');
+			$('#savedId').val(id);
+			$('#permissionForm').modal('show');
+		}
+		function handleError(error){
+			alert('ERROR');
+		}
+	}
+	
+	$scope.removeItem = function(id){
+		$('#removeDraftMessage').html("Are you sure you want to remove this record?");
+		$('#removeItemId').val(id);
+		$('#removeDraftDiv').modal('show');
+	}
+
+	$scope.removeDraftRecord = function(){
+		var param = {};
+		param.action = 'delete';
+		param.savedId = $('#removeItemId').val();
+		var data = JSON.stringify(param);
+		saveRequestDataScoped.saveData(data, sessionId);
+		$('#removeDraftDiv').modal('hide');	
+	}
+	
+	$scope.closeRequestConfirm = function(){
+		$('#removeDraftDiv').modal('hide');	
+	}
+	
+	spUtil.recordWatch($scope, "u_dceg_rrs_saved_request", "", function(name, data) {  
+			spUtil.update($scope);
+	});	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>aasts</id>
+        <internal>false</internal>
+        <link/>
+        <name>Account Activation Saved Table Scoped</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+  data.savedData = [];
+	var session_id = gs.getSession().getSessionToken();
+	var userId = gs.getUserID();
+	var user = gs.getUser();
+
+	data.info = {
+		userId: userId,
+		sessionId: session_id
+	};	
+	
+	var appName = "AccountActivation";
+	var gr_saved_items = new GlideRecord('u_dceg_rrs_saved_request');
+        gr_saved_items.addQuery('u_userid', userId);
+	      gr_saved_items.addQuery('u_application_name', appName); 
+        gr_saved_items.orderByDesc('sys_created_on');
+        gr_saved_items.query();
+	
+	while(gr_saved_items.next()){
+		var queryStr = gr_saved_items.getValue("u_value");
+		var variables = JSON.parse(queryStr);
+		var createOn = gr_saved_items.getValue("sys_created_on").toString().split(" ")[0]; 
+		data.savedData.push({
+			name: variables.name,
+			title: variables.title,
+			id_number: variables.id_number,
+			createdOn: createOn,
+			sysId: gr_saved_items.getValue("sys_id")
+		});
+	}  
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-06-15 18:43:08</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>3f98f95cdb3e134054d8ff621f9619f6</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>Account Activation Saved Table Scoped</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sp_widget_3f98f95cdb3e134054d8ff621f9619f6</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-06-15 19:05:32</sys_updated_on>
+        <template><![CDATA[<br/><br/>
+<div ng-if="c.data.savedData.length > 0" class="row">
+    <div class="panel panel-success">
+        <div class="panel-heading" role="tab" id="heading_savedItems">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-target="#collapsesavedItems" aria-expanded="true" aria-controls="collapsesavedItems">
+    					<span class="accordion_icon"><i class="fa fa-minus-square"></i></span> Draft dbGaP Data Access Permission Form <span class="badge" id="ritm_count">{{c.data.savedData.length}}</span>
+						</a>
+            </h4>
+        </div>
+        <div id="collapsesavedItems" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_savedItems">
+            <table class="table table-bordered table-striped table-condensed">
+                <tr>
+                    <th ng-click="sort('name')">Name <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                    <th ng-click="sort('title')">Title<span class="glyphicon sort-icon" ng-show="sortKey=='title'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+										<th ng-click="sort('id_number')">NIH ID<span class="glyphicon sort-icon" ng-show="sortKey=='id_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>                  
+                    <th ng-click="sort('createdOn')">Created Date <span class="glyphicon sort-icon" ng-show="sortKey=='createdOn'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span></th>
+                    <th>Actions</th>
+                </tr>
+                <tr dir-paginate="data in c.data.savedData|filter:search|orderBy:sortKey:reverse|itemsPerPage:pageSize" pagination-id="savedDataPagination">
+                    <td class="ritm_number">{{data.name}}</td>
+                    <td class="ritm_cat_item">{{data.title}}</td>
+                    <td class="ritm_cat_item">{{data.id_number}}</td>
+                    <td class="ritm_cat_item">{{data.createdOn}}</td>
+                    <td><button ng-click="listDetails(data.sysId);" class="btn btn-sm btn-primary" style="width: 70px; text-align: center;"> Edit</button>&#160;
+                        <button ng-click="removeItem(data.sysId);" class="btn btn-sm btn-warning" style="width: 70px; text-align: center;">Delete</button>
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <table width="100%" border="0">
+                    <tr>
+                        <td width="70%">
+                            <dir-pagination-controls pagination-id="savedDataPagination" direction-links="true" boundary-links="true"></dir-pagination-controls>
+                        </td>
+                        <td width="25%" align="right"><label>Items per page&#160;&#160;</label></td>
+                        <td width="5%" align="right">
+                            <select class="form-control" ng-model="pageSize" ng-init="pageSize='10'" style="width:80px;">
+										<option value="5">5</option>
+										<option value="10">10</option>
+										<option value="15">15</option>
+										<option value="20">20</option>
+									</select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="removeDraftDiv" class="modal fade" data-keyborad="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="height:200px; overflow-y:auto; overflow-x: hidden;">
+            <div class="modal-header">
+                <div>
+                    Confirmation Dialog
+                </div>
+            </div>
+            <div class="row">
+              <br/>
+                <div class="col-md-12" id="removeDraftMessage" align="center">
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="col-md-12" align="center">
+              <br/><br/>
+              <button class="btn btn-primary" ng-click="removeDraftRecord()" style="width: 70px; text-align: center;">YES</button> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-primary" ng-click="closeRequestConfirm();" style="width: 70px; text-align: center;">NO</button>
+            </div>
+            <input type="hidden" id="removeItemId"/>
+        </div>
+    </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

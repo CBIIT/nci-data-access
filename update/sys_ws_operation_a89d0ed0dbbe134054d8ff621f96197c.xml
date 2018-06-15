@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>GET</http_method>
+        <name>withdrawRequest</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+      var jsonArr = [];
+	  var sysId = request.queryParams.sysId;
+      var gr = new GlideRecord('sc_req_item');
+      gr.addQuery('sys_id',sysId); //to delete one record
+      gr.query();
+      gr.next();
+      gr.deleteRecord();
+	
+	  jsonArr.push({
+		 message: "succeed" 
+	  });
+
+	return jsonArr;
+	
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_naci_account_act/accountactivationscoped/withdrawRequest</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/withdrawRequest</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-06-15 20:15:05</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>a89d0ed0dbbe134054d8ff621f96197c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>withdrawRequest</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sys_ws_operation_a89d0ed0dbbe134054d8ff621f96197c</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-06-15 20:15:05</sys_updated_on>
+        <web_service_definition display_value="accountActivationScoped">7e930e58db7e134054d8ff621f96195e</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

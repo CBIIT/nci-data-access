@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>POST</http_method>
+        <name>updateRequestAction</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	   var jsonObj = {};
+	   var data = request.body.data;
+       var approval_id = data.approval_id;
+       var comments = data.approval_comments;
+       var action= data.action;
+       var role = data.role;
+
+       var gr1 = new GlideRecord("sysapproval_approver");
+       gr1.addQuery("sys_id", approval_id);
+       gr1.query();
+       gr1.next();
+       gr1.state=action;
+       gr1.comments.setJournalEntry( '(' + action + ') ' +comments + '(role)' + role + '(ENDROLE)' + gs.getUser().getFirstName() + ' ' + gs.getUser().getLastName() + 'ENDCOMMENTS', gs.getUserID());
+       gr1.update();
+	   
+	   jsonObj = {
+		   status : data
+	   };
+	
+	  return jsonObj;
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_naci_account_act/accountactivationscoped/updateRequestAction</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/updateRequestAction</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-06-15 20:14:18</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>196d4ad0dbbe134054d8ff621f961967</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>updateRequestAction</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sys_ws_operation_196d4ad0dbbe134054d8ff621f961967</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-06-15 20:14:18</sys_updated_on>
+        <web_service_definition display_value="accountActivationScoped">7e930e58db7e134054d8ff621f96195e</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>
