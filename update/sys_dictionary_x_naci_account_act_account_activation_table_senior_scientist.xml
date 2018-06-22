@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update>
-    <sys_dictionary action="INSERT_OR_UPDATE" element="" table="x_naci_account_act_account_activation_table">
+    <sys_dictionary action="INSERT_OR_UPDATE" element="senior_scientist" table="x_naci_account_act_account_activation_table">
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
@@ -15,7 +15,7 @@
         <choice/>
         <choice_field/>
         <choice_table/>
-        <column_label/>
+        <column_label>Senior Scientist</column_label>
         <comments/>
         <create_roles/>
         <default_value/>
@@ -28,12 +28,12 @@
         <dynamic_creation_script/>
         <dynamic_default_value/>
         <dynamic_ref_qual/>
-        <element/>
+        <element>senior_scientist</element>
         <element_reference>false</element_reference>
         <foreign_database/>
-        <internal_type display_value="Collection">collection</internal_type>
+        <internal_type display_value="">string_full_utf8</internal_type>
         <mandatory>false</mandatory>
-        <max_length>40</max_length>
+        <max_length>255</max_length>
         <name>x_naci_account_act_account_activation_table</name>
         <next_element/>
         <primary>false</primary>
@@ -51,18 +51,18 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2018-06-14 15:39:28</sys_created_on>
+        <sys_created_on>2018-06-18 16:20:10</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>19741658dbbe134054d8ff621f96192d</sys_id>
+        <sys_id>c994f819db32d34054d8ff621f961971</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>x_naci_account_act_account_activation_table</sys_name>
+        <sys_name>Senior Scientist</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
-        <sys_update_name>sys_dictionary_x_naci_account_act_account_activation_table_NULL</sys_update_name>
-        <sys_updated_by>system</sys_updated_by>
-        <sys_updated_on>2018-06-15 20:44:47</sys_updated_on>
+        <sys_update_name>sys_dictionary_x_naci_account_act_account_activation_table_senior_scientist</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-06-18 16:20:10</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <u_model_id/>

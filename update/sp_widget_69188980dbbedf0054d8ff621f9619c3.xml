@@ -106,7 +106,7 @@
 		},
 		autoFocus: true,
 		select: function(event, ui) {
-			console.log(event, ui);
+			resetPermissionForm();
 			var title = ui.item.title;
 			var id_number = ui.item.id_number;
 			var manager = ui.item.manager;
@@ -337,6 +337,11 @@
 		var data = JSON.stringify(param);
 		saveRequestDataScoped.saveData(data, sessionId);
 	}
+	function resetPermissionForm(){
+		$scope.form.userSelected = "";
+		$scope.form.confirm = "";
+		$scope.form.type="";
+	}
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>.modal-dialog1 {
@@ -391,7 +396,7 @@ legend.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>32</sys_mod_count>
+        <sys_mod_count>34</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -399,7 +404,7 @@ legend.scheduler-border {
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-06-15 20:17:41</sys_updated_on>
+        <sys_updated_on>2018-06-15 20:53:01</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">

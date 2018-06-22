@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database>
-    <element extends="task" label="Account Activation Table" max_length="40" name="x_naci_account_act_account_activation_table" type="collection"/>
+    <element extends="task" label="Account Activation Table" max_length="40" name="x_naci_account_act_account_activation_table" type="collection">
+        <element label="Administrtive" max_length="255" name="administrtive" type="string_full_utf8"/>
+        <element label="NIH ID Number" max_length="512" name="id_number" type="string_full_utf8"/>
+        <element label="Manager" max_length="500" name="manager" type="string_full_utf8"/>
+        <element label="Name" max_length="500" name="name" type="string_full_utf8"/>
+        <element label="Need Access" max_length="255" name="need_access" type="string_full_utf8"/>
+        <element label="Oversight" max_length="255" name="oversight" type="string_full_utf8"/>
+        <element label="Project Id" max_length="255" name="projectid" type="string_full_utf8"/>
+        <element label="SDSO" max_length="255" name="sdso" type="string_full_utf8"/>
+        <element label="Senior Scientist" max_length="255" name="senior_scientist" type="string_full_utf8"/>
+        <element label="Staff Scientist" max_length="255" name="staff_scientist" type="string_full_utf8"/>
+        <element label="Substantial Research" max_length="255" name="substantial_research" type="string_full_utf8"/>
+        <element label="Tenure Track" max_length="50" name="tenure_track" type="string_full_utf8"/>
+        <element label="Title" max_length="1000" name="title" type="string_full_utf8"/>
+        <element label="Type" max_length="255" name="type" type="string_full_utf8"/>
+    </element>
 </database>
