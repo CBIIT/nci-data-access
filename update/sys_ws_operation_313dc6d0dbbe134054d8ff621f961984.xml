@@ -9,30 +9,36 @@
         <http_method>POST</http_method>
         <name>submitRequestData</name>
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
-	names = ['name', 'title', 'id_number', 'manager', 'tenure_track', 'senior_scientist', 'staff_scientist','administrative','substantial_research','need_access','oversight', 'type', 'projectId'];
-    var message = '';
-    var jsonData = [];
-    var variables = {};
+	//names = ['name', 'title', 'id_number', 'manager', 'tenure_track', 'senior_scientist', 'staff_scientist','administrative','substantial_research','need_access','oversight', 'type', 'projectId'];
+  
+	var jsonData = [];
     var body = request.body.data; 
-	var requested_for = body.requested_for;
-	var opened_by = body.opened_by;
-	var manager = body.manager.toString();
-	var cat_item_id = body.cat_item;
-	var short_description = body.short_description;
-	var contact_type = body.contact_type;
-	var itemIds = body.variables;
-    var comments = body.comments;
+    
+	//var comments = body.comments;
+	//comments_and_work_notes - column name
 	
-	var gr_request = new GlideRecord('sc_request');
+	var gr_request = new GlideRecord('x_naci_account_act_account_activation_table');
 	
 	gr_request.initialize();
-	gr_request.u_cms_submitted = true;
-	gr_request.requested_for = requested_for;
-	gr_request.opened_by = opened_by;
-	gr_request.contact_type = contact_type;
-	var request_id = gr_request.insert();
+	//gr_request.u_cms_submitted = true;
+	gr_request.u_requested_for = body.requested_for;
+	gr_request.opened_by = body.opened_by;
+	gr_request.short_description = body.short_description;
+	gr_request.name = body.name;
+	gr_request.title = body.title;
+	gr_request.id_number = body.id_number;
+	gr_request.manager = body.manager;
+	gr_request.tenure_track = body.tenure_track;
+	gr_request.senior_scientist = body.senior_scientist;
+	gr_request.staff_scientist = body.staff_scientist;
+	gr_request.administrative = body.administrative;
+	gr_request.substantial_research = body.substantial_research;
+	gr_request.need_access = body.need_access;
+	gr_request.oversight = body.oversight;
+	gr_request.type = body.type;
+	var task_id = gr_request.insert();
 	
-	//create a record in sc_requested_item table
+	/*//create a record in sc_requested_item table
 	var gr_requested_item = new GlideRecord("sc_req_item");
 	gr_requested_item.initialize();
 	gr_requested_item.u_cms_submitted = true;
@@ -83,10 +89,10 @@
 	var gdt1 = new GlideDateTime();
 	gr_requested_item2.due_date = gdt1.getDisplayValue();
 	gr_requested_item2.update();
-	
+	*/
 	jsonData.push({
-           submit_id: (submitted_id).toString(),
-		   number: manager
+           submit_id: (task_id.toString()),
+		   number: body.manager
      });
 	
 	return jsonData[0];
@@ -105,7 +111,7 @@
         <sys_created_on>2018-06-15 20:13:30</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>313dc6d0dbbe134054d8ff621f961984</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>submitRequestData</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -113,7 +119,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sys_ws_operation_313dc6d0dbbe134054d8ff621f961984</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-06-15 20:13:30</sys_updated_on>
+        <sys_updated_on>2018-07-02 21:58:18</sys_updated_on>
         <web_service_definition display_value="accountActivationScoped">7e930e58db7e134054d8ff621f96195e</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

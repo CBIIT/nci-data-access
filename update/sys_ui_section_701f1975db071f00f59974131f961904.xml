@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_ui_section caption="" section_id="701f1975db071f00f59974131f961904" sys_domain="global" table="x_naci_account_act_account_activation_table" version="3" view="">
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>number</element>
+            <position>0</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>ab180af9db871f00f59974131f9619b3</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>u_requested_for</element>
+            <position>1</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>23180af9db871f00f59974131f9619b4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>opened_by</element>
+            <position>2</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>a3180af9db871f00f59974131f9619b4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.split</element>
+            <position>3</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>27180af9db871f00f59974131f9619b4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type>.split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>state</element>
+            <position>4</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>a7180af9db871f00f59974131f9619b4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>assigned_to</element>
+            <position>5</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>2b180af9db871f00f59974131f9619b4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>.end_split</element>
+            <position>6</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>ab180af9db871f00f59974131f9619b4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type>.end_split</type>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>short_description</element>
+            <position>7</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>2f180af9db871f00f59974131f9619b4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>description</element>
+            <position>8</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>af180af9db871f00f59974131f9619b4</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>name</element>
+            <position>9</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>23180af9db871f00f59974131f9619b5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>title</element>
+            <position>10</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>a3180af9db871f00f59974131f9619b5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>id_number</element>
+            <position>11</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>27180af9db871f00f59974131f9619b5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>manager</element>
+            <position>12</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>a7180af9db871f00f59974131f9619b5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>tenure_track</element>
+            <position>13</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>2b180af9db871f00f59974131f9619b5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>senior_scientist</element>
+            <position>14</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>ab180af9db871f00f59974131f9619b5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>staff_scientist</element>
+            <position>15</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>2f180af9db871f00f59974131f9619b5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>substantial_research</element>
+            <position>16</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>af180af9db871f00f59974131f9619b5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>need_access</element>
+            <position>17</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>23180af9db871f00f59974131f9619b6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>oversight</element>
+            <position>18</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>a3180af9db871f00f59974131f9619b6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>type</element>
+            <position>19</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>27180af9db871f00f59974131f9619b6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>projectid</element>
+            <position>20</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>a7180af9db871f00f59974131f9619b6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>administrative</element>
+            <position>21</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>2b180af9db871f00f59974131f9619b6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>ds_approval_status</element>
+            <position>22</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>ab180af9db871f00f59974131f9619b6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sdso</element>
+            <position>23</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>2f180af9db871f00f59974131f9619b6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>sdso_approval_status</element>
+            <position>24</position>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 21:57:27</sys_created_on>
+            <sys_id>af180af9db871f00f59974131f9619b6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_naci_account_act_account_activation_table" sys_domain="global" view="Default view">701f1975db071f00f59974131f961904</sys_ui_section>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 21:57:27</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_section action="INSERT_OR_UPDATE">
+            <caption/>
+            <header>false</header>
+            <name>x_naci_account_act_account_activation_table</name>
+            <roles/>
+            <sys_class_name>sys_ui_section</sys_class_name>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-02 18:58:07</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_domain>global</sys_domain>
+            <sys_id>701f1975db071f00f59974131f961904</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_naci_account_act_account_activation_table</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+            <sys_update_name>sys_ui_section_701f1975db071f00f59974131f961904</sys_update_name>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-02 18:58:07</sys_updated_on>
+            <sys_user/>
+            <title>true</title>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_section>
+    </sys_ui_section>
+</record_update>

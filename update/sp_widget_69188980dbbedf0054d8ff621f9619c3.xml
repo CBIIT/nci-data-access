@@ -6,40 +6,10 @@
   var c = this;
   var sessionId = c.data.info.sessionId;
 	var userId = c.data.info.userId;
-	var catId;
-	var itemArray;
-	
-	$.ajax({
-			dataType: "json",
-			type: "GET",
-			url: "/api/x_naci_account_act/accountactivationscoped/getCatId",
-			beforeSend: function(xhr){ xhr.setRequestHeader('X-UserToken', sessionId); },
-			async: false,
-			success: function(data){
-				catId = data.result.id;
-				console.log(catId);
-			},
-			error: function(data){
-				alert("ERROR");
-			}
-	});	
-	$.ajax({
-			dataType: "json",
-			type: "GET",
-			url: "/api/x_naci_account_act/accountactivationscoped/getItemArray",
-			beforeSend: function(xhr){ xhr.setRequestHeader('X-UserToken', sessionId); },
-			async: false,
-			success: function(data){
-				itemArray = data.result.variables;
-				console.log(JSON.stringify(itemArray));
-			},
-			error: function(data){
-				alert("ERROR");
-			}
-		});	
 	
 	$scope.form = {
 		name:"",
+		user_sys_id:"",
 		title:"",
 		id_number:"",
 		manager: "",
@@ -108,6 +78,7 @@
 		select: function(event, ui) {
 			resetPermissionForm();
 			var title = ui.item.title;
+			var sys_id = ui.item.id;
 			var id_number = ui.item.id_number;
 			var manager = ui.item.manager;
 			var manager_id = ui.item.manager_id;
@@ -128,6 +99,7 @@
 				$scope.form.manager = "";
 				$scope.form.manager_id = "";
 			}
+			$scope.form.user_sys_id = sys_id;
 			$scope.form.userSelected = "selected";
 			$scope.$apply();
 		}
@@ -195,19 +167,17 @@
 		}
 		if(!validation()){
 			$('#errMessage').hide();
-			variables.requested_for = userId;
+			variables.requested_for = $scope.form.user_sys_id;
 			variables.opened_by = userId;			
-			variables.cat_item = catId; 
 			variables.short_description ="CBIIT Account Activation Application";
-			variables.contact_type="Web";
 			variables.manager = $scope.form.manager_id;
-			variables.variables = itemArray;
 			var param = JSON.stringify(variables);
+			alert(param);
 			$('#submitRequestDiv').modal('hide').on('hidden.bs.modal', function() {
 					$('body').addClass('modal-open')
 			});
 			sendSubmitRequest(param);
-			$('#permissionForm').modal('hide');
+			$('#permissionForm').modal('hide'); 
 		}else{
 			$('#submitRequestDiv').modal('hide').on('hidden.bs.modal', function() {
 					$('body').addClass('modal-open')
@@ -280,7 +250,6 @@
 	function checkSubmission(name){
 			//validate if the user has been submitte a request before nor not
 		  var exist = accountActivationCheckSubmitterScoped.checkSubmitter(name, sessionId);
-		
 		  return exist;
 	}
 	function saveData() {
@@ -396,7 +365,7 @@ legend.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>34</sys_mod_count>
+        <sys_mod_count>55</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -404,7 +373,7 @@ legend.scheduler-border {
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-06-15 20:53:01</sys_updated_on>
+        <sys_updated_on>2018-07-02 22:21:05</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">

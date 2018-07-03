@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update>
-    <sys_documentation element="administrtive" label="Administrtive" language="en" table="x_naci_account_act_account_activation_table">
+    <sys_documentation element="orgnization" label="Orgnization" language="en" table="x_naci_account_act_account_activation_table">
         <sys_documentation action="INSERT_OR_UPDATE">
-            <element>administrtive</element>
+            <element>orgnization</element>
             <help/>
             <hint/>
-            <label>Administrtive</label>
+            <label>Orgnization</label>
             <language>en</language>
             <name>x_naci_account_act_account_activation_table</name>
-            <plural>Administrtives</plural>
+            <plural>Orgnizations</plural>
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>zhoujim@nih.gov</sys_created_by>
-            <sys_created_on>2018-06-18 19:54:03</sys_created_on>
+            <sys_created_on>2018-07-02 13:47:37</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
-            <sys_id>3b956151dbf2d34054d8ff621f961975</sys_id>
+            <sys_id>1808d07ddb431f00f59974131f96197d</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_name>Administrtive</sys_name>
+            <sys_name>Orgnization</sys_name>
             <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
             <sys_policy/>
             <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
             <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
-            <sys_update_name>sys_documentation_x_naci_account_act_account_activation_table_administrtive_en</sys_update_name>
+            <sys_update_name>sys_documentation_x_naci_account_act_account_activation_table_orgnization_en</sys_update_name>
             <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-            <sys_updated_on>2018-06-18 19:54:03</sys_updated_on>
+            <sys_updated_on>2018-07-02 13:47:37</sys_updated_on>
             <url/>
             <url_target/>
         </sys_documentation>

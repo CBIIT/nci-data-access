@@ -8,7 +8,7 @@
         <hint/>
         <name>Account Activation</name>
         <order/>
-        <roles>x_naci_account_act.user</roles>
+        <roles/>
         <sys_class_name>sys_app_application</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
         <sys_created_on>2018-06-14 15:39:27</sys_created_on>
