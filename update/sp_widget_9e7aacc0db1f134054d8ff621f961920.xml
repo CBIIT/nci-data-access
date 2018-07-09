@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope,accountActivationConstantScoped) {
+  /* widget controller */
+   var c = this;
+   var checkbox = accountActivationConstantScoped.getCheckboxNames();
+   $scope.form = {
+		name:"",
+		user_sys_id:"",
+		title:"",
+		institute:"NCI",
+		division:"",
+		id_number:"",
+		manager: "",
+		manager_id: "", 
+		tenure_track: false,
+		senior_scientist: false,
+		staff_scientist: false,
+		administrative: false,
+		substantial_research: false,
+		need_access: false,
+		oversight: false,
+		type: "",
+		userSelected: "No", 
+		confirm: ""
+   };
+	
+   window.setDisplayValues = function(value, doNotApply) {
+		for (var key in value) {			
+			if(checkbox.includes(key)){
+				$scope.form[key] = value[key] === 'true';	
+			}else{
+				$scope.form[key] = value[key];
+			}
+		}
+		
+		if (!doNotApply)
+			$scope.$apply();
+  };	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.right-align{
+	text-align: right;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>account-activation-form-display-scoped</id>
+        <internal>false</internal>
+        <link/>
+        <name>Account Activation Form display Scoped</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	var session_id = gs.getSession().getSessionToken();
+	var userId = gs.getUserID();
+
+	data.info = {
+		userId: userId,
+		sessionId: session_id
+	};	
+	
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-07-09 14:54:37</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>9e7aacc0db1f134054d8ff621f961920</sys_id>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>Account Activation Form display Scoped</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sp_widget_9e7aacc0db1f134054d8ff621f961920</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-07-09 19:33:55</sys_updated_on>
+        <template><![CDATA[<div id="proposalDetail" class="modal fade" data-keyboard="false" data-backdrop="static">
+   <div class="modal-dialog modal-lg" style="width:1000px;">
+      <div class="modal-content" style="overflow-y:auto; overflow-x: hidden;">
+         <div class="modal-header">
+            <button type="button" class="close btn btn-xs" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+            <div id="anchor1">
+               <font size="5"> <b>Permission Form for NIH Staff Access to Controlled-Access Data in dbGaP</b></font>
+            </div>
+         </div>
+         <div class="modal-body" width="70%">
+            <div class="container">
+               <div class="col-md-12"> &#160;</div>
+               <div class="col-md-12" id="errMsg" style="display:none;"></div>
+               <div class="row">
+                  <div class="col-md-10">
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                           <h2 class="panel-title">Principal Investigator</h2>
+                        </div>
+                        <div class="panel-body">
+                           <div class="row col-md-12" id="errorMessage" style="display:none;"></div>
+                           <div class="row" style="margin-bottom:10px">
+                              <label class="col-sm-2 ">Name</label>
+                              <div class="col-sm-10"><span>{{form.name}}</span></div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <label class="col-sm-2">Title</label>
+                              <div class="col-sm-10"><span>{{form.title}}</span></div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <label class="col-sm-2">Institute</label>
+                              <div class="col-sm-10"><span>{{form.institute}}</span></div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <label class="col-sm-2">Division Center</label>
+                              <div class="col-sm-10"><span>{{form.division}}</span></div>
+                           </div>                          
+                           <div class="row" style="margin-bottom:10px">
+                              <label class="col-sm-2">NIH ID Number</label>
+                              <div class="col-sm-10"><span>{{form.id_number}}</span></div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <label class="col-sm-2">Manager</label>
+                              <div class="col-sm-10"><span>{{form.manager}}</span></div>
+                           </div>                          
+                        </div>
+                     </div>
+                     <div class="panel panel-default" ng-if="form.type == 'intramural'">
+                        <div class="panel-heading">
+                           <h2 class="panel-title">Professional Designations (for Intramural)</h2>
+                        </div>
+                        <div class="panel-body">
+                           <div class="row" style="margin-bottom:10px">
+                              <div class="col-sm-12"><input type="checkbox" disabled="disabled" ng-model="form.tenure_track"/>&#160;Tenure-track Investigator</div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <div class="col-sm-12"><input type="checkbox" ng-model="form.senior_scientist" disabled="disabled"/>&#160;Senior Scientist/Investigator/Clinician</div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <div class="col-sm-12"><input type="checkbox" ng-model="form.staff_scientist" disabled="disabled"/>&#160; Staff Scientist</div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="panel panel-default" ng-if="form.type == 'extramural'">
+                        <div class="panel-heading">
+                           <h2 class="panel-title">Reason for seeking access (for Extramural)</h2>
+                        </div>
+                        <div class="panel-body">
+                           <div class="row" style="margin-bottom:10px">
+                              <div class="col-sm-12"><input type="checkbox" ng-model="form.administrative" disabled="disabled"/>&#160;Administrative responsibility for dbGaP data</div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <div class="col-sm-12"><input type="checkbox" ng-model="form.substantial_research" disabled="disabled"/>&#160;Substantial research involvement in the award that generated the data</div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <div class="col-sm-12"><input type="checkbox" ng-model="form.need_access" disabled="disabled"/>&#160; Need access to carry out research unrelated to portfolio management responsibilities</div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <div class="col-sm-12"><input type="checkbox" ng-model="form.oversight" disabled="disabled"/>&#160; My supervisor will provide oversight for my use of the dbGaP data</div>
+                           </div>                          
+                        </div>
+                     </div>                    
+                     <div id="commets" style="display:none;">
+                        <div class="panel panel-default">
+                           <div class="panel-heading" id="err">
+                              <h2 class="panel-title">Approval History</h2>
+                           </div>
+                           <div class="panel-body">
+                              <div id="commentReviewId1"></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div align="center" id="bioSelectorId" style="display:none;">
+                        <div id="optionDiv"></div>
+                        <br/>
+                     </div>
+                     <div id="commentTextarea" style="display:none;">
+                        <div class="panel panel-default">
+                           <div class="panel-heading" id="err">
+                              <h2 class="panel-title"><font color='red'>*</font>Commets</h2>
+                           </div>
+                           <div class="panel-body">
+                              <div class="row">
+                                 <textarea id="commentsText" style="width:100%; height: 150px; margin-top:10px" name="comments" form="usrform" placeholder="Place your comments here"></textarea>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-12" id="okDiv" style="display:none;">
+                        <input type="button" style="margin-top:5px;margin-left:45%; width: 100px; " id="cancel"  value=" OK " class="btn btn-default active" onclick="$('#proposalDetail').modal('hide');"/>
+                     </div>
+                      <div class="col-sm-12" id="dsActionDiv" style="display:none;" style="text-align:center;">
+                        <input type="button" id="approve" style="margin-top:5px" value="Approve" style="width:120px; text-align:center;" class="btn btn-primary" ng-click="loadDSApprovalConfirm()"/>&#160;&#160;
+                        <input type="button" id="reject" style="margin-top:5px" value="Reject" style="width:120px; text-align:center;" class="btn btn-warning" ng-click="loadDSRejectConfirm()"/>&#160;&#160;
+                        <input type="button" id="cancel" style="margin-top:5px" value="Cancel" style="width:120px; text-align:center;" class="btn btn-primary" onclick="$('#proposalDetail').modal('hide');"/>									 
+                       </div>                    
+                     <input type="hidden" id="hideValue"/>
+                     <input type="hidden" id="hideRequestId"/>
+                     <input type="hidden" id="hideApprovalId"/>
+                     <input type="hidden" id="commentLength"/>
+                     <input type="hidden" id="roleType"/>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div id="processRequestDiv" class="modal fade" data-keyborad="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="height:200px; overflow-y:auto; overflow-x: hidden;">
+            <div class="modal-header">
+                <div>
+                    Confirmation Dialog
+                </div>
+            </div>
+            <div class="row">
+                <br>
+                <div class="col-md-12" id="processRequestMessage" align="center">
+                </div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="col-md-12" align="center">
+              <button id="yesBtn" class="btn btn-primary" ng-click="" data-dismiss="modal">YES</button> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button id="noBtn" class="btn btn-primary" ng-click="$('#processRequestDiv').modal('hide');" data-dismiss="modal">NO</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dsApprovalDiv" class="modal fade" data-keyborad="false" data-backdrop="static">
+	 <div class="modal-dialog modal-lg">
+		<div class="modal-content" style="height:200px; overflow-y:auto; overflow-x: hidden;">
+			<div class="modal-header">
+			   <div>
+					 Confirmation Dialog
+			   </div>
+			</div>
+			<div class="row">
+         <br/>
+				<div class="col-md-12" id="dsMessage" align="center">
+				</div>
+			</div>
+			<div class="col-md-12" align="center">
+         <br/><br/>
+				<input type="button" class="btn btn-primary" style="width:70px; text-align:center" name="okBt" value="YES" id="submitAction" ng-click="dsApprove();" /> &#160; &#160; &#160;&#160; &#160; &#160;
+				<input type="button" class="btn btn-primary" style="width:70px; text-align:center" name="noBt" value="NO" onclick="$('#dsApprovalDiv').modal('hide');"/>
+			</div>
+		 </div>
+	 </div>
+</div>	
+
+<div id="rejectDiv" class="modal fade" data-keyborad="false" data-backdrop="static">
+	 <div class="modal-dialog modal-lg">
+		<div class="modal-content" style="height:200px; overflow-y:auto; overflow-x: hidden;">
+			<div class="modal-header">
+			   <div>
+					 Confirmation Dialog
+			   </div>
+			</div>
+			<div class="row">
+         <br/>
+				<div class="col-md-12" id="rejectMessage" align="center">
+				</div>
+			</div>
+			<div class="col-md-12" align="center">
+         <br/><br/>
+				<input type="button" class="btn btn-primary" style="width:70px; text-align:center" name="okBt" value="YES" id="submitAction" ng-click="dsReject();" /> &#160; &#160; &#160;&#160; &#160; &#160;
+				<input type="button" class="btn btn-primary" style="width:70px; text-align:center" name="noBt" value="NO" onclick="$('#rejectDiv').modal('hide');"/>
+			</div>
+		 </div>
+	 </div>
+</div>	
+]]></template>
+    </sp_widget>
+</record_update>

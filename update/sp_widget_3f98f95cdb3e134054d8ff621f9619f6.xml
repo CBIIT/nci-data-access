@@ -8,6 +8,12 @@
   var sessionId = c.data.info.sessionId;
   var userId = c.data.info.userId;
 	
+	$('.collapse').on('shown.bs.collapse', function() {
+		$(this).parent().find(".fa-plus-square").removeClass("fa-plus-square").addClass("fa-minus-square");
+	}).on('hidden.bs.collapse', function() {
+		$(this).parent().find(".fa-minus-square").removeClass("fa-minus-square").addClass("fa-plus-square");
+	});	
+	
 	setTimeout(function() {
 	  $('.collapse').on('shown.bs.collapse', function() {
 		  $(this).parent().find(".fa-plus-square").removeClass("fa-plus-square").addClass("fa-minus-square");
@@ -33,13 +39,26 @@
 			window.setFormValues(result);
 			$('#action').val('update');
 			$('#savedId').val(id);
+			$scope.changeModalSize(result.type, result.confirm);
 			$('#permissionForm').modal('show');
 		}
 		function handleError(error){
 			alert('ERROR');
 		}
 	}
-	
+	$scope.changeModalSize = function(type, answer){
+		if(answer == 'yes'){
+			if(type == 'intramural'){
+				$('#content').css('height', '800px');
+			}
+			if(type == 'extramural'){
+				$('#content').css('height', '900px');
+			}
+				$('#content').css('overflow-y', 'auto');
+				$('#content').css('overflow-x', 'hide');
+		}
+	}
+		
 	$scope.removeItem = function(id){
 		$('#removeDraftMessage').html("Are you sure you want to remove this record?");
 		$('#removeItemId').val(id);
@@ -118,7 +137,7 @@
         <sys_created_on>2018-06-15 18:43:08</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>3f98f95cdb3e134054d8ff621f9619f6</sys_id>
-        <sys_mod_count>7</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_name>Account Activation Saved Table Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -126,7 +145,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_3f98f95cdb3e134054d8ff621f9619f6</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-06-15 19:05:32</sys_updated_on>
+        <sys_updated_on>2018-07-09 16:10:15</sys_updated_on>
         <template><![CDATA[<br/><br/>
 <div ng-if="c.data.savedData.length > 0" class="row">
     <div class="panel panel-success">

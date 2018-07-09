@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope,spUtil, accountactivationGetSubmittedRequestDataScoped, accountActivationUtilScoped) {
+  /* widget controller */
+  var c = this;
+	var sessionId = c.data.info.sessionId;
+	var userId = c.data.info.userId;
+	$scope.count = c.data.submittedData.length;
+	
+	$('.collapse').on('shown.bs.collapse', function() {
+		$(this).parent().find(".fa-plus-square").removeClass("fa-plus-square").addClass("fa-minus-square");
+	}).on('hidden.bs.collapse', function() {
+		$(this).parent().find(".fa-minus-square").removeClass("fa-minus-square").addClass("fa-plus-square");
+	});	
+	
+	$scope.displayDetails = function(id){
+		accountactivationGetSubmittedRequestDataScoped.getSubmittedRequestData(id, sessionId).then(handleResponse, handleError);
+		function handleResponse(result){
+			console.log(result);
+			var comments = result.comments;
+			//var comment_str = commentStringUtil.parseComment(comments);
+			/*if(comments.length > 126){
+				$('#commentReviewId1').html(comment_str);
+				$('#commets').show();
+			}else{
+				$('#commentReviewId1').html('');
+				$('#commets').hide();
+			}*/
+			window.setDisplayValues(result);
+		}
+		function handleError(error){
+			console.log(error);
+			alert('ERROR!');
+		}
+		
+		accountActivationUtilScoped.setButtonOnDisplayPage('PI');
+		$('#proposalDetail').modal('show');		
+		
+		
+	};
+	
+	spUtil.recordWatch($scope, "x_naci_account_act_account_activation_table", "", function() {  
+		spUtil.update($scope);
+		$scope.count = c.data.submittedData.length;
+	});	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>account-activation-pi-submitted-page</id>
+        <internal>false</internal>
+        <link/>
+        <name>Account Activation PI submitted Page</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	var session_id = gs.getSession().getSessionToken();
+	var userId = gs.getUserID();
+  var year = new GlideDateTime().getYearLocalTime();  
+	
+	data.info = {
+		userId: userId,
+		sessionId: session_id
+	};	
+	
+  data.submittedData = [];
+	var desc = 'CBIIT Account Activation Application';
+	var gr_items = new GlideRecord('x_naci_account_act_account_activation_table');
+      gr_items.addQuery('short_description', desc);
+      gr_items.addQuery('opened_by', userId);
+			gr_items.addActiveQuery();
+			gr_items.orderByDesc('number');
+      gr_items.query();
+	
+      while(gr_items.next()){
+            var item = {};
+            item.number = gr_items.number.toString();
+            item.number = "DA-"+year+"-"+item.number.substring(8);
+						item.name = gr_items.name.toString();
+						item.title = gr_items.title.toString(); 
+            item.id_number = gr_items.id_number.toString();
+            item.submittedDate = gr_items.sys_created_on.toString();
+            item.sysId = gr_items.sys_id.toString();
+          
+            var it = new GlideRecord('sysapproval_approver');
+            it.addQuery('document_id', item.sys_id);
+            it.query();
+            it.next();
+            var name = it.wf_activity.getDisplayValue();
+						if(name == 'Waiting for DS Review'){
+								name = 'Waiting for Direct Supervisor Review';
+						}else if(name == 'Waiting for SD/SO Review'){
+								name = 'Waiting for Scientific Directors/Signing Official Review';
+						}else if(name == 'Waiting for NIH Office of SP Review'){
+								name = 'Waiting for NIH Office of Science Policy Review';
+						}else if(name == 'Rejected by SD/SO -Waiting for DS Review'){
+								name = 'Rejected by Scientific Directors/Signing Offical - Waiting for Direct Supervisor Review';
+						}else{
+								name = 'No such stage';
+						}
+				    item.stage = name;
+            data.submittedData.push(item); 
+        }
+	
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-07-03 20:07:32</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>af88fa4edb431f0054d8ff621f96199c</sys_id>
+        <sys_mod_count>34</sys_mod_count>
+        <sys_name>Account Activation PI submitted Page</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sp_widget_af88fa4edb431f0054d8ff621f96199c</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-07-09 18:57:43</sys_updated_on>
+        <template><![CDATA[<div class="row" ng-if="c.data.submittedData.length > 0" id="submitted_table">
+<div  class="panel panel-success">
+    <div class="panel-heading" role="tab" id="heading_submittedItems">
+        <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-target="#collapsesubmittedItems" aria-expanded="true" aria-controls="collapsesubmittedItems">
+                <span class="accordion_icon">
+                    <i class="fa fa-minus-square"></i>
+                </span> Submitted dbGaP Data Access
+                <span class="badge" id="ritm_count">{{count}}</span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapsesubmittedItems" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_submittedItems">
+        <table class="table table-bordered table-striped table-condensed">
+            <tr>
+                <th ng-click="sort('number')">Control Access ID
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('name')">Name
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('title')">Title
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='projectName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th ng-click="sort('id_number')">NIH ID Number
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='stage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>              
+                <th ng-click="sort('stage')">Status
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='stage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+                <th ng-click="sort('submitDate')">Submitted Date
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='submitDate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th>Actions</th>
+            </tr>
+            <tr dir-paginate="data in c.data.submittedData|filter:search|orderBy:sortKey:reverse|itemsPerPage:pageSize" pagination-id="submittedDataPagination">
+                <td class="ritm_number">{{data.number}}</td>
+                <td class="ritm_cat_item">{{data.name}}</td>
+                <td class="ritm_cat_item">{{data.title}}</td>
+                <td class="ritm_cat_item">{{data.id_number}}</td>
+                <td class="ritm_cat_item">{{data.stage}}</td>
+                <td class="ritm_cat_item">{{data.submittedDate}}</td>
+                <td>
+                    <button ng-click="displayDetails(data.sysId);" class="btn btn-sm btn-primary" style="width: 70px; text-align: center;">
+                    View&#160;</button>
+                    <button ng-if="data.stage =='Waiting for Investigator Resubmission'" ng-click="resubmitProposal(data.sysId, data.number);" class="btn btn-sm btn-primary"
+                        style="width: 70px; text-align: center;">Resubmit&#160;</button>
+                    <button ng-if="data.stage != 'Completed'" ng-click="withdrawItem(data.sysId);" class="btn btn-sm btn-warning" style="width: 70px; text-align: center;">Withdraw&#160;</button> 
+                    <!--<a href="$sp.do?id=dceg_report_page&sys_id={{data.sysId}}" target="_BLANK"> -->
+                    <!--    <button class="btn btn-sm btn-primary" style="width: 70px; text-align: center;" ng-click="exportDoc(data.sysId);">Export</button> -->
+                    <!--</a> -->&#160;
+                </td>
+            </tr>
+        </table>
+        <div>
+            <table width="100%" border="0">
+                <tr>
+                    <td width="70%">
+                        <dir-pagination-controls pagination-id="submittedDataPagination" direction-links="true" boundary-links="true"></dir-pagination-controls>
+                    </td>
+                    <td width="25%" align="right">
+                        <label>Items per page&#160;&#160;</label>
+                    </td>
+                    <td width="5%" align="right">
+                        <select class="form-control" ng-model="pageSize" ng-init="pageSize='10'" style="width:80px;">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+	<div id="confirmationDiv" class="modal fade" data-keyborad="false" data-backdrop="static">
+		 <div class="modal-dialog modal-lg">
+			<div class="modal-content" style="height:200px; overflow-y:auto; overflow-x: hidden;">
+				<div class="modal-header">
+				   <div>
+						 Confirmation Dialog
+				   </div>
+				</div>
+				<div class="row">
+					<br/>
+          <div class="col-md-12" id="confirmMessage" align="center"></div>
+				</div>
+				<div class="col-md-12" align="center">
+          <br/><br/><br/>
+					<input type="button" class="btn btn-primary" style="width: 70px; text-align: center;" name="okBt" value="YES" id="submitAction" ng-click="withdraw();" /> &#160; &#160; &#160;&#160; &#160; &#160;
+          <input type="hidden" id="withdrawId"/>
+					<input type="button" name="noBt" class="btn btn-primary" style="width: 70px; text-align: center;" value="NO" onclick="$('#confirmationDiv').modal('hide');"/>
+				</div>
+			 </div>
+		 </div>
+	</div>	
+</div>]]></template>
+    </sp_widget>
+</record_update>

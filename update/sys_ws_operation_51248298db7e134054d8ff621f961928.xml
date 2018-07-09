@@ -13,15 +13,15 @@
 	//if yes, return true, then this user cannot submit a request anymore
 	//if No, return false, then this user can submit a request.
 	var result = false;
-	var piName = request.queryParams.name.toString();
+
+	var id_number = request.queryParams.id_number.toString();
 	var short_description = request.queryParams.desc.toString();
-	
 	var item = new GlideRecord('x_naci_account_act_account_activation_table');
 	item.addQuery('short_description', short_description);
 	item.query();
 	while(item.next()){
-		var name = item.name.toString();
-		if(name.toUpperCase() == piName.toUpperCase() ){
+		var id_num = item.id_number.toString();
+		if(id_num == id_number){
 			result = true;
 			break;
 		}
@@ -42,7 +42,7 @@
         <sys_created_on>2018-06-15 19:34:33</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>51248298db7e134054d8ff621f961928</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>checkSubmitter</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -50,7 +50,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sys_ws_operation_51248298db7e134054d8ff621f961928</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-02 18:10:32</sys_updated_on>
+        <sys_updated_on>2018-07-05 19:32:22</sys_updated_on>
         <web_service_definition display_value="accountActivationScoped">7e930e58db7e134054d8ff621f96195e</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

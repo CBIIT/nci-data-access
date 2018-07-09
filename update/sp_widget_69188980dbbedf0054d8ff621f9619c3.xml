@@ -11,6 +11,8 @@
 		name:"",
 		user_sys_id:"",
 		title:"",
+		institute:"NCI",
+		division:"",
 		id_number:"",
 		manager: "",
 		manager_id: "", 
@@ -25,7 +27,7 @@
 		userSelected: "No", 
 		confirm: ""
 	};
-	
+	$scope.divisions = accountActivationConstantScoped.getDivisions();
 	window.setFormValues = function(value, doNotApply) {
 		for (var key in value) {
 			$scope.form[key] = value[key];
@@ -107,10 +109,10 @@
 	
 	$scope.changeModalSize = function(){
 		if($scope.form.type == 'intramural'){
-			$('#content').css('height', '750px');
+			$('#content').css('height', '800px');
 		}
 		if($scope.form.type == 'extramural'){
-			$('#content').css('height', '850px');
+			$('#content').css('height', '900px');
 		}
 			$('#content').css('overflow-y', 'auto');
 			$('#content').css('overflow-x', 'hide');
@@ -123,7 +125,11 @@
 	$scope.checkConfirm = function(answer){
 
 		if(answer == 'yes'){
-			if($scope.form.title.trim().length == 0 || $scope.form.id_number.trim().length == 0 || $scope.form.manager.trim().length == 0){
+			if($scope.form.division.trim().length == 0){
+				$('#userCheckMessage').html("Institute and Division are required fieldsssss.");
+			  $('#userCheckDiv').modal('show');
+				$scope.form.confirm = '';				
+			}else if($scope.form.title.trim().length == 0 || $scope.form.id_number.trim().length == 0 || $scope.form.manager.trim().length == 0){
 				$('#userCheckMessage').html("All required fields cannot be empty, please contact the Authorizing Official to get NED updated");
 			  $('#userCheckDiv').modal('show');
 				$scope.form.confirm = '';
@@ -171,8 +177,8 @@
 			variables.opened_by = userId;			
 			variables.short_description ="CBIIT Account Activation Application";
 			variables.manager = $scope.form.manager_id;
+			variables.sdso = getSDSO($scope.form.institute,	$scope.form.division);
 			var param = JSON.stringify(variables);
-			alert(param);
 			$('#submitRequestDiv').modal('hide').on('hidden.bs.modal', function() {
 					$('body').addClass('modal-open')
 			});
@@ -190,6 +196,18 @@
 		clearData();
 		$('#permissionForm').modal('hide');
 	};
+	
+	function getSDSO(institute, division){
+		var divisions = accountActivationConstantScoped.getDivisions();
+		var sdso = "";
+		for(var item in divisions){
+			if(divisions[item].value == division){
+				sdso = divisions[item].manager_id;
+				break;
+			}
+		}
+		return sdso;
+	}
 	
 	function sendSubmitRequest(param){
 		accountActivationSubmissionScoped.submitRequest(param, sessionId).then(handleRequest, handleError);
@@ -216,7 +234,7 @@
 			$('#piName').css('background-color', "yellow");
 			error = true;
 		}else{
-			  var exist = checkSubmission(name);
+			  var exist = checkSubmission($scope.form.id_number);
 				if (exist){
 					$('#errMessage').html("<font color='red'>" + name + " has already submitted the permission form previously</font>" );
 					return true;
@@ -225,6 +243,9 @@
 		if($scope.form.title == null || $scope.form.title.trim().length == 0){
 			$('#title').css('background-color', "yellow");
 			error = true;			
+		}
+		if($scope.form.division == null || $scope.form.division.trim().length == 0){
+			$('#division').css('background-color', "yellow");
 		}
 		if($scope.form.id_number == null || $scope.form.id_number.trim().length == 0){
 			$('#id_number').css('background-color', "yellow");
@@ -247,9 +268,9 @@
 		return error;
 	}
 	
-	function checkSubmission(name){
+	function checkSubmission(id_num){
 			//validate if the user has been submitte a request before nor not
-		  var exist = accountActivationCheckSubmitterScoped.checkSubmitter(name, sessionId);
+		  var exist = accountActivationCheckSubmitterScoped.checkSubmitter(id_num, sessionId);
 		  return exist;
 	}
 	function saveData() {
@@ -274,6 +295,7 @@
 		$scope.form.title = "";
 		$scope.form.id_number = "";
 		$scope.form.manager = "";
+		$scope.form.division = "";
 		$scope.form.tenure_track = false;
 		$scope.form.senior_scientist = false;
 		$scope.form.staff_scientist = false;
@@ -294,6 +316,7 @@
 		  $('#errMessage').hide();
 			$('#piName').css('background-color','');
 			$('#title').css('background-color','');
+		  $('#division').css('background-color', '');
 			$('#id_number').css('background-color','');		
 		  $('#intramural').css('background-color','');
 		  $('#extramural').css('background-color','');
@@ -365,7 +388,7 @@ legend.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>55</sys_mod_count>
+        <sys_mod_count>105</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -373,11 +396,11 @@ legend.scheduler-border {
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-02 22:21:05</sys_updated_on>
+        <sys_updated_on>2018-07-06 14:54:37</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">
-  	<div class="modal-content" id="content" style="height:500px; overflow-y:auto; overflow-x: hidden;">
+  	<div class="modal-content" id="content" style="height:550px; overflow-y:auto; overflow-x: hidden;">
          <div class="modal-header">
                <button type="button" class="close" data-dismiss="modal" ng-click="cancel()" aria-label="Close">
                    <span aria-hidden="true">&times;</span>
@@ -396,6 +419,18 @@ legend.scheduler-border {
                       <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>Title</label></div>
                       <div class="col-md-9"><input type="text" id="title" class="form-control input-margin" ng-model="form.title" placeholder="Please enter your title" size="80" readonly/></div>
                     </div>  
+										<div class="row">
+                    	<div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>Institute</label> </div>  
+                      <div class="col-md-9"><label class="label-margin">NCI</label></div>               
+               			</div>
+										<div class="row">
+                    	<div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>Division Center</label> </div>  
+                      <div class="col-md-9">
+                      	<select class="form-control label-margin" id="division" ng-model="form.division">
+                          <option ng-repeat="x in divisions" value="{{x.value}}">{{x.value}}</option>
+                        </select>
+                      </div>               
+               			</div>
                     <div class="row">
                       <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>NIH ID Number</label></div>
                       <div class="col-md-9"><input type="text" id="id_number" class="form-control input-margin" ng-model="form.id_number" placeholder="Please enter your NIH ID Number" size="80" readonly/></div>

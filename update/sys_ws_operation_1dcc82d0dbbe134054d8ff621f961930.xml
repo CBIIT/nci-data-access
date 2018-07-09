@@ -10,28 +10,37 @@
         <name>getSubmittedRequestDataById</name>
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	var sysId = request.queryParams.id;	
-	var gr_requested_items = new GlideRecord('sc_req_item');
+	var gr_requested_items = new GlideRecord('x_naci_account_act_account_activation_table');
 		gr_requested_items.addQuery('sys_id', sysId);
 		gr_requested_items.orderByDesc('number');
 		gr_requested_items.query();
 		gr_requested_items.next();
 	var item = {};
-    var comments =  gr_requested_items.comments.getJournalEntry(-1);
-	var variables = gr_requested_items.variables;
-	
-	item.name =  variables.name.toString();
-	item.title = variables.title.toString();
-	item.id_number = variables.id_number.toString();
-	item.manager = variables.manager.toString();
-	item.type = variables.type.toString();
-	item.tenure_track = variables.tenure_track;
-	item.senior_scientist = variables.senior_scientist;
-	item.staff_scientist = variables.staff_scientist;
-	item.administrative = variables.administrative;
-	item.substantial_research = variables.substantial_research;
-	item.need_access = variables.need_access;
-	item.oversight = variables.oversight;
-	item.comments = comments;
+    var comments =  gr_requested_items.comments_and_work_notes.getJournalEntry(-1);
+	var manager_id = gr_requested_items.manager.toString();
+	var user_item = new GlideRecord('sys_user');
+	    user_item.addQuery('sys_id', manager_id);
+	    user_item.query();
+	    user_item.next();
+	var manager = user_item.name.toString();
+	if(manager == null || manager.trim().length == 0){
+		manager = "";
+	}
+	item.name =  gr_requested_items.name.toString();
+	item.title = gr_requested_items.title.toString();
+	item.id_number = gr_requested_items.id_number.toString();
+	item.insitution = 'NCI';
+	item.division = gr_requested_items.division.toString();
+	item.manager = manager;
+	item.type = gr_requested_items.type.toString();
+	item.tenure_track = gr_requested_items.tenure_track.toString();
+	item.senior_scientist = gr_requested_items.senior_scientist.toString();
+	item.staff_scientist = gr_requested_items.staff_scientist.toString();
+	item.administrative = gr_requested_items.administrative.toString();
+	item.substantial_research = gr_requested_items.substantial_research.toString();
+	item.need_access = gr_requested_items.need_access.toString();
+	item.oversight = gr_requested_items.oversight.toString();
+	item.comments = comments.toString();
 	return item;
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_naci_account_act/accountactivationscoped/getSubmittedRequestDataById</operation_uri>
@@ -47,7 +56,7 @@
         <sys_created_on>2018-06-15 20:11:39</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>1dcc82d0dbbe134054d8ff621f961930</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_name>getSubmittedRequestDataById</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -55,7 +64,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sys_ws_operation_1dcc82d0dbbe134054d8ff621f961930</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-06-15 20:11:39</sys_updated_on>
+        <sys_updated_on>2018-07-09 19:44:14</sys_updated_on>
         <web_service_definition display_value="accountActivationScoped">7e930e58db7e134054d8ff621f96195e</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
