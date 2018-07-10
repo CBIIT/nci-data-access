@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
-        <client_script><![CDATA[function($scope,spUtil, accountactivationGetSubmittedRequestDataScoped, accountActivationUtilScoped) {
+        <client_script><![CDATA[function($scope,spUtil, accountactivationGetSubmittedRequestDataScoped, accountActivationUtilScoped, accountActivationcommentStringUitlScoped, accountActivationWithdrawRequestScoped) {
   /* widget controller */
   var c = this;
 	var sessionId = c.data.info.sessionId;
 	var userId = c.data.info.userId;
-	$scope.count = c.data.submittedData.length;
 	
 	$('.collapse').on('shown.bs.collapse', function() {
 		$(this).parent().find(".fa-plus-square").removeClass("fa-plus-square").addClass("fa-minus-square");
@@ -14,19 +13,24 @@
 		$(this).parent().find(".fa-minus-square").removeClass("fa-minus-square").addClass("fa-plus-square");
 	});	
 	
+	$scope.sort = function(keyname){
+	   $scope.sortKey = keyname;
+	   $scope.reverse = !$scope.reverse;
+	};		
+	
 	$scope.displayDetails = function(id){
 		accountactivationGetSubmittedRequestDataScoped.getSubmittedRequestData(id, sessionId).then(handleResponse, handleError);
 		function handleResponse(result){
 			console.log(result);
 			var comments = result.comments;
-			//var comment_str = commentStringUtil.parseComment(comments);
-			/*if(comments.length > 126){
+			var comment_str = accountActivationcommentStringUitlScoped.parseComment(comments);
+			if(comments.length > 126){
 				$('#commentReviewId1').html(comment_str);
 				$('#commets').show();
 			}else{
 				$('#commentReviewId1').html('');
 				$('#commets').hide();
-			}*/
+			}
 			window.setDisplayValues(result);
 		}
 		function handleError(error){
@@ -36,13 +40,29 @@
 		
 		accountActivationUtilScoped.setButtonOnDisplayPage('PI');
 		$('#proposalDetail').modal('show');		
-		
-		
 	};
 	
-	spUtil.recordWatch($scope, "x_naci_account_act_account_activation_table", "", function() {  
+	$scope.withdrawItem = function(id){
+		$('#confirmMessage').html("Are you sure that you want to withdraw this request?");
+		$('#withdrawId').val(id);
+		$('#confirmationDiv').modal('show');		
+	};
+	
+	$scope.withdraw = function(){
+		var id = $('#withdrawId').val();
+		accountActivationWithdrawRequestScoped.withdraw(id).then(handleResponse, handleError);
+		function handleResponse(data){
+			console.log(data);
+			$('#confirmationDiv').modal('hide');
+		}
+		function handleError(data){
+			$('#confirmationDiv').modal('hide');
+			alert("ERROR!");
+		}
+	}	
+	
+	spUtil.recordWatch($scope, "x_naci_account_act_account_activation_table", "", function(data) {  
 		spUtil.update($scope);
-		$scope.count = c.data.submittedData.length;
 	});	
 }]]></client_script>
         <controller_as>c</controller_as>
@@ -87,10 +107,11 @@
 						item.title = gr_items.title.toString(); 
             item.id_number = gr_items.id_number.toString();
             item.submittedDate = gr_items.sys_created_on.toString();
+				    var sdate = item.submittedDate.split(' ');
+				    item.submittedDate = sdate[0];
             item.sysId = gr_items.sys_id.toString();
-          
             var it = new GlideRecord('sysapproval_approver');
-            it.addQuery('document_id', item.sys_id);
+            it.addQuery('document_id', item.sysId);
             it.query();
             it.next();
             var name = it.wf_activity.getDisplayValue();
@@ -116,7 +137,7 @@
         <sys_created_on>2018-07-03 20:07:32</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>af88fa4edb431f0054d8ff621f96199c</sys_id>
-        <sys_mod_count>34</sys_mod_count>
+        <sys_mod_count>60</sys_mod_count>
         <sys_name>Account Activation PI submitted Page</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -124,7 +145,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_af88fa4edb431f0054d8ff621f96199c</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-09 18:57:43</sys_updated_on>
+        <sys_updated_on>2018-07-09 21:09:06</sys_updated_on>
         <template><![CDATA[<div class="row" ng-if="c.data.submittedData.length > 0" id="submitted_table">
 <div  class="panel panel-success">
     <div class="panel-heading" role="tab" id="heading_submittedItems">
@@ -133,7 +154,7 @@
                 <span class="accordion_icon">
                     <i class="fa fa-minus-square"></i>
                 </span> Submitted dbGaP Data Access
-                <span class="badge" id="ritm_count">{{count}}</span>
+                <span class="badge" id="ritm_count">{{c.data.submittedData.length}}</span>
             </a>
         </h4>
     </div>
