@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <client_script><![CDATA[function($scope, spUtil,accountactivationGetSubmittedRequestDataScoped, accountActivationcommentStringUitlScoped, accountActivationUtilScoped) {
+  /* widget controller */
+  var c = this;
+	var sessionId = c.data.info.sessionId;
+	var userId = c.data.info.userId;
+
+	$scope.sort = function(keyname) {		
+		$scope.sortKey = keyname;
+		$scope.reverse = !scope.reverse;
+	};
+	
+	$scope.count = c.data.sdsoReviewedData.length;
+	
+	$scope.displayDetails = function(requestId){
+		accountactivationGetSubmittedRequestDataScoped.getSubmittedRequestData(requestId, sessionId).then(handleResponse, handleError);
+		function handleResponse(result){
+			var comments = result.comments;
+			var comment_str = accountActivationcommentStringUitlScoped.parseComment(comments);
+			if(comments.length > 126){
+				$('#commentReviewId1').html(comment_str);
+				$('#commets').show();
+			}else{
+				$('#commentReviewId1').html('');
+				$('#commets').hide();
+			}
+			window.setDisplayValues(result);
+		}
+		function handleError(error){
+			console.log(error);
+			alert('ERROR!');
+		}
+
+		accountActivationUtilScoped.setButtonOnDisplayPage('PI');
+		$('#proposalDetail').modal('show');		
+	};
+	
+	$scope.report = function(requestId){
+				alert("Under Construction!");
+			};
+	
+	spUtil.recordWatch($scope, "sysapproval_approver", "", function() {  
+		spUtil.update($scope);
+		$scope.count = c.data.sdsoReviewedData.length;
+	});		
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>account_activation_sdso_reviewed_scoped</id>
+        <internal>false</internal>
+        <link/>
+        <name>Account Activation SDSO reviewed Scoped</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	var session_id = gs.getSession().getSessionToken();
+	var userId = gs.getUserID();
+	 var year = new GlideDateTime().getYearLocalTime();
+	
+	data.info = {
+		userId: userId,
+		sessionId: session_id
+	};	
+	
+  data.sdsoReviewedData = [];
+		
+	var gr_items = new GlideRecord("x_naci_account_act_account_activation_table");
+			gr_items.addQuery("short_description", "CBIIT Account Activation Application");
+			gr_items.addQuery('opened_by', userId);
+      //gr_items.addQuery('sdso', userId);
+			gr_items.orderByDesc('number');  
+			gr_items.query();
+	while (gr_items.next()){
+		if(gr_items.stage == 'Completed' || gr_items.stage == 'Rejected by SD/SO-Waiting for DS Review' ){
+				var sysId = gr_items.sys_id.toString();
+				var stage = gr_items.stage.toString();				
+				var number = gr_items.number.toString();
+						number = "DA-" + year + "-" + number.substring(8);
+				var submittedDate = gr_items.sys_created_on.toString();
+				var submittedBy =  gr_items.opened_by.getDisplayValue();
+				var lastUpdateDate = gr_items.sys_updated_on.toString();
+				var	name = gr_items.name.toString();
+				var	title = gr_items.title.toString();
+				var id_number = gr_items.id_number.toString();
+				submittedDate = submittedDate.toString().split(" ")[0];
+				lastUpdateDate = lastUpdateDate.toString().split(" ")[0]; 
+				var item = {};
+				item.sysId = sysId;
+				item.number = number;
+				item.name = name;
+				item.title = title;
+				item.id_number = id_number;
+				item.stage = stage;
+				item.submitBy = submittedBy;
+				item.submitDate = submittedDate;
+				item.lastUpdate = lastUpdateDate;
+				data.sdsoReviewedData.push(item);					
+			}
+	}
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-07-12 18:14:15</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>77e43c4ddb1b530054d8ff621f961994</sys_id>
+        <sys_mod_count>26</sys_mod_count>
+        <sys_name>Account Activation SDSO reviewed Scoped</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sp_widget_77e43c4ddb1b530054d8ff621f961994</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-07-12 19:44:15</sys_updated_on>
+        <template><![CDATA[<div class="row" id="sdso_reviewed_table" ng-if="c.data.sdsoReviewedData.length > 0">
+<div class="panel panel-success">
+   <div class="panel-heading" role="tab" id="heading_sdso_reviewed_Items">
+      <h4 class="panel-title">
+         <a role="button" data-toggle="collapse" data-target="#collapsesdsoReviewedItems" aria-expanded="true" aria-controls="collapsesdsoReviewedItems">
+         <span class="accordion_icon">
+         <i class="fa fa-minus-square"></i>
+         </span> dbGaP Data Access Reviewed by Scientific Director and Signing Official
+         <span class="badge" id="ritm_count">{{c.data.sdsoReviewedData.length}}</span>
+         </a>
+      </h4>
+   </div>
+   <div id="collapsesdsoReviewedItems" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading_sdso_reviewed_Items">
+      <table class="table table-bordered table-striped table-condensed">
+         <tr>
+            <th ng-click="sort('number')">Control Access ID
+               <span class="glyphicon sort-icon" ng-show="sortKey=='number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('name')">Name
+               <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('title')">Title
+               <span class="glyphicon sort-icon" ng-show="sortKey=='title'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('id_number')">NIH ID Number
+               <span class="glyphicon sort-icon" ng-show="sortKey=='id_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('stage')">Status
+               <span class="glyphicon sort-icon" ng-show="sortKey=='stage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('submitBy')">Submitted By
+               <span class="glyphicon sort-icon" ng-show="sortKey=='submitBy'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('submitDate')">Submitted Date
+               <span class="glyphicon sort-icon" ng-show="sortKey=='submitDate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th ng-click="sort('lastUpdate')">Last Update Date
+               <span class="glyphicon sort-icon" ng-show="sortKey=='lastUpdate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
+            <th>Actions</th>
+         </tr>
+         <tr dir-paginate="data in c.data.sdsoReviewedData|filter:search|orderBy:sortKey:reverse|itemsPerPage:pageSize" pagination-id="sdsoReviewedDataPagination">
+            <td class="ritm_number">{{data.number}}</td>
+            <td class="ritm_cat_item">{{data.name}}</td>
+            <td class="ritm_cat_item">{{data.title}}</td>
+            <td class="ritm_cat_item">{{data.id_number}}</td>
+            <td class="ritm_cat_item">{{data.stage}}</td>
+            <td class="ritm_cat_item">{{data.submitBy}}</td>
+            <td class="ritm_cat_item">{{data.submitDate}}</td>
+            <td class="ritm_cat_item">{{data.lastUpdate}}</td>
+            <td>
+               <button ng-click="displayDetails(data.sysId);" class="btn btn-sm btn-primary" style="width: 70px; text-align: center;">View&#160;</button>
+               <!--<button class="btn btn-sm btn-primary" ng-click="report(data.requestId);" style="width: 70px; text-align: center;">Export</button>-->
+            </td>
+         </tr>
+      </table>
+      <div>
+         <table width="100%" border="0">
+            <tr>
+               <td width="70%">
+                  <dir-pagination-controls pagination-id="sdsoReviewedDataPagination" direction-links="true" boundary-links="true"></dir-pagination-controls>
+               </td>
+               <td width="25%" align="right">
+                  <label>Items per page&#160;&#160;</label>
+               </td>
+               <td width="5%" align="right">
+                  <select class="form-control" ng-model="pageSize" ng-init="pageSize='10'" style="width:80px;">
+                     <option value="5">5</option>
+                     <option value="10">10</option>
+                     <option value="15">15</option>
+                     <option value="20">20</option>
+                  </select>
+               </td>
+            </tr>
+         </table>
+      </div>
+   </div>
+</div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

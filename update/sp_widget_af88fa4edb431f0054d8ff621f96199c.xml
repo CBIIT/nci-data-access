@@ -51,12 +51,11 @@
 	$scope.withdraw = function(){
 		var id = $('#withdrawId').val();
 		accountActivationWithdrawRequestScoped.withdraw(id).then(handleResponse, handleError);
+		$('#confirmationDiv').modal('hide');
 		function handleResponse(data){
 			console.log(data);
-			$('#confirmationDiv').modal('hide');
 		}
 		function handleError(data){
-			$('#confirmationDiv').modal('hide');
 			alert("ERROR!");
 		}
 	}	
@@ -101,6 +100,7 @@
 	
       while(gr_items.next()){
             var item = {};
+				    item.sysId = gr_items.sys_id.toString();
             item.number = gr_items.number.toString();
             item.number = "DA-"+year+"-"+item.number.substring(8);
 						item.name = gr_items.name.toString();
@@ -109,22 +109,15 @@
             item.submittedDate = gr_items.sys_created_on.toString();
 				    var sdate = item.submittedDate.split(' ');
 				    item.submittedDate = sdate[0];
-            item.sysId = gr_items.sys_id.toString();
-            var it = new GlideRecord('sysapproval_approver');
-            it.addQuery('document_id', item.sysId);
-            it.query();
-            it.next();
-            var name = it.wf_activity.getDisplayValue();
+            var name = gr_items.stage.toString();
 						if(name == 'Waiting for DS Review'){
 								name = 'Waiting for Direct Supervisor Review';
 						}else if(name == 'Waiting for SD/SO Review'){
 								name = 'Waiting for Scientific Directors/Signing Official Review';
 						}else if(name == 'Waiting for NIH Office of SP Review'){
 								name = 'Waiting for NIH Office of Science Policy Review';
-						}else if(name == 'Rejected by SD/SO -Waiting for DS Review'){
+						}else if(name == 'Rejected by SD/SO-Waiting for DS Review'){
 								name = 'Rejected by Scientific Directors/Signing Offical - Waiting for Direct Supervisor Review';
-						}else{
-								name = 'No such stage';
 						}
 				    item.stage = name;
             data.submittedData.push(item); 
@@ -137,7 +130,7 @@
         <sys_created_on>2018-07-03 20:07:32</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>af88fa4edb431f0054d8ff621f96199c</sys_id>
-        <sys_mod_count>60</sys_mod_count>
+        <sys_mod_count>70</sys_mod_count>
         <sys_name>Account Activation PI submitted Page</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -145,7 +138,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_af88fa4edb431f0054d8ff621f96199c</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-09 21:09:06</sys_updated_on>
+        <sys_updated_on>2018-07-12 17:48:23</sys_updated_on>
         <template><![CDATA[<div class="row" ng-if="c.data.submittedData.length > 0" id="submitted_table">
 <div  class="panel panel-success">
     <div class="panel-heading" role="tab" id="heading_submittedItems">

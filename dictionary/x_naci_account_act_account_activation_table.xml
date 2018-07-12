@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database>
-    <element extends="task" label="Account Activation Table" max_length="40" name="x_naci_account_act_account_activation_table" sizeclass="1" type="collection">
+    <element audit="true" extends="task" label="Account Activation Table" max_length="40" name="x_naci_account_act_account_activation_table" sizeclass="1" type="collection">
         <element label="administrative" max_length="255" name="administrative" type="string_full_utf8"/>
         <element label="division" max_length="255" name="division" type="string"/>
         <element label="DS approval status" max_length="255" name="ds_approval_status" type="string"/>
@@ -15,6 +15,7 @@
         <element label="SDSO approval status" max_length="255" name="sdso_approval_status" type="string"/>
         <element label="Senior Scientist" max_length="255" name="senior_scientist" type="string_full_utf8"/>
         <element label="Staff Scientist" max_length="255" name="staff_scientist" type="string_full_utf8"/>
+        <element label="Stage" max_length="255" name="stage" type="string"/>
         <element label="Substantial Research" max_length="255" name="substantial_research" type="string_full_utf8"/>
         <element label="Tenure Track" max_length="50" name="tenure_track" type="string_full_utf8"/>
         <element label="Title" max_length="1000" name="title" type="string_full_utf8"/>

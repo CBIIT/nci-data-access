@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
-        <client_script><![CDATA[function($scope,accountActivationConstantScoped) {
+        <client_script><![CDATA[function($scope,accountActivationConstantScoped, accountActivationActionUpdateScoped) {
   /* widget controller */
    var c = this;
+	 var sessionId = c.data.info.sessionId;
+	 var userId = c.data.info.userId;
    var checkbox = accountActivationConstantScoped.getCheckboxNames();
    $scope.form = {
 		name:"",
@@ -38,6 +40,104 @@
 		if (!doNotApply)
 			$scope.$apply();
   };	
+	
+	$scope.loadDSApprovalConfirm = function(){
+		hideError();
+		$('#dsMessage').html("Are you sure that you want to approve this request?");
+		$('#dsApprovalDiv').modal('show');
+	}
+	
+	$scope.loadDSRejectConfirm = function(){
+		$('#rejectMessage').html("Are you sure you recommend to reject this request?");
+		$('#rejectDiv').modal('show');
+	}
+	
+	$scope.dsApprove = function(){
+		var comments = $('#commentsText').val();
+    var roleType = $('#roleType').val();
+		var requestId = $('#hideRequestId').val();
+		var action = accountActivationConstantScoped.getApprovalAction();
+		var role = "";
+
+		if(roleType == 'DS'){
+			role = accountActivationConstantScoped.getDsRole();
+		}else if(roleType == "SDSO"){
+			role = accountActivationConstantScoped.getSDSORole();
+		}
+		if(validation()){
+			showError();
+			$('#dsApprovalDiv').modal('hide');
+		}else{
+			var variables = {};
+			variables.request_id = requestId;
+			variables.approval_comments = comments;
+			variables.action = action;
+			variables.role = role;
+			submitApproval(variables);
+			$('#dsApprovalDiv').modal('hide');
+			$('#proposalDetail').modal('hide');
+	 }
+	}
+	
+	$scope.dsReject = function(){
+		var comments = $('#commentsText').val();
+    var roleType = $('#roleType').val();
+		var requestId = $('#hideRequestId').val();
+		var action = accountActivationConstantScoped.getRejectAction();
+		var role = "";
+		if(roleType == 'DS'){
+			role = accountActivationConstantScoped.getDsRole();
+		}else if(roleType == "SDSO"){
+			role = accountActivationConstantScoped.getSDSORole();
+		}
+		if(validation()){
+			showError();
+			$('#rejectDiv').modal('hide');
+		}else{
+			var variables = {};
+			variables.request_id = requestId;
+			variables.approval_comments = comments;
+			variables.action = action;
+			variables.role = role;
+			submitApproval(variables);
+			$('#rejectDiv').modal('hide');
+			$('#proposalDetail').modal('hide');
+	 }
+	}
+	
+	function submitApproval(variables){
+			accountActivationActionUpdateScoped.updateRequest(variables, sessionId).then(handleResponse, handleError);
+			function handleResponse(data){
+				console.log(data);
+			}
+			function handleError(data){
+				console.log(data);
+				alert('ERROR');
+			}
+	}		
+
+	
+	function validation(){
+		var comments = $('#commentsText').val();
+		if(comments.trim().length == 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	function showError(){
+		$('#commentsText').css('background-color', 'yellow');
+		$('#errMsg').html("<font color='red'>Please fill in the required field</font>");
+		$('#errMsg').show();		
+	}
+	
+	function hideError(){
+		$('#commentsText').css('background-color', '');
+		$('#errMsg').html("");
+		$('#errMsg').hide();			
+	}
+	
 }]]></client_script>
         <controller_as>c</controller_as>
         <css>.right-align{
@@ -73,7 +173,7 @@
         <sys_created_on>2018-07-09 14:54:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>9e7aacc0db1f134054d8ff621f961920</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>41</sys_mod_count>
         <sys_name>Account Activation Form display Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -81,7 +181,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_9e7aacc0db1f134054d8ff621f961920</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-09 19:33:55</sys_updated_on>
+        <sys_updated_on>2018-07-12 14:17:51</sys_updated_on>
         <template><![CDATA[<div id="proposalDetail" class="modal fade" data-keyboard="false" data-backdrop="static">
    <div class="modal-dialog modal-lg" style="width:1000px;">
       <div class="modal-content" style="overflow-y:auto; overflow-x: hidden;">
@@ -200,7 +300,6 @@
                        </div>                    
                      <input type="hidden" id="hideValue"/>
                      <input type="hidden" id="hideRequestId"/>
-                     <input type="hidden" id="hideApprovalId"/>
                      <input type="hidden" id="commentLength"/>
                      <input type="hidden" id="roleType"/>
                   </div>

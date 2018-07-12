@@ -31,17 +31,18 @@
 				$('#commets').hide();
 			}			
 			window.setDisplayValues(result);
+			$('#commentsText').val('');
 			$('#roleType').val('DS');
 			$('#hideRequestId').val(requestId);
-			$('#hideApprovalId').val(approvalId);
 			hideError();
+			accountActivationUtilScoped.setButtonOnDisplayPage('DS');
+			$('#proposalDetail').modal('show');					
 		}
 		function handleError(error){
 			console.log(error);
 			alert('ERROR!');
 		}
-		accountActivationUtilScoped.setButtonOnDisplayPage('DS');
-		$('#proposalDetail').modal('show');		
+
 	};
 	
 	$scope.report = function(requestId){
@@ -66,7 +67,7 @@
         <docs/>
         <field_list/>
         <has_preview>false</has_preview>
-        <id>account_activate_ds_approval_page_scoped</id>
+        <id>account-activate-ds-approval-page-scoped</id>
         <internal>false</internal>
         <link/>
         <name>Account Activate DS approval page scoped</name>
@@ -86,13 +87,14 @@
     data.dsData = [];
 
     var gr_items = new GlideRecord('x_naci_account_act_account_activation_table');
+	gr_items.addQuery('short_description', 'CBIIT Account Activation Application');
     gr_items.addQuery('opened_by', userId);
     //gr_items.addQuery('manager', userId);
     gr_items.orderByDesc('number');
     gr_items.query();
 
     while (gr_items.next()) {
-        if (gr_items.ds_approval_status == null || gr_items.ds_approval_status.toString().trim().length == 0) {
+        if (gr_items.stage == 'Waiting for DS Review' || gr_items.stage == 'Rejected by SD/SO-Waiting for DS Review') {
 
             var number = gr_items.number.toString();
             var sysId = gr_items.sys_id.toString();
@@ -107,22 +109,16 @@
             var name = gr_items.name.toString();
             var title = gr_items.title.toString();
             var id_number = gr_items.id_number.toString();
-            var it = new GlideRecord('sysapproval_approver');
-            it.addQuery('document_id', sysId);
-            it.query();
-            it.next();
-            var stage = it.wf_activity.getDisplayValue();
+            var stage = gr_items.stage.toString();
             if (stage == 'Waiting for DS Review') {
                 stage = 'Waiting for Direct Supervisor Review';
             } else if (stage == 'Waiting for SD/SO Review') {
-                v = 'Waiting for Scientific Directors/Signing Official Review';
+                stage = 'Waiting for Scientific Directors/Signing Official Review';
             } else if (stage == 'Waiting for NIH Office of SP Review') {
                 stage = 'Waiting for NIH Office of Science Policy Review';
-            } else if (stage == 'Rejected by SD/SO -Waiting for DS Review') {
+            } else if (stage == 'Rejected by SD/SO-Waiting for DS Review') {
                 stage = 'Rejected by Scientific Directors/Signing Offical - Waiting for Direct Supervisor Review';
-            } else {
-                stage = 'No such stage';
-            }
+            } 
             var item = {};
 					  item.sysId = sysId;
             item.number = number;
@@ -144,7 +140,7 @@
         <sys_created_on>2018-07-10 19:45:13</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>a496f298db1f534054d8ff621f96193e</sys_id>
-        <sys_mod_count>26</sys_mod_count>
+        <sys_mod_count>36</sys_mod_count>
         <sys_name>Account Activate DS approval page scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -152,7 +148,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_a496f298db1f534054d8ff621f96193e</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-10 21:38:59</sys_updated_on>
+        <sys_updated_on>2018-07-12 18:10:02</sys_updated_on>
         <template><![CDATA[<div class="row" id="ds_review_table" ng-if="c.data.dsData.length > 0">
 <div class="panel panel-success">
    <div class="panel-heading" role="tab" id="heading_ds_review_Items">

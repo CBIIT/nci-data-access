@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="m2m_sp_ng_pro_sp_widget">
+    <m2m_sp_ng_pro_sp_widget action="INSERT_OR_UPDATE">
+        <sp_angular_provider display_value="accountActivationUtilScoped">599061ccdb9f134054d8ff621f9619c5</sp_angular_provider>
+        <sp_widget display_value="account activation admin page scoped">fd9ac10ddb5b530054d8ff621f96192c</sp_widget>
+        <sys_class_name>m2m_sp_ng_pro_sp_widget</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-07-12 19:55:01</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>b7fb814ddb5b530054d8ff621f9619ea</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>accountActivationUtilScoped.account activation admin page scoped</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>m2m_sp_ng_pro_sp_widget_b7fb814ddb5b530054d8ff621f9619ea</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-07-12 19:55:01</sys_updated_on>
+    </m2m_sp_ng_pro_sp_widget>
+</record_update>
