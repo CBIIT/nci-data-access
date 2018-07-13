@@ -183,11 +183,18 @@
 			variables.short_description ="CBIIT Account Activation Application";
 			variables.manager = $scope.form.manager_id;
 			variables.sdso = getSDSO($scope.form.institute,	$scope.form.division);
-			var param = JSON.stringify(variables);
 			$('#submitRequestDiv').modal('hide').on('hidden.bs.modal', function() {
 					$('body').addClass('modal-open')
 			});
-			sendSubmitRequest(param);
+			var isResubmit = $('#isResubmit').val();
+			if(isResubmit == 'submit'){
+				var param = JSON.stringify(variables);
+				sendSubmitRequest(param);
+			}else if(isResubmit == 'resubmit'){
+				variables.sysId = $('#savedId').val();
+	      var param1 = JSON.stringify(variables);			
+				sendResubmitRequest(param1);
+			}
 			$('#permissionForm').modal('hide'); 
 		}else{
 			$('#submitRequestDiv').modal('hide').on('hidden.bs.modal', function() {
@@ -227,8 +234,18 @@
 			console.log(error);
 			alert("ERROR!");
 		}
-		
 	}
+
+	function sendResubmitRequest(param){
+		accountActivationSubmissionScoped.resubmitRequest(param, sessionId).then(handleRequest, handleError);
+		function handleRequest(response){
+			console.log('in handleRequest', response);
+		}
+		function handleError(error){
+			console.log(error);
+			alert("ERROR!");
+		}
+	}	
 	
 	function validation(){
 		cleanError();
@@ -239,10 +256,13 @@
 			$('#piName').css('background-color', "yellow");
 			error = true;
 		}else{
-			  var exist = checkSubmission($scope.form.id_number);
-				if (exist){
-					$('#errMessage').html("<font color='red'>" + name + " has already submitted the permission form previously</font>" );
-					return true;
+			var  isResubmit = $('#isResubmit').val();
+			  if(isResubmit == 'submit'){
+					var exist = checkSubmission($scope.form.id_number);
+					if (exist){
+						$('#errMessage').html("<font color='red'>" + name + " has already submitted the permission form previously</font>" );
+						return true;
+					}
 				}
 		}
 		if($scope.form.title == null || $scope.form.title.trim().length == 0){
@@ -393,7 +413,7 @@ legend.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>114</sys_mod_count>
+        <sys_mod_count>142</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -401,7 +421,7 @@ legend.scheduler-border {
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-12 20:15:32</sys_updated_on>
+        <sys_updated_on>2018-07-13 19:14:58</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">
@@ -501,11 +521,12 @@ legend.scheduler-border {
                		 </div> 
            	</fieldset> 
             <div class="row" style="text-align:center">
-              <button class="btn btn-primary" ng-click="saveData()" style="width: 80px;">SAVE</button>&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-primary" id="save-bt" ng-click="saveData()" style="width: 80px;">SAVE</button>&nbsp;&nbsp;&nbsp;
               <button class="btn btn-primary" ng-click="loadSubmitRequest()" ng-show="form.type.trim().length != 0" style="width: 80px;">SUBMIT</button>&nbsp;&nbsp;&nbsp;
               <button class="btn btn-primary" ng-click="cancel()" style="width: 80px;">CANCEL</button>&nbsp;&nbsp;&nbsp;
               <input type="hidden" id="action" value="save"/>
               <input type="hidden" id="savedId"/>
+              <input type="hidden" id="isResubmit"/>
            </div>
       	</div>
     </div>

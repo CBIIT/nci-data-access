@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
-        <client_script><![CDATA[function($scope,spUtil, accountactivationGetSubmittedRequestDataScoped, accountActivationUtilScoped, accountActivationcommentStringUitlScoped, accountActivationWithdrawRequestScoped) {
+        <client_script><![CDATA[function($scope,spUtil, accountActivationConstantScoped, accountactivationGetSubmittedRequestDataScoped, accountActivationUtilScoped, accountActivationcommentStringUitlScoped, accountActivationWithdrawRequestScoped) {
   /* widget controller */
   var c = this;
 	var sessionId = c.data.info.sessionId;
 	var userId = c.data.info.userId;
-	
+
 	$('.collapse').on('shown.bs.collapse', function() {
 		$(this).parent().find(".fa-plus-square").removeClass("fa-plus-square").addClass("fa-minus-square");
 	}).on('hidden.bs.collapse', function() {
@@ -57,6 +57,44 @@
 		}
 		function handleError(data){
 			alert("ERROR!");
+		}
+	}	
+	
+	$scope.resubmitProposal = function(sysId, number){
+		$('#errMessage').hide();
+		var checkbox = accountActivationConstantScoped.getCheckboxNames();
+		accountactivationGetSubmittedRequestDataScoped.getSubmittedRequestData(sysId, sessionId).then(handleResponse, handleError);
+		function handleResponse (result){
+			var type = result.type;
+			console.log(result);
+			$('#piName').val(result.name);
+			$('#savedId').val(sysId);
+			$('#isResubmit').val('resubmit');
+			result.confirm = 'yes';
+			$('#save-bt').hide();
+			for(var i = 0; i < checkbox.length; i++){
+				result[checkbox[i]] = (result[checkbox[i]] == 'true');
+			}
+			window.setFormValues(result);
+			$scope.changeModalSize(result.type, result.confirm);
+			$('#permissionForm').modal('show');
+		}
+		function handleError(error){
+			alert('ERROR');
+		}
+	
+	};
+	
+	$scope.changeModalSize = function(type, answer){
+		if(answer == 'yes'){
+			if(type == 'intramural'){
+				$('#content').css('height', '800px');
+			}
+			if(type == 'extramural'){
+				$('#content').css('height', '900px');
+			}
+				$('#content').css('overflow-y', 'auto');
+				$('#content').css('overflow-x', 'hide');
 		}
 	}	
 	
@@ -130,7 +168,7 @@
         <sys_created_on>2018-07-03 20:07:32</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>af88fa4edb431f0054d8ff621f96199c</sys_id>
-        <sys_mod_count>70</sys_mod_count>
+        <sys_mod_count>116</sys_mod_count>
         <sys_name>Account Activation PI submitted Page</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -138,7 +176,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_af88fa4edb431f0054d8ff621f96199c</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-12 17:48:23</sys_updated_on>
+        <sys_updated_on>2018-07-13 19:38:01</sys_updated_on>
         <template><![CDATA[<div class="row" ng-if="c.data.submittedData.length > 0" id="submitted_table">
 <div  class="panel panel-success">
     <div class="panel-heading" role="tab" id="heading_submittedItems">
@@ -165,10 +203,11 @@
                 </th>
                 <th ng-click="sort('id_number')">NIH ID Number
                     <span class="glyphicon sort-icon" ng-show="sortKey=='stage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-              </th>              
+                </th>    
+                <th>Stage</th>                
                 <th ng-click="sort('stage')">Status
                     <span class="glyphicon sort-icon" ng-show="sortKey=='stage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-              </th>
+                </th>
                 <th ng-click="sort('submitDate')">Submitted Date
                     <span class="glyphicon sort-icon" ng-show="sortKey=='submitDate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                 </th>
@@ -179,6 +218,15 @@
                 <td class="ritm_cat_item">{{data.name}}</td>
                 <td class="ritm_cat_item">{{data.title}}</td>
                 <td class="ritm_cat_item">{{data.id_number}}</td>
+                <td class="ritm_cat_item">
+                  <span ng-switch on='data.stage'> 
+                    <span ng-switch-when='Waiting for Direct Supervisor Review'><img src="/images/workflow_approved.gifx" Alt="Request Submitted" title="Request Submitted"/><img src="/images/workflow_active.gifx" Alt="Waiting for Direct Supervisor Review"  title="Waiting for Direct Supervisor Review"/><img src="/images/workflow_pending.gifx" Alt="Waiting for Scientific Directors/Signing Official Review" title="Waiting for Scientific Directors/Signing Official Review"/></span>
+                    <span ng-switch-when='Waiting for Scientific Directors/Signing Official Review'><img src="/images/workflow_approved.gifx" Alt="Request Submitted" title="Request Submitted"/><img src="/images/workflow_approved.gifx" Alt="Direct Supervisor approved" title="Direct Supervisor approved"/><img src="/images/workflow_active.gifx" Alt="Waiting for Scientific Directors/Signing Official Review" title="Waiting for Scientific Directors/Signing Official Review"/></span>
+                    <span ng-switch-when='Rejected by Scientific Directors/Signing Offical - Waiting for Direct Supervisor Review'><img src="/images/workflow_approved.gifx" Alt="Request Submitted" title="Request Submitted"/><img src="/images/workflow_approved.gifx" Alt="Direct Supervisor approved" title="Direct Supervisor approved"/><img src="/images/workflow_rejected.gifx" Alt="Scientific Directors/Signing Official Rejected" title="Scientific Directors/Signing Official Rejected"/><img src="/images/workflow_active.gifx" Alt="Waiting for Direct Supervisor Review" title="Waiting for Direct Supervisor Review"/><img src="/images/workflow_pending.gifx" Alt="Waiting for Scientific Directors/Signing Official Review" title="Waiting for Scientific Directors/Signing Official Review"/></span>
+                    <span ng-switch-when='Waiting for Investigator Resubmission'><img src="/images/workflow_approved.gifx" Alt="Request Submitted" title="Request Submitted"/><img src="/images/workflow_rejected.gifx" Alt="Direct Supervisor Rejected" title="Direct Supervisor Rejected"/></span>
+                    <span ng-switch-default><img src="/images/workflow_approved.gifx" title="Request Submitted" Alt="Request Submitted"/><img src="/images/workflow_approved.gifx" Alt="Direct Supervisor approved" title="Direct Supervisor Approved"/><img src="/images/workflow_approved.gifx" Alt="Scientific Directors/Signing Official Approved" title="Scientific Directors/Signing Official Approved"/></span>
+                  </span>                
+                </td>
                 <td class="ritm_cat_item">{{data.stage}}</td>
                 <td class="ritm_cat_item">{{data.submittedDate}}</td>
                 <td>

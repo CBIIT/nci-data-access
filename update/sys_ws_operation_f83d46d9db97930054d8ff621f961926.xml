@@ -7,19 +7,19 @@
         <default_operation_uri/>
         <enforce_acl/>
         <http_method>POST</http_method>
-        <name>submitRequestData</name>
+        <name>resubmitRequestData</name>
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	//names = ['name', 'title', 'id_number', 'manager', 'tenure_track', 'senior_scientist', 'staff_scientist','administrative','substantial_research','need_access','oversight', 'type', 'projectId'];
   
 	var jsonData = [];
     var body = request.body.data; 
-    
-	//var comments = body.comments;
-	//comments_and_work_notes - column name
+    var sys_id = body.sysId;
 	
 	var gr_request = new GlideRecord('x_naci_account_act_account_activation_table');
+        gr_request.addQuery('sys_id', sys_id);
+	gr_request.query();
+	gr_request.next();
 	
-	gr_request.initialize();
 	//gr_request.u_cms_submitted = true;
 	gr_request.u_requested_for = body.requested_for;
 	gr_request.opened_by = body.opened_by;
@@ -39,38 +39,38 @@
 	gr_request.oversight = body.oversight;
 	gr_request.type = body.type;
 	gr_request.sdso = body.sdso;
-	var task_id = gr_request.insert();
+	gr_request.pi_resubmission = 'approved';
+	gr_request.update();
 
 	jsonData.push({
-           submit_id: (task_id.toString()),
-		   number: body.manager
+      	   number: body.manager
      });
 	
 	return jsonData[0];
 	
 })(request, response);]]></operation_script>
-        <operation_uri>/api/x_naci_account_act/accountactivationscoped/submitRequestData</operation_uri>
+        <operation_uri>/api/x_naci_account_act/accountactivationscoped/resubmitRequestData</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
         <produces_customized>false</produces_customized>
-        <relative_path>/submitRequestData</relative_path>
+        <relative_path>/resubmitRequestData</relative_path>
         <request_example/>
         <requires_acl_authorization>false</requires_acl_authorization>
         <requires_authentication>true</requires_authentication>
         <short_description/>
         <sys_class_name>sys_ws_operation</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
-        <sys_created_on>2018-06-15 20:13:30</sys_created_on>
+        <sys_created_on>2018-07-13 19:18:49</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>313dc6d0dbbe134054d8ff621f961984</sys_id>
-        <sys_mod_count>11</sys_mod_count>
-        <sys_name>submitRequestData</sys_name>
+        <sys_id>f83d46d9db97930054d8ff621f961926</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>resubmitRequestData</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
-        <sys_update_name>sys_ws_operation_313dc6d0dbbe134054d8ff621f961984</sys_update_name>
+        <sys_update_name>sys_ws_operation_f83d46d9db97930054d8ff621f961926</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-13 19:22:54</sys_updated_on>
+        <sys_updated_on>2018-07-13 19:30:52</sys_updated_on>
         <web_service_definition display_value="accountActivationScoped">7e930e58db7e134054d8ff621f96195e</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

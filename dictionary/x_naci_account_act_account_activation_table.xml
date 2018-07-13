@@ -10,6 +10,7 @@
         <element label="Name" max_length="500" name="name" type="string_full_utf8"/>
         <element label="Need Access" max_length="255" name="need_access" type="string_full_utf8"/>
         <element label="Oversight" max_length="255" name="oversight" type="string_full_utf8"/>
+        <element label="PI resubmission" max_length="50" name="pi_resubmission" type="string"/>
         <element label="Project Id" max_length="255" name="projectid" type="string_full_utf8"/>
         <element label="SDSO" max_length="255" name="sdso" type="string_full_utf8"/>
         <element label="SDSO approval status" max_length="255" name="sdso_approval_status" type="string"/>

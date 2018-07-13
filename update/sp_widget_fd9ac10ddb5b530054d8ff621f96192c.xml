@@ -118,7 +118,7 @@
         <sys_created_on>2018-07-12 19:48:53</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>fd9ac10ddb5b530054d8ff621f96192c</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_name>account activation admin page scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -126,7 +126,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_fd9ac10ddb5b530054d8ff621f96192c</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-12 20:09:39</sys_updated_on>
+        <sys_updated_on>2018-07-12 21:06:08</sys_updated_on>
         <template><![CDATA[<div class="row" id="admin_table" ng-if="c.data.adminData.length > 0">
 <div class="panel panel-success">
    <div class="panel-heading" role="tab" id="heading_admin_Items">
@@ -154,6 +154,7 @@
             <th ng-click="sort('id_number')">NIH ID Number
                <span class="glyphicon sort-icon" ng-show="sortKey=='id_number'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
             </th>
+            <th>Stage</th> 
             <th ng-click="sort('stage')">Status
                <span class="glyphicon sort-icon" ng-show="sortKey=='stage'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
             </th>
@@ -163,9 +164,9 @@
             <th ng-click="sort('submitDate')">Submitted Date
                <span class="glyphicon sort-icon" ng-show="sortKey=='submitDate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
             </th>
-            <th ng-click="sort('lastUpdate')">Last Update Date
+            <!--th ng-click="sort('lastUpdate')">Last Update Date
                <span class="glyphicon sort-icon" ng-show="sortKey=='lastUpdate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-            </th>
+            </th -->
             <th>Actions</th>
          </tr>
          <tr dir-paginate="data in c.data.adminData|filter:search|orderBy:sortKey:reverse|itemsPerPage:pageSize" pagination-id="adminDataPagination">
@@ -173,10 +174,19 @@
             <td class="ritm_cat_item">{{data.name}}</td>
             <td class="ritm_cat_item">{{data.title}}</td>
             <td class="ritm_cat_item">{{data.id_number}}</td>
+            <td class="ritm_cat_item">
+              <span ng-switch on='data.stage'> 
+                <span ng-switch-when='Waiting for Direct Supervisor Review'><img src="/images/workflow_approved.gifx" Alt="Request Submitted" title="Request Submitted"/><img src="/images/workflow_active.gifx" Alt="Waiting for Direct Supervisor Review"  title="Waiting for Direct Supervisor Review"/><img src="/images/workflow_pending.gifx" Alt="Waiting for Scientific Directors/Signing Official Review" title="Waiting for Scientific Directors/Signing Official Review"/></span>
+                <span ng-switch-when='Waiting for Scientific Directors/Signing Official Review'><img src="/images/workflow_approved.gifx" Alt="Request Submitted" title="Request Submitted"/><img src="/images/workflow_approved.gifx" Alt="Direct Supervisor approved" title="Direct Supervisor approved"/><img src="/images/workflow_active.gifx" Alt="Waiting for Scientific Directors/Signing Official Review" title="Waiting for Scientific Directors/Signing Official Review"/></span>
+                <span ng-switch-when='Rejected by Scientific Directors/Signing Offical - Waiting for Direct Supervisor Review'><img src="/images/workflow_approved.gifx" Alt="Request Submitted" title="Request Submitted"/><img src="/images/workflow_approved.gifx" Alt="Direct Supervisor approved" title="Direct Supervisor approved"/><img src="/images/workflow_rejected.gifx" Alt="Scientific Directors/Signing Official Rejected" title="Scientific Directors/Signing Official Rejected"/><img src="/images/workflow_active.gifx" Alt="Waiting for Direct Supervisor Review" title="Waiting for Direct Supervisor Review"/><img src="/images/workflow_pending.gifx" Alt="Waiting for Scientific Directors/Signing Official Review" title="Waiting for Scientific Directors/Signing Official Review"/></span>
+                <span ng-switch-when='Waiting for Investigator Resubmission'><img src="/images/workflow_approved.gifx" Alt="Request Submitted" title="Request Submitted"/><img src="/images/workflow_rejected.gifx" Alt="Direct Supervisor Rejected" title="Direct Supervisor Rejected"/></span>
+                <span ng-switch-default><img src="/images/workflow_approved.gifx" title="Request Submitted" Alt="Request Submitted"/><img src="/images/workflow_approved.gifx" Alt="Direct Supervisor approved" title="Direct Supervisor Approved"/><img src="/images/workflow_approved.gifx" Alt="Scientific Directors/Signing Official Approved" title="Scientific Directors/Signing Official Approved"/></span>
+              </span>                
+            </td>           
             <td class="ritm_cat_item">{{data.stage}}</td>
             <td class="ritm_cat_item">{{data.submitBy}}</td>
             <td class="ritm_cat_item">{{data.submitDate}}</td>
-            <td class="ritm_cat_item">{{data.lastUpdate}}</td>
+            <!--td class="ritm_cat_item">{{data.lastUpdate}}</td -->
             <td>
                <button ng-click="displayDetails(data.sysId);" class="btn btn-sm btn-primary" style="width: 70px; text-align: center;">View&#160;</button>
                <!--<button class="btn btn-sm btn-primary" ng-click="report(data.requestId);" style="width: 70px; text-align: center;">Export</button>-->
