@@ -107,17 +107,17 @@
 			}
 			$scope.form.user_sys_id = sys_id;
 			$scope.form.userSelected = "selected";
-			$('#content').css('height', '580px');
+			$('#content').css('height', '550px');
 			$scope.$apply();
 		}
 	});
 	
 	$scope.changeModalSize = function(){
 		if($scope.form.type == 'intramural'){
-			$('#content').css('height', '800px');
+			$('#content').css('height', '700px');
 		}
 		if($scope.form.type == 'extramural'){
-			$('#content').css('height', '900px');
+			$('#content').css('height', '800px');
 		}
 			$('#content').css('overflow-y', 'auto');
 			$('#content').css('overflow-x', 'hide');
@@ -131,7 +131,7 @@
 
 		if(answer == 'yes'){
 			if($scope.form.division.trim().length == 0){
-				$('#userCheckMessage').html("Institute and Division are required fieldsssss.");
+				$('#userCheckMessage').html("Institute and Division are required fields.");
 			  $('#userCheckDiv').modal('show');
 				$scope.form.confirm = '';				
 			}else if($scope.form.title.trim().length == 0 || $scope.form.id_number.trim().length == 0 || $scope.form.manager.trim().length == 0){
@@ -380,8 +380,33 @@
 }
 
 legend.scheduler-border {
+  display: inline-block;
+  width: inherit;
+  padding: 0 10px;
+  border: none;
+  margin-left: 10px;
+  margin-bottom: 0px;
   font-size: 16px;
   font-weight: bold;
+}
+
+legend.scheduler-border label {
+  margin: 0;
+  font-weight: bold;
+}
+
+.scheduler-border {
+  border: 1px solid #ddd;
+  margin: 10px;
+}
+
+fieldset.scheduler-border {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.btn {
+  margin-top: 20px;
 }</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -413,7 +438,7 @@ legend.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>142</sys_mod_count>
+        <sys_mod_count>158</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -421,7 +446,7 @@ legend.scheduler-border {
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-13 19:14:58</sys_updated_on>
+        <sys_updated_on>2018-07-17 16:36:43</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">
@@ -460,7 +485,7 @@ legend.scheduler-border {
                       <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>NIH ID Number</label></div>
                       <div class="col-md-9"><input type="text" id="id_number" class="form-control input-margin" ng-model="form.id_number" placeholder="Please enter your NIH ID Number" size="80" readonly/></div>
                     </div>  
-                    <div class="row">
+                    <div class="row form-group">
                       <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>Project Manager</label></div>
                       <div class="col-md-9"><input type="text" id="id_number" class="form-control input-margin" ng-model="form.manager" placeholder="Please enter your Project Namager's Name" size="80" readonly/></div>
                    </div>

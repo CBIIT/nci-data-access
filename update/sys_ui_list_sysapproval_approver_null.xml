@@ -3,183 +3,153 @@
     <sys_ui_list parent="" relationship="" sys_domain="global" table="sysapproval_approver" version="2" view="">
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>state</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
+            <element>approval_column</element>
+            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">4c5d65e2db97130054d8ff621f961975</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>0</position>
             <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>9e67d0e6db36430004e574131f9619eb</sys_id>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-17 14:11:28</sys_created_on>
+            <sys_id>c05d65e2db97130054d8ff621f961977</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-17 14:11:28</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>approver</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
+            <element>approval_journal_column</element>
+            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">4c5d65e2db97130054d8ff621f961975</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>1</position>
             <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>1267d0e6db36430004e574131f9619ec</sys_id>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-17 14:11:28</sys_created_on>
+            <sys_id>c85d65e2db97130054d8ff621f961977</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-17 14:11:28</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>comments</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
+            <element>approval_source</element>
+            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">4c5d65e2db97130054d8ff621f961975</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>2</position>
             <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>9267d0e6db36430004e574131f9619ec</sys_id>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-17 14:11:28</sys_created_on>
+            <sys_id>4c5d65e2db97130054d8ff621f961977</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-17 14:11:28</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>document_id</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
+            <element>approver</element>
+            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">4c5d65e2db97130054d8ff621f961975</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>3</position>
             <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>1667d0e6db36430004e574131f9619ec</sys_id>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-17 14:11:28</sys_created_on>
+            <sys_id>cc5d65e2db97130054d8ff621f961977</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-17 14:11:28</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>sysapproval.ref_change_request.requested_by</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
+            <element>comments</element>
+            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">4c5d65e2db97130054d8ff621f961975</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>4</position>
             <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>9667d0e6db36430004e574131f9619ec</sys_id>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-17 14:11:28</sys_created_on>
+            <sys_id>405d65e2db97130054d8ff621f961978</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-17 14:11:28</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>sysapproval.u_requested_for</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
+            <element>document_id</element>
+            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">4c5d65e2db97130054d8ff621f961975</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>5</position>
             <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>1a67d0e6db36430004e574131f9619ec</sys_id>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-17 14:11:28</sys_created_on>
+            <sys_id>c05d65e2db97130054d8ff621f961978</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-17 14:11:28</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>sysapproval.ref_sc_req_item.cat_item</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
+            <element>due_date</element>
+            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">4c5d65e2db97130054d8ff621f961975</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>6</position>
             <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>9a67d0e6db36430004e574131f9619ec</sys_id>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-17 14:11:28</sys_created_on>
+            <sys_id>445d65e2db97130054d8ff621f961978</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-17 14:11:28</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>sys_created_on</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
+            <element>expected_start</element>
+            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">4c5d65e2db97130054d8ff621f961975</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>7</position>
             <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>1e67d0e6db36430004e574131f9619ec</sys_id>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-17 14:11:28</sys_created_on>
+            <sys_id>c45d65e2db97130054d8ff621f961978</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-17 14:11:28</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>approval_column</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
+            <element>group</element>
+            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">4c5d65e2db97130054d8ff621f961975</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>8</position>
             <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>9e67d0e6db36430004e574131f9619ec</sys_id>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-17 14:11:28</sys_created_on>
+            <sys_id>485d65e2db97130054d8ff621f961978</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-17 14:11:28</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list_element action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
-            <element>process_step</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
+            <element>iteration</element>
+            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">4c5d65e2db97130054d8ff621f961975</list_id>
             <max_value>false</max_value>
             <min_value>false</min_value>
             <position>9</position>
             <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>1267d0e6db36430004e574131f9619ed</sys_id>
+            <sys_created_by>zhoujim@nih.gov</sys_created_by>
+            <sys_created_on>2018-07-17 14:11:28</sys_created_on>
+            <sys_id>c85d65e2db97130054d8ff621f961978</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
-        </sys_ui_list_element>
-        <sys_ui_list_element action="INSERT_OR_UPDATE">
-            <average_value>false</average_value>
-            <element>sys_updated_by</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
-            <max_value>false</max_value>
-            <min_value>false</min_value>
-            <position>10</position>
-            <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>9267d0e6db36430004e574131f9619ed</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
-        </sys_ui_list_element>
-        <sys_ui_list_element action="INSERT_OR_UPDATE">
-            <average_value>false</average_value>
-            <element>sys_updated_on</element>
-            <list_id display_value="sysapproval_approver" element="NULL" name="sysapproval_approver" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">132161ba6f5812001c857eeeae3ee423</list_id>
-            <max_value>false</max_value>
-            <min_value>false</min_value>
-            <position>11</position>
-            <sum>false</sum>
-            <sys_created_by>buhlnk@nih.gov</sys_created_by>
-            <sys_created_on>2017-12-05 15:13:37</sys_created_on>
-            <sys_id>1667d0e6db36430004e574131f9619ed</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
-            <sys_updated_on>2017-12-05 15:13:37</sys_updated_on>
+            <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-07-17 14:11:28</sys_updated_on>
         </sys_ui_list_element>
         <sys_ui_list action="INSERT_OR_UPDATE">
             <average_value>false</average_value>
@@ -198,12 +168,12 @@
             <sys_domain>global</sys_domain>
             <sys_id>1391207cdbdb1300f59974131f961950</sys_id>
             <sys_mod_count>0</sys_mod_count>
-            <sys_name/>
-            <sys_package/>
+            <sys_name>sysapproval_approver</sys_name>
+            <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
             <sys_policy/>
             <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
             <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
-            <sys_update_name/>
+            <sys_update_name>sys_ui_list_sysapproval_approver_null</sys_update_name>
             <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
             <sys_updated_on>2018-07-11 22:11:22</sys_updated_on>
             <sys_user display_value="Jim Zhou">7acff4a96f6f2100e04fd15eae3ee451</sys_user>

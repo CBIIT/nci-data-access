@@ -53,7 +53,7 @@
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
         <sys_created_on>2018-06-18 20:00:33</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
-        <sys_id>8207a191dbf2d34054d8ff621f9619d8</sys_id>
+        <sys_id>13d961eedb57130054d8ff621f9619c4</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>Need Access</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
@@ -61,8 +61,8 @@
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sys_dictionary_x_naci_account_act_account_activation_table_need_access</sys_update_name>
-        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-06-18 20:00:33</sys_updated_on>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2018-07-17 13:58:59</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <u_model_id/>

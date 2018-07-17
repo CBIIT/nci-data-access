@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_wizard_answer">
+    <sys_wizard_answer action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <answer>Account Activation Table</answer>
+        <button_label/>
+        <dependent_value/>
+        <element/>
+        <name>Account Activation Table</name>
+        <next_question/>
+        <order>100</order>
+        <payload_name/>
+        <question display_value="Task" name="Task">2ce745436f022100250e6bbeae3ee45b</question>
+        <roles/>
+        <script/>
+        <sys_class_name>sys_wizard_answer</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2018-07-17 13:56:22</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>cfd961eedb57130054d8ff621f9619b6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Account Activation Table</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sys_wizard_answer_cfd961eedb57130054d8ff621f9619b6</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2018-07-17 13:56:22</sys_updated_on>
+        <table/>
+        <target_url>x_naci_account_act_account_activation_table.do</target_url>
+        <type>1</type>
+    </sys_wizard_answer>
+</record_update>
