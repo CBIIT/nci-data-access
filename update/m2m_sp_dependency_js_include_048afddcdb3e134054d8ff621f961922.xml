@@ -3,7 +3,7 @@
     <m2m_sp_dependency_js_include action="INSERT_OR_UPDATE">
         <order>100</order>
         <sp_dependency display_value="dirPagination Scoped">8089759cdb3e134054d8ff621f9619e1</sp_dependency>
-        <sp_js_include display_value="">2bae71c1dbb0470054d8ff621f96191f</sp_js_include>
+        <sp_js_include display_value="JQuery UI script">2bae71c1dbb0470054d8ff621f96191f</sp_js_include>
         <sys_class_name>m2m_sp_dependency_js_include</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
         <sys_created_on>2018-06-15 18:51:21</sys_created_on>

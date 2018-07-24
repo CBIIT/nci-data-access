@@ -33,10 +33,12 @@
 		 var manager = user_item.getDisplayValue('manager');
 		 var manager_id = user_item.manager.sys_id.toString();
 		 var id_number = user_item.getDisplayValue('employee_number');
+		 var institution = user_item.getDisplayValue("department");
+		 var doc = user_item.getDisplayValue("u_long_org_division");
 		 if (email) {
 			 label += "  [" + email + "]";
 		 }
-		 users.push({label: label, value: value, id: id, email: email, phone: phone, title: title, id_number: id_number, manager: manager, manager_id: manager_id});
+		 users.push({label: label, value: value, id: id, email: email, phone: phone, title: title, id_number: id_number, manager: manager, manager_id: manager_id, institution: institution, doc: doc});
 		 
 //		 users.push({'list':{label: label, value: value}, 'fistName': user_item.getDisplayValue('first_name'), 'lastName':user_item.getDisplayValue('last_name'), 'id': user_item.getDisplayValue('sys_id')});
      }
@@ -56,7 +58,7 @@
         <sys_created_on>2018-06-15 19:36:35</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>5aa44e58db7e134054d8ff621f9619a4</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>fetchUserList</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -64,7 +66,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sys_ws_operation_5aa44e58db7e134054d8ff621f9619a4</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-06-15 19:36:35</sys_updated_on>
+        <sys_updated_on>2018-07-23 21:37:28</sys_updated_on>
         <web_service_definition display_value="accountActivationScoped">7e930e58db7e134054d8ff621f96195e</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
