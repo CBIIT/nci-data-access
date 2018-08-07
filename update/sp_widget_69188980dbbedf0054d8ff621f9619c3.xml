@@ -125,11 +125,12 @@
 			}
 			$scope.form.user_sys_id = sys_id;
 			$scope.form.userSelected = "selected";
-			$('#content').css('height', '550px');
+			//$('#content').css('height', '550px');
 			$scope.$apply();
 		}
 	});
 	
+	/*
 	$scope.changeModalSize = function(){
 		if($scope.form.type == 'intramural'){
 			$('#content').css('height', '800px');
@@ -137,9 +138,11 @@
 		if($scope.form.type == 'extramural'){
 			$('#content').css('height', '900px');
 		}
-			$('#content').css('overflow-y', 'auto');
-			$('#content').css('overflow-x', 'hide');
+		$('#content').css('overflow-y', 'auto');
+		$('#content').css('overflow-x', 'hide');
 	}
+	*/
+	
 	$scope.saveData = function(){
 		//var type = $('#applicantType').val();
 		saveData();
@@ -169,13 +172,20 @@
 				 $scope.form.confirm = '';
 				}else{
 					$scope.form.abbr = abbr;
-					$scope.form.confirm = 'yes';
-					$scope.form.type = "intramural";
-					$scope.changeModalSize();					
+					$scope.form.confirm = 'yes';					
 				}
 			}
 		}else if(answer == 'no'){
-			 $('#userCheckMessage').html("Please contact the Authorizing Official to get NED updated");
+				$('#userCheckMessage').html("Please contact the Authorizing Official to get NED updated");
+				$scope.form.confirm = 'no';
+				$scope.form.type = "";
+				$scope.form.tenure_track = false;
+				$scope.form.senior_scientist = false;
+				$scope.form.staff_scientist = false;
+				$scope.form.administrative = false;
+				$scope.form.substantial_research = false;
+				$scope.form.need_access = false;
+				$scope.form.oversight = false;
 			 $('#userCheckDiv').modal('show');
 		}	
 	}
@@ -243,9 +253,7 @@
 	function getSDSO(institute, division){
 		var divisions = accountActivationConstantScoped.getDivisions();
 		var sdso = "";
-		alert(division);
 		for(var item in divisions){
-			alert(divisions[item].abbr);
 			if(divisions[item].abbr == division){
 				sdso = divisions[item].manager_id;
 				break;
@@ -366,9 +374,9 @@
 		$scope.form.userSelected = "No";
 		$scope.form.confirm = "";
 		$scope.form.abbr = "";
-		$('#content').css('height', '550px');
-		$('#content').css('overflow-y', 'auto');
-		$('#content').css('overflow-x', 'hide');
+		//$('#content').css('height', '550px');
+		//$('#content').css('overflow-y', 'auto');
+		//$('#content').css('overflow-x', 'hide');
 		cleanError();
 	}
 	
@@ -483,7 +491,7 @@ fieldset.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>231</sys_mod_count>
+        <sys_mod_count>257</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -491,14 +499,14 @@ fieldset.scheduler-border {
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-24 22:23:02</sys_updated_on>
+        <sys_updated_on>2018-08-07 22:01:42</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">
-  	<div class="modal-content" id="content" style="height:600px; overflow-y:auto; overflow-x: hidden;">
+  	<div class="modal-content" id="content">
          <div class="modal-header">
                <button type="button" class="close" data-dismiss="modal" ng-click="cancel()" aria-label="Close">
-                   <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                </button>
                <h4  class="modal-title">Permission Form for NIH Staff Access to Controlled-Access Data in dbGaP</h4>
          </div>      
@@ -512,7 +520,7 @@ fieldset.scheduler-border {
                     </div>
                     <div class="row">
                       <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>Title</label></div>
-                      <div class="col-md-9"><input type="text" id="title" class="form-control input-margin" ng-model="form.title" placeholder="Please enter your title" size="80" readonly/></div>
+                      <div class="col-md-9"><input type="text" id="title" class="form-control input-margin" ng-model="form.title" placeholder="Please enter your title" size="80" /></div>
                     </div>  
                     <!--<div class="row">
                       <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font></label></div>
@@ -536,8 +544,8 @@ fieldset.scheduler-border {
                       <div class="col-md-9"><input type="text" id="id_number" class="form-control input-margin" ng-model="form.id_number" placeholder="Please enter your NIH ID Number" size="80" readonly/></div>
                     </div>  
                     <div class="row form-group">
-                      <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>Project Manager</label></div>
-                      <div class="col-md-9"><input type="text" id="id_number" class="form-control input-margin" ng-model="form.manager" placeholder="Please enter your Project Namager's Name" size="80" readonly/></div>
+                      <div class="col-md-3"><label class="label-margin control-label text-right"><font color="red">*</font>Supervisor</label></div>
+                      <div class="col-md-9"><input type="text" id="id_number" class="form-control input-margin" ng-model="form.manager" placeholder="Please enter your Supervisor's Name" size="80" readonly/></div>
                    </div>
                 	 <div class="row"  ng-show="form.userSelected == 'selected'">
                     	<div class="col-md-3 label-margin">&nbsp;</div>
@@ -547,8 +555,8 @@ fieldset.scheduler-border {
             <fieldset class="scheduler-border" ng-show="form.confirm == 'yes'">
                    <legend class="scheduler-border"></legend>
                 	<div class="row">
-											<div class="col-md-6 label-margin"><label><input type="radio" name="typeApplicant" ng-model="form.type" ng-click="changeModalSize();" value="intramural" checked/>&nbsp;&nbsp;&nbsp;Eligible Intramural Scientist</label></div>                    
-                    	<div class="col-md-6 label-margin"><label><input type="radio" name="typeApplicant" ng-model="form.type" ng-click="changeModalSize();" value="extramural"/>&nbsp;&nbsp;&nbsp;Eligible Extramural Scientific Staff</label></div>
+											<div class="col-md-6 label-margin"><label><input type="radio" name="typeApplicant" ng-model="form.type" value="intramural"/>&nbsp;&nbsp;&nbsp;Eligible Intramural Scientist</label></div>                    
+                    	<div class="col-md-6 label-margin"><label><input type="radio" name="typeApplicant" ng-model="form.type" value="extramural"/>&nbsp;&nbsp;&nbsp;Eligible Extramural/OD Scientific Staff</label></div>
                		</div>
            	</fieldset> 
              <fieldset class="scheduler-border" ng-show="form.type == 'intramural'">
@@ -587,16 +595,16 @@ fieldset.scheduler-border {
                      </div>
                		 </div>
            	</fieldset> 
-            <fieldset class="scheduler-border" ng-show="form.type == 'extramural'">
+            <!--fieldset class="scheduler-border" ng-show="form.type == 'extramural'">
                    <legend class="scheduler-border"></legend>
                		 <div class="row">
                      <div class="col-md-12">
 	                      <label><input type="checkbox" ng-model="form.oversight"/>&nbsp;&nbsp;My supervisor will provide oversight for my use of the dbGaP data </label>
                      </div>
                		 </div> 
-           	</fieldset> 
+           	</fieldset --> 
             <div class="row" style="text-align:center">
-              <button class="btn btn-primary" id="save-bt" ng-click="saveData()" style="width: 80px;">SAVE</button>&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-primary" id="save-bt" ng-click="saveData()" style="width: 80px;" ng-disabled="form.save">SAVE</button>&nbsp;&nbsp;&nbsp;
               <button class="btn btn-primary" ng-click="loadSubmitRequest()" ng-show="form.type.trim().length != 0" style="width: 80px;">SUBMIT</button>&nbsp;&nbsp;&nbsp;
               <button class="btn btn-primary" ng-click="cancel()" style="width: 80px;">CANCEL</button>&nbsp;&nbsp;&nbsp;
               <input type="hidden" id="action" value="save"/>
