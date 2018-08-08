@@ -57,18 +57,18 @@
         <sys_created_on>2018-06-14 18:42:53</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>c6fe24c0db7edf0054d8ff621f96198c</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>Account Activation Page Header Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_c6fe24c0db7edf0054d8ff621f96198c</sys_update_name>
-        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-06-14 18:44:09</sys_updated_on>
+        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-08-08 15:26:19</sys_updated_on>
         <template><![CDATA[<div>
   <div class="row">
-     <img src="NCI-logo-full.jpg" height="70" Alt="NCI LOGO"/> <span style="float:right"> <input type="button" class="btn btn-info" value="Logout" ng-click="logout()"/>&#160;&#160;&#160;&#160;&#160;</span>
+     <img src="NCI-logo-full.jpg" height="70" Alt="NCI LOGO"/> <span style="float:right"> <input type="button" class="btn btn-primary" value="Logout" ng-click="logout()"/>&#160;&#160;&#160;&#160;&#160;</span>
   </div>  
 </div>]]></template>
     </sp_widget>
