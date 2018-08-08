@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Account Activation Saved Request" max_length="40" name="x_naci_account_act_account_activation_saved_request" type="collection">
+        <element label="Application Name" max_length="255" name="u_application_name" type="string"/>
+        <element label="userid" max_length="255" name="u_userid" type="string_full_utf8"/>
+        <element label="Value" max_length="4000" name="u_value" type="string_full_utf8"/>
+    </element>
+</database>
