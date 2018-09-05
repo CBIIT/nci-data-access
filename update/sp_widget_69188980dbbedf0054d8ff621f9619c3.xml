@@ -210,7 +210,17 @@
 			variables.opened_by = userId;			
 			variables.short_description ="CBIIT Account Activation Application";
 			variables.manager = $scope.form.manager_id;
-			variables.sdso = getSDSO($scope.form.institute,	$scope.form.abbr);
+			
+			var index = accountActivationConstantScoped.checkSpecialPI($scope.form.user_sys_id);
+			if(index != -1){
+				if(index == 7){
+					variables.sdso = accountActivationConstantScoped.getSpecialSDSO(1);
+				}else{
+					variables.sdso = accountActivationConstantScoped.getSpecialSDSO(0);
+				}	
+			}else{
+				variables.sdso = getSDSO($scope.form.institute,	$scope.form.abbr);
+			}
 			$('#submitRequestDiv').modal('hide').on('hidden.bs.modal', function() {
 					$('body').addClass('modal-open')
 			});
@@ -286,7 +296,7 @@
 		}else{
 			var  isResubmit = $('#isResubmit').val();
 			  if(isResubmit == 'submit'){
-					var exist = checkSubmission($scope.form.id_number);
+					var exist = checkSubmission($scope.form.id_number);	
 					if (exist){
 						$('#errMessage').html("<font color='red'>" + name + " has already submitted the permission form previously</font>" );
 						return true;
@@ -478,15 +488,15 @@ fieldset.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>265</sys_mod_count>
+        <sys_mod_count>282</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
-        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-08-07 22:26:27</sys_updated_on>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-09-05 13:59:39</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">

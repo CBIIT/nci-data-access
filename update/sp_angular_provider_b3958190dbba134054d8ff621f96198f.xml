@@ -14,7 +14,7 @@
 	this.sdsoRole = "Scientific Directors / Signing Official";
 	this.divisions = [
 		{abbr: "CCR", value: 'Center for Cancer Research', manager_id: '0b091f9c6fae2100250e6bbeae3ee440', manager_name: 'Jason Levine '},
-		{abbr: "CSSI", value: 'Center for Strategic Scientific Initialtives', manager_id: '0fbf70a96f6f2100e04fd15eae3ee46e', manager_name: 'Doung Lowy'},
+		{abbr: "CSSI", value: 'Center for Strategic Scientific Initialtives', manager_id: '0fbf70a96f6f2100e04fd15eae3ee46e', manager_name: 'Doug Lowy'},
 		{abbr: "CBIIT", value: 'Center for Biomedical Informatics and Information', manager_id: '4f091f9c6fae2100250e6bbeae3ee43d', manager_name: 'Tony Kerlavage'},
 		{abbr: "DCEG", value: 'Division of Cancer Epidemiology and Genetics', manager_id: '77af7c696f6f2100e04fd15eae3ee420', manager_name: 'Stephen Chanock'},
 		{abbr: "DCB", value: 'Division of Cancer Biology', manager_id: '04bf7c696f6f2100e04fd15eae3ee425', manager_name: 'Dinah Singer'},
@@ -22,6 +22,8 @@
 		{abbr: "DCP", value: 'Division of Cancer Prevention', manager_id: '48cfb0a96f6f2100e04fd15eae3ee4ef', manager_name: 'Barry Kramer'},
 		{abbr: "DCTD", value: 'Division of Cancer Treatment and Diagnosis', manager_id: '6dbffc696f6f2100e04fd15eae3ee487', manager_name: 'James Doroshow'}
 	]
+	this.specialPI = ['0b091f9c6fae2100250e6bbeae3ee440','4f091f9c6fae2100250e6bbeae3ee43d','77af7c696f6f2100e04fd15eae3ee420','04bf7c696f6f2100e04fd15eae3ee425','54bf7c696f6f2100e04fd15eae3ee49d','48cfb0a96f6f2100e04fd15eae3ee4ef','6dbffc696f6f2100e04fd15eae3ee487','0fbf70a96f6f2100e04fd15eae3ee46e'];
+	this.specialSDSO = ['0fbf70a96f6f2100e04fd15eae3ee46e','fbf6d9006fef52001c857eeeae3ee407'];
 	this.getApplicationName = function() {return this.applicationName;};
 	this.getCatItemDesc = function() {return this.catItemDesc;};
 	this.getNames = function(){return this.names};
@@ -41,6 +43,19 @@
 			}
 		}
 		return exist;
+	};
+	this.checkSpecialPI = function(id){
+		var index = -1;
+		for(var i = 0; i < this.specialPI.length; i++){
+			if(id == this.specialPI[i]){
+				index = i;
+				break;
+			}
+		}
+		return index;
+	};
+	this.getSpecialSDSO = function(index){
+		return this.specialSDSO[index];
 	}
 }]]></script>
         <sys_class_name>sp_angular_provider</sys_class_name>
@@ -48,7 +63,7 @@
         <sys_created_on>2018-06-15 15:00:38</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>b3958190dbba134054d8ff621f96198f</sys_id>
-        <sys_mod_count>20</sys_mod_count>
+        <sys_mod_count>24</sys_mod_count>
         <sys_name>accountActivationConstantScoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -56,7 +71,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_angular_provider_b3958190dbba134054d8ff621f96198f</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-07-24 22:12:10</sys_updated_on>
+        <sys_updated_on>2018-09-05 13:48:15</sys_updated_on>
         <type>service</type>
     </sp_angular_provider>
 </record_update>
