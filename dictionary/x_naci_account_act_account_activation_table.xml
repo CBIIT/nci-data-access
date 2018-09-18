@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database>
-    <element audit="true" extends="task" label="Account Activation Table" max_length="40" name="x_naci_account_act_account_activation_table" sizeclass="3" type="collection">
+    <element audit="true" extends="task" label="Account Activation Table" max_length="40" name="x_naci_account_act_account_activation_table" sizeclass="1" type="collection">
         <element label="administrative" max_length="255" name="administrative" type="string_full_utf8"/>
         <element label="division" max_length="255" name="division" type="string"/>
         <element label="DS approval status" max_length="255" name="ds_approval_status" type="string"/>
@@ -9,9 +9,12 @@
         <element label="Manager" max_length="500" name="manager" type="string_full_utf8"/>
         <element label="Name" max_length="500" name="name" type="string_full_utf8"/>
         <element label="Need Access" max_length="255" name="need_access" type="string_full_utf8"/>
+        <element label="Other" max_length="255" name="other" type="string_full_utf8"/>
         <element label="Oversight" max_length="255" name="oversight" type="string_full_utf8"/>
         <element label="PI resubmission" max_length="50" name="pi_resubmission" type="string"/>
+        <element label="Program Officer" max_length="255" name="program_officer" type="string_full_utf8"/>
         <element label="Project Id" max_length="255" name="projectid" type="string_full_utf8"/>
+        <element label="Project Officer" max_length="255" name="project_officer" type="string_full_utf8"/>
         <element label="SDSO" max_length="255" name="sdso" type="string_full_utf8"/>
         <element label="SDSO approval status" max_length="255" name="sdso_approval_status" type="string"/>
         <element label="Senior Scientist" max_length="255" name="senior_scientist" type="string_full_utf8"/>

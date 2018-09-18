@@ -30,14 +30,34 @@
         <option_schema/>
         <public>false</public>
         <roles/>
-        <script><![CDATA[(function() {  /* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */})();]]></script>
+        <script><![CDATA[(function() {  
+	/* populate the 'data' object */  /* e.g., data.table = $sp.getValue('table'); */
+	//var desc = 'CBIIT Account Activation Application';
+	var userId = gs.getUserID();
+	var gr_items = new GlideRecord('x_naci_account_act_account_activation_table');
+      //gr_items.addQuery('short_description', desc);
+  var tmp = gr_items.addQuery('opened_by', userId);
+			tmp.addOrCondition('manager', userId);
+			tmp.addOrCondition('sdso', userId);
+			//gr_items.addActiveQuery();
+			gr_items.query();
+	var total = 0;
+      while(gr_items.next()){
+        if(gr_items.opened_by == userId || gr_items.manager == userId){
+					total++;
+				}else if(gr_items.sdso == userId && gr_items.stage != 'Waiting for DS Review' && gr_items.stage != 'Waiting for Investigator Resubmission' ){
+					total++;
+				}  
+			}
+  data.count = total;
+})();]]></script>
         <servicenow>false</servicenow>
         <sys_class_name>sp_widget</sys_class_name>
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
         <sys_created_on>2018-06-14 20:18:46</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>72e40d4cdb7edf0054d8ff621f961994</sys_id>
-        <sys_mod_count>17</sys_mod_count>
+        <sys_mod_count>36</sys_mod_count>
         <sys_name>Account Activation Home Content Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -45,19 +65,41 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_72e40d4cdb7edf0054d8ff621f961994</sys_update_name>
         <sys_updated_by>yuw5@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-08-07 21:31:36</sys_updated_on>
+        <sys_updated_on>2018-09-17 20:05:58</sys_updated_on>
         <template><![CDATA[<div>
 	  <div style="white-space:nowrap;" class="row">
-	    	<h3 class="tools-owner-title">CBIIT Account Activation System</h3>
+	    	<h3 class="tools-owner-title">Database of Genotypes and Phenotypes (dbGaP) Account Request System</h3>
     </div>
    	<div class="row"></div>
-  	<div class="row">
-    CBIIT Account Activation System is designed for obtaining access to genomic data in dbGaP that is available through controlled access, eligible NIH Institute and Cetner (IC) intrumural scientists and IC extramural program scientific staff can appy for access.
-    <br/><br/>
-    Account Activation Form should be submitted for accessing to NIH-Designated Genomic Data in dbGaP.
-    &nbsp;&nbsp;
-    <span id="submitterSpan"> <input type="button" name="submitForm" id="submitForm" class="btn btn-primary" value="Submit a Request" ng-click="applyAccount();"/></span>  
+  	<div class="row" ng-show="data.count == 0">
+      <p>
+        The Database of Genotypes and Phenotypes (dbGaP) Account Request System is designed to facilitate the process for NIH Intramural Investigators and Extramural Scientific Staff to obtain appropriate account credentials, which will allow them to apply for access to controlled-tier level genomic data through dbGaP.
+      </p>
+      <p>
+        <label>Criteria to apply for dbGaP accounts:</label>
+				<ul>
+          <li>
+          	<u>NIH Intramural Investigators</u> must be at a level of tenure-track investigators, senior investigators, senior scientists, senior clinicians, or staff scientists.
+          </li>
+          <li>
+            <u>NIH Extramural Scientific Staff</u> must have administrative responsibility for the data; have substantial research involvement in the award that generated the data; or need access to carry out research unrelated to their portfolio management responsibilities.
+          </li>
+      	</ul>
+      </p>
+      <p>
+        For information on the Minimum Qualifications to apply to access data in dbGaP, visit <a href="https://cbiit.cancer.gov/genomic-data-access" target="_blank">https://cbiit.cancer.gov/genomic-data-access</a>.
+      </p>
+    	<span id="submitterSpan"> <input type="button" name="submitForm" id="submitForm" class="btn btn-primary" value="Submit a Request" ng-click="applyAccount();"/></span>  
   </div>
+  <div class="row" ng-show="data.count > 0">
+        <p>
+          In order to obtain a dbGaP account to apply for controlled-access data, your Direct Supervisor and Signing Official must review and approve your request. The status of your dbGaP account request is displayed below. To view your request and additional comments, select “View”. To cancel your request for a dbGaP account, select “Withdraw”.  
+        </p>
+        <p>
+          For more information about the Data access process, please visit <a href="https://cbiit.cancer.gov/genomic-data-access" target="_blank">https://cbiit.cancer.gov/genomic-data-access</a>.
+        </p>
+        <span id="submitterSpan"> <input type="button" name="submitForm" id="submitForm" class="btn btn-primary" value="Submit a Request" ng-click="applyAccount();"/></span>  
+    </div>
 </div>]]></template>
     </sp_widget>
 </record_update>

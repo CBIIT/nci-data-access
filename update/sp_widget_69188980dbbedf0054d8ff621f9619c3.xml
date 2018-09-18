@@ -20,6 +20,9 @@
 		tenure_track: false,
 		senior_scientist: false,
 		staff_scientist: false,
+		program_officer: false,
+		project_officer: false,
+		other: false,
 		administrative: false,
 		substantial_research: false,
 		need_access: false,
@@ -169,6 +172,9 @@
 				$scope.form.tenure_track = false;
 				$scope.form.senior_scientist = false;
 				$scope.form.staff_scientist = false;
+				$scope.form.program_officer = false;
+				$scope.form.project_officer = false;
+				$scope.form.other = false;
 				$scope.form.administrative = false;
 				$scope.form.substantial_research = false;
 				$scope.form.need_access = false;
@@ -363,6 +369,9 @@
 		$scope.form.tenure_track = false;
 		$scope.form.senior_scientist = false;
 		$scope.form.staff_scientist = false;
+		$scope.form.program_officer = false;
+		$scope.form.project_officer = false;
+		$scope.form.other = false;
 		$scope.form.administrative = false;
 		$scope.form.substantial_research = false;
 		$scope.form.need_access = false;
@@ -457,6 +466,20 @@ fieldset.scheduler-border {
 .jquery-menu{
   position: relative; or position: absolute;
   z-index: 2;
+}
+.subsection-left{
+	width:50%;
+  float:left;
+  padding:5px 0 0 20px;
+}
+.subsection-right{
+	width:50%;
+  float:right;
+  padding:5px 0 0 20px;
+}
+.subsection-options{
+	border-top: 1px solid gray;
+  padding-top:5px;
 }</css>
         <data_table>sp_instance</data_table>
         <demo_data/>
@@ -488,15 +511,15 @@ fieldset.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>282</sys_mod_count>
+        <sys_mod_count>306</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
-        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-05 13:59:39</sys_updated_on>
+        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-09-17 18:15:29</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">
@@ -550,12 +573,55 @@ fieldset.scheduler-border {
                		 </div>
            	</fieldset>
             <fieldset class="scheduler-border" ng-show="form.confirm == 'yes'">
-                   <legend class="scheduler-border"></legend>
+                   <legend class="scheduler-border"><font color='red'>*</font><label id="intramural">NIH Designations</label></legend>
                 	<div class="row">
-											<div class="col-md-6 label-margin"><label><input type="radio" name="typeApplicant" ng-model="form.type" value="intramural"/>&nbsp;&nbsp;&nbsp;Eligible Intramural Scientist</label></div>                    
-                    	<div class="col-md-6 label-margin"><label><input type="radio" name="typeApplicant" ng-model="form.type" value="extramural"/>&nbsp;&nbsp;&nbsp;Eligible Extramural/OD Scientific Staff</label></div>
+											<div class="subsection-left label-margin">
+                        <label>
+                          <input type="radio" name="typeApplicant" ng-model="form.type" value="intramural"/>&nbsp;&nbsp;&nbsp;Eligible Intramural Scientist
+                        </label>
+                        <div class="subsection-options" ng-show="form.type == 'intramural'">
+                          <div class="row">
+                           <div class="col-md-12">
+                             <label><input type="checkbox" ng-model="form.tenure_track"/>&nbsp;&nbsp;Tenure-track Investigator</label>
+                           </div>
+                         </div>  
+                         <div class="row">
+                           <div class="col-md-12">
+                             <label><input type="checkbox" ng-model="form.senior_scientist"/>&nbsp;&nbsp;Senior Scientist/Investigator/Clinician</label>
+                           </div>
+                         </div>
+                         <div class="row">  
+                           <div class="col-md-12">
+                             <label><input type="checkbox" ng-model="form.staff_scientist"/>&nbsp;&nbsp;Staff Scientist</label>
+                           </div>
+                         </div>
+                        </div>
+                    	</div>                    
+                    	<div class="subsection-right label-margin">
+                        <label>
+                          <input type="radio" name="typeApplicant" ng-model="form.type" value="extramural"/>&nbsp;&nbsp;&nbsp;Eligible Extramural/OD Scientific Staff
+                        </label>
+                        <div class="subsection-options" ng-show="form.type == 'extramural'">
+                          <div class="row">
+                           <div class="col-md-12">
+                             <label><input type="checkbox" ng-model="form.program_officer"/>&nbsp;&nbsp;Program Officer</label>
+                           </div>
+                         </div>  
+                         <div class="row">
+                           <div class="col-md-12">
+                             <label><input type="checkbox" ng-model="form.project_officer"/>&nbsp;&nbsp;Project Officer</label>
+                           </div>
+                         </div>
+                         <div class="row">  
+                           <div class="col-md-12">
+                             <label><input type="checkbox" ng-model="form.other"/>&nbsp;&nbsp;Other</label>
+                           </div>
+                         </div>
+                        </div>
+                    	</div>
                		</div>
            	</fieldset> 
+           <!--
              <fieldset class="scheduler-border" ng-show="form.type == 'intramural'">
                    <legend class="scheduler-border"><font color='red'>*</font><label id="intramural">Professional Designations</label></legend>
                    <div class="row">
@@ -574,6 +640,7 @@ fieldset.scheduler-border {
                      </div>
                		 </div>
            	</fieldset> 
+						-->
              <fieldset class="scheduler-border" ng-show="form.type == 'extramural'">
                    <legend class="scheduler-border"><font color='red'>*</font><label id="extramural">Reason for seeking access</label></legend>
                    <div class="row">
@@ -604,7 +671,7 @@ fieldset.scheduler-border {
 					-->
             <div class="row" style="text-align:center">
               <button class="btn btn-primary" id="save-bt" ng-click="saveData()" style="width: 80px;" ng-disabled="form.name == '' || form.title == '' || form.confirm == '' || form.confirm == 'no'">SAVE</button>&nbsp;&nbsp;&nbsp;
-              <button class="btn btn-primary" ng-click="loadSubmitRequest()" ng-show="form.type.trim().length != 0" style="width: 80px;" ng-disabled="(form.type =='intramural' && !form.tenure_track && !form.senior_scientist && !form.staff_scientist) || (form.type =='extramural'  && !form.administrative && !form.substantial_research && !form.need_access)">SUBMIT</button>&nbsp;&nbsp;&nbsp;
+              <button class="btn btn-primary" ng-click="loadSubmitRequest()" ng-show="form.type.trim().length != 0" style="width: 80px;" ng-disabled="(form.type =='intramural' && !form.tenure_track && !form.senior_scientist && !form.staff_scientist) || (form.type =='extramural'&& ((!form.program_officer && !form.project_officer && !form.other) || (!form.administrative && !form.substantial_research && !form.need_access)))">SUBMIT</button>&nbsp;&nbsp;&nbsp;
               <button class="btn btn-primary" ng-click="cancel()" style="width: 80px;">CANCEL</button>&nbsp;&nbsp;&nbsp;
               <input type="hidden" id="action" value="save"/>
               <input type="hidden" id="savedId"/>

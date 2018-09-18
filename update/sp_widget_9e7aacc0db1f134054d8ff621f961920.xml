@@ -20,6 +20,9 @@
 		tenure_track: false,
 		senior_scientist: false,
 		staff_scientist: false,
+		program_officer: false,
+		project_officer: false,
+		other: false,
 		administrative: false,
 		substantial_research: false,
 		need_access: false,
@@ -175,7 +178,7 @@
         <sys_created_on>2018-07-09 14:54:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>9e7aacc0db1f134054d8ff621f961920</sys_id>
-        <sys_mod_count>48</sys_mod_count>
+        <sys_mod_count>52</sys_mod_count>
         <sys_name>Account Activation Form display Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -183,7 +186,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_9e7aacc0db1f134054d8ff621f961920</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-08-07 21:39:02</sys_updated_on>
+        <sys_updated_on>2018-09-15 17:41:03</sys_updated_on>
         <template><![CDATA[<div id="proposalDetail" class="modal fade" data-keyboard="false" data-backdrop="static">
    <div class="modal-dialog modal-lg" style="width:1000px;">
       <div class="modal-content" style="overflow-y:auto; overflow-x: hidden;">
@@ -233,7 +236,7 @@
                      </div>
                      <div class="panel panel-default" ng-if="form.type == 'intramural'">
                         <div class="panel-heading">
-                           <h2 class="panel-title">Professional Designations (for Intramural)</h2>
+                           <h2 class="panel-title">NIH Designations</h2>
                         </div>
                         <div class="panel-body">
                            <div class="row" style="margin-bottom:10px">
@@ -244,6 +247,22 @@
                            </div>
                            <div class="row" style="margin-bottom:10px">
                               <div class="col-sm-12"><input type="checkbox" ng-model="form.staff_scientist" disabled="disabled"/>&#160; Staff Scientist</div>
+                           </div>
+                        </div>
+                     </div>
+                    <div class="panel panel-default" ng-if="form.type == 'extramural'">
+                        <div class="panel-heading">
+                           <h2 class="panel-title">NIH Designations</h2>
+                        </div>
+                        <div class="panel-body">
+                           <div class="row" style="margin-bottom:10px">
+                              <div class="col-sm-12"><input type="checkbox" disabled="disabled" ng-model="form.program_officer"/>&#160;Program Officer</div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <div class="col-sm-12"><input type="checkbox" ng-model="form.project_officer" disabled="disabled"/>&#160;Project Officer</div>
+                           </div>
+                           <div class="row" style="margin-bottom:10px">
+                              <div class="col-sm-12"><input type="checkbox" ng-model="form.other" disabled="disabled"/>&#160; Other</div>
                            </div>
                         </div>
                      </div>
