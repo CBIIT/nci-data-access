@@ -30,7 +30,9 @@
 		type: "",
 		userSelected: "No", 
 		confirm: "",
-		abbr: ""
+		abbr: "",
+		sdso: "",
+		requested_for: ""
 	};
 	//$scope.divisions = accountActivationConstantScoped.getDivisions();
 	window.setFormValues = function(value, doNotApply) {
@@ -236,6 +238,9 @@
 				sendSubmitRequest(param);
 			}else if(isResubmit == 'resubmit'){
 				variables.sysId = $('#savedId').val();
+				variables.manager = $scope.form.manager_id;
+				variables.sdso = $scope.form.sdso;
+				variables.requested_for = $scope.form.requested_for;
 	      var param1 = JSON.stringify(variables);			
 				sendResubmitRequest(param1);
 			}
@@ -511,15 +516,15 @@ fieldset.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>313</sys_mod_count>
+        <sys_mod_count>318</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
-        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-19 20:30:09</sys_updated_on>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-09-21 21:41:33</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">
