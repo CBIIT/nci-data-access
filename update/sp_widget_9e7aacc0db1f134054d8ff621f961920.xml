@@ -29,7 +29,8 @@
 		oversight: false,
 		type: "",
 		userSelected: "No", 
-		confirm: ""
+		confirm: "",
+		additionalComments: ""
    };
 	
    window.setDisplayValues = function(value, doNotApply) {
@@ -178,15 +179,15 @@
         <sys_created_on>2018-07-09 14:54:37</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>9e7aacc0db1f134054d8ff621f961920</sys_id>
-        <sys_mod_count>57</sys_mod_count>
+        <sys_mod_count>62</sys_mod_count>
         <sys_name>Account Activation Form display Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_9e7aacc0db1f134054d8ff621f961920</sys_update_name>
-        <sys_updated_by>pansu@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-19 20:46:58</sys_updated_on>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-09-23 20:24:51</sys_updated_on>
         <template><![CDATA[<div id="proposalDetail" class="modal fade" data-keyboard="false" data-backdrop="static">
    <div class="modal-dialog modal-lg" style="width:1000px;">
       <div class="modal-content" style="overflow-y:auto; overflow-x: hidden;">
@@ -286,7 +287,17 @@
                            </div>
 													-->
                         </div>
-                     </div>                    
+                     </div>   
+                    <div class="panel panel-default" ng-if="form.additionalComments.length > 0">
+                        <div class="panel-heading">
+                           <h2 class="panel-title">Additional Comments</h2>
+                        </div>
+                 				<div class="panel-body">
+                           <div class="row" style="margin-bottom:10px"> 
+                              <div class="col-sm-12"><span>{{form.additionalComments}}</span></div>
+                          </div>
+                      	</div>  
+                    </div>  
                      <div id="commets" style="display:none;">
                         <div class="panel panel-default">
                            <div class="panel-heading" id="err">

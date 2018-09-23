@@ -5,7 +5,7 @@
         <script><![CDATA[function accountActivationConstantScoped() {
 	this.applicationName = "AccountActivation";
 	this.catItemDesc = "CBIIT Account Activation Application";
-	this.names = ['name', 'title', 'institute', 'division', 'id_number', 'manager', 'tenure_track', 'senior_scientist', 'staff_scientist','program_officer','project_officer','other','administrative','substantial_research','need_access','oversight', 'type'];
+	this.names = ['name', 'title', 'institute', 'division', 'id_number', 'manager', 'tenure_track', 'senior_scientist', 'staff_scientist','program_officer','project_officer','other','administrative','substantial_research','need_access','oversight', 'type', 'additionalComments'];
 	this.checkboxNames = ['tenure_track','senior_scientist','staff_scientist','program_officer','project_officer','other','administrative','substantial_research','need_access','oversight'];
 	this.textField = ['name', 'title', 'id_number', 'manager'];
 	this.approvalAction = 'approved';
@@ -63,15 +63,15 @@
         <sys_created_on>2018-06-15 15:00:38</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>b3958190dbba134054d8ff621f96198f</sys_id>
-        <sys_mod_count>26</sys_mod_count>
+        <sys_mod_count>28</sys_mod_count>
         <sys_name>accountActivationConstantScoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_angular_provider_b3958190dbba134054d8ff621f96198f</sys_update_name>
-        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-15 18:16:23</sys_updated_on>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-09-23 20:34:21</sys_updated_on>
         <type>service</type>
     </sp_angular_provider>
 </record_update>

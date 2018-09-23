@@ -42,6 +42,7 @@
 	gr_request.oversight = body.oversight;
 	gr_request.type = body.type;
 	gr_request.sdso = body.sdso;
+	gr_request.extra_comments = body.additionalComments;
 	var task_id = gr_request.insert();
 
 	jsonData.push({
@@ -65,7 +66,7 @@
         <sys_created_on>2018-06-15 20:13:30</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>313dc6d0dbbe134054d8ff621f961984</sys_id>
-        <sys_mod_count>12</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>submitRequestData</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -73,7 +74,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sys_ws_operation_313dc6d0dbbe134054d8ff621f961984</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-15 17:46:44</sys_updated_on>
+        <sys_updated_on>2018-09-23 20:17:20</sys_updated_on>
         <web_service_definition display_value="accountActivationScoped">7e930e58db7e134054d8ff621f96195e</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
