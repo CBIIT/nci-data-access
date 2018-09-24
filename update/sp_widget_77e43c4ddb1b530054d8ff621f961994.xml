@@ -123,7 +123,7 @@
         <sys_created_on>2018-07-12 18:14:15</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>77e43c4ddb1b530054d8ff621f961994</sys_id>
-        <sys_mod_count>33</sys_mod_count>
+        <sys_mod_count>34</sys_mod_count>
         <sys_name>Account Activation SDSO reviewed Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -131,10 +131,10 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_77e43c4ddb1b530054d8ff621f961994</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-21 19:33:11</sys_updated_on>
+        <sys_updated_on>2018-09-24 21:00:13</sys_updated_on>
         <template><![CDATA[<div class="row" id="sdso_reviewed_table" ng-if="c.data.sdsoReviewedData.length > 0">
-<div class="panel panel-success">
-   <div class="panel-heading" role="tab" id="heading_sdso_reviewed_Items">
+<div class="panel margin-bottom-small">
+   <div class="panel-heading blue-panel" role="tab" id="heading_sdso_reviewed_Items">
       <h4 class="panel-title">
          <a role="button" data-toggle="collapse" data-target="#collapsesdsoReviewedItems" aria-expanded="true" aria-controls="collapsesdsoReviewedItems">
          <span class="accordion_icon">

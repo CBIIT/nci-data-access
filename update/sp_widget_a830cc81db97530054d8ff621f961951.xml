@@ -122,7 +122,7 @@
         <sys_created_on>2018-07-12 14:23:51</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>a830cc81db97530054d8ff621f961951</sys_id>
-        <sys_mod_count>28</sys_mod_count>
+        <sys_mod_count>29</sys_mod_count>
         <sys_name>Account Activation DS reviewed Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -130,10 +130,10 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_a830cc81db97530054d8ff621f961951</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-21 19:32:07</sys_updated_on>
+        <sys_updated_on>2018-09-24 20:57:50</sys_updated_on>
         <template><![CDATA[<div class="row" id="ds_reviewed_table" ng-if="c.data.dsReviewedData.length > 0">
-<div class="panel panel-success">
-   <div class="panel-heading" role="tab" id="heading_ds_reviewed_Items">
+<div class="panel margin-bottom-small">
+   <div class="panel-heading blue-panel" role="tab" id="heading_ds_reviewed_Items">
       <h4 class="panel-title">
          <a role="button" data-toggle="collapse" data-target="#collapseDSReviewedItems" aria-expanded="true" aria-controls="collapseDSReviewedItems">
          <span class="accordion_icon">

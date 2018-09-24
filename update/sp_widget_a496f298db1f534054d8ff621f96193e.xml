@@ -141,7 +141,7 @@
         <sys_created_on>2018-07-10 19:45:13</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>a496f298db1f534054d8ff621f96193e</sys_id>
-        <sys_mod_count>45</sys_mod_count>
+        <sys_mod_count>46</sys_mod_count>
         <sys_name>Account Activate DS approval page scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -149,14 +149,14 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_a496f298db1f534054d8ff621f96193e</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-24 15:06:48</sys_updated_on>
+        <sys_updated_on>2018-09-24 20:56:33</sys_updated_on>
         <template><![CDATA[<div class="row" id="ds_review_table" ng-if="c.data.dsData.length > 0">
 <p>
   The person(s) below is requesting permission to create an account which will allow them to apply for controlled-access data through dbGaP. As the Direct Supervisor, please review this request. <br/>
   ***NOTE: This is not an application to access specific datasets stored in dbGaP. ***
 </p>  
-<div class="panel panel-success">
-   <div class="panel-heading" role="tab" id="heading_ds_review_Items">
+<div class="panel margin-bottom-small">
+   <div class="panel-heading blue-panel" role="tab" id="heading_ds_review_Items">
       <h4 class="panel-title">
          <a role="button" data-toggle="collapse" data-target="#collapseDSReviewItems" aria-expanded="true" aria-controls="collapseDSReviewItems">
          <span class="accordion_icon">

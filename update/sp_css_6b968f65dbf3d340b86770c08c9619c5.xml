@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update table="sp_css">
     <sp_css action="INSERT_OR_UPDATE">
-        <css>.panel-success{&#13;
-  margin-bottom:3px !important;&#13;
-}&#13;
-.panel-heading{&#13;
-  color: #fff !important;&#13;
-  background-color: #0b4d86 !important;&#13;
-  border-color: #0b4d86 !important;&#13;
+        <css>.panel-heading.blue-panel {&#13;
+  color: #fff;&#13;
+  background-color: #0b4d86;&#13;
+  border-color: #0b4d86;&#13;
 }&#13;
 &#13;
-.panel-heading .badge{&#13;
-  color: #286090 !important;&#13;
-  background-color:#fff !important;&#13;
+.margin-bottom-small {&#13;
+  margin-bottom: 3px !important;&#13;
+}&#13;
+&#13;
+.panel-heading.blue-panel .badge {&#13;
+  color: #286090;&#13;
+  background-color:#fff;&#13;
+  margin-bottom: 5px;&#13;
 }</css>
         <name>Account_Activation_CSS</name>
         <sys_class_name>sp_css</sys_class_name>
@@ -20,14 +22,14 @@
         <sys_created_on>2018-08-08 14:39:30</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>6b968f65dbf3d340b86770c08c9619c5</sys_id>
-        <sys_mod_count>9</sys_mod_count>
+        <sys_mod_count>17</sys_mod_count>
         <sys_name>Account_Activation_CSS</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_css_6b968f65dbf3d340b86770c08c9619c5</sys_update_name>
-        <sys_updated_by>pansu@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-08-08 15:40:46</sys_updated_on>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-09-24 20:20:28</sys_updated_on>
     </sp_css>
 </record_update>
