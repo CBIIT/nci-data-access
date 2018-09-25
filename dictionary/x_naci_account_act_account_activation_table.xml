@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database>
-    <element audit="true" extends="task" label="Account Activation Table" max_length="40" name="x_naci_account_act_account_activation_table" sizeclass="3" type="collection">
+    <element audit="true" extends="task" label="Account Activation Table" max_length="40" name="x_naci_account_act_account_activation_table" sizeclass="5" type="collection">
         <element label="administrative" max_length="255" name="administrative" type="string_full_utf8"/>
         <element label="division" max_length="255" name="division" type="string"/>
         <element label="DS approval status" max_length="255" name="ds_approval_status" type="string"/>
