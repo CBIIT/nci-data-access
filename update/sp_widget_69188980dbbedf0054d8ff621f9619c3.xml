@@ -33,9 +33,13 @@
 		abbr: "",
 		sdso: "",
 		requested_for: "",
-		additionalComments: ""
+		additionalComments: "",
+		submitAction: ''
 	};
 	//$scope.divisions = accountActivationConstantScoped.getDivisions();
+	window.setResubmitFlag = function (value){
+		$scope.form.submitAction = value;
+	}
 	window.setFormValues = function(value, doNotApply) {
 		for (var key in value) {
 			$scope.form[key] = value[key];
@@ -145,7 +149,7 @@
 
 		if(answer == 'yes'){
 		  if($scope.form.division.trim().length == 0 || $scope.form.title.trim().length == 0 || $scope.form.institute.trim().length == 0 || $scope.form.id_number.trim().length == 0 || $scope.form.manager.trim().length == 0){
-				$('#userCheckMessage').html("All required fields cannot be empty, please contact the Authorizing Official to get NED updated");
+				$('#userCheckMessage').html("All required fields cannot be empty, please contact the Authorizing Official to get <a href='https://ned.nih.gov/' target='_BLANK'>NED</a> updated");
 			  $('#userCheckDiv').modal('show');
 				$scope.form.confirm = '';
 			}else if($scope.form.institute.trim() != 'NCI'){
@@ -169,7 +173,7 @@
 				}
 			}
 		}else if(answer == 'no'){
-				$('#userCheckMessage').html("Please contact the Authorizing Official to get NED updated");
+				$('#userCheckMessage').html("Please contact the Authorizing Official to get <a href='https://ned.nih.gov/' target='_BLANK'>NED</a> updated");
 				$scope.form.confirm = 'no';
 				$scope.form.type = "";
 				$scope.form.tenure_track = false;
@@ -525,7 +529,7 @@ fieldset.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>334</sys_mod_count>
+        <sys_mod_count>345</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -533,7 +537,7 @@ fieldset.scheduler-border {
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-25 16:29:42</sys_updated_on>
+        <sys_updated_on>2018-10-01 20:49:35</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">
@@ -609,6 +613,11 @@ fieldset.scheduler-border {
                              <label><input type="checkbox" ng-model="form.staff_scientist"/>&nbsp;&nbsp;Staff Scientist</label>
                            </div>
                          </div>
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <b>Note:</b> Trainees such as graduate students and postdoctoral fellows are not permitted to apply for an account to access controlled-access data in the Database of Genotypes and Phenotypes (dbGaP)
+                          </div>
+                        </div>
                         </div>
                     	</div>                    
                     	<div class="subsection-right label-margin">
@@ -673,8 +682,8 @@ fieldset.scheduler-border {
                      </div>
                		 </div>
            	</fieldset> 
-            <fieldset class="scheduler-border"  ng-show="form.type == 'intramural' || form.type == 'extramural' ">
-                   <legend class="scheduler-border">Additional Comments</legend>
+            <fieldset class="scheduler-border"  ng-show="form.submitAction == 'resubmit' && (form.type == 'intramural' || form.type == 'extramural')">
+                   <legend class="scheduler-border">Response to the Rejection</legend>
                		 <div class="row">
                      <div class="col-md-12">
 												<textarea style="width:100%; height: 100px; margin-top:10px" ng-model="form.additionalComments" name="comments" placeholder="Place your additional comments here"></textarea>

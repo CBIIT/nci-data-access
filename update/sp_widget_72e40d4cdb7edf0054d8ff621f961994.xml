@@ -12,6 +12,7 @@
 		$('#savedId').val('');
 		$('#isResubmit').val('submit');
 		window.clearData();
+		window.setResubmitFlag('submit');
 		/*$('#content').css('height', '550px');
 		$('#content').css('overflow-y', 'auto');
 		$('#content').css('overflow-x', 'hide');*/
@@ -60,7 +61,7 @@
         <sys_created_on>2018-06-14 20:18:46</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>72e40d4cdb7edf0054d8ff621f961994</sys_id>
-        <sys_mod_count>39</sys_mod_count>
+        <sys_mod_count>40</sys_mod_count>
         <sys_name>Account Activation Home Content Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -68,7 +69,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_72e40d4cdb7edf0054d8ff621f961994</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-25 17:51:52</sys_updated_on>
+        <sys_updated_on>2018-10-01 20:36:19</sys_updated_on>
         <template><![CDATA[<div>
 	  <div style="white-space:nowrap;" class="row">
 	    	<h3 class="tools-owner-title">Database of Genotypes and Phenotypes (dbGaP) Account Request System</h3>
