@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update>
+    <sys_documentation element="" label="Account Activation Approver" language="en" table="x_naci_account_act_account_activation_approver">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element/>
+            <help/>
+            <hint/>
+            <label>Account Activation Approver</label>
+            <language>en</language>
+            <name>x_naci_account_act_account_activation_approver</name>
+            <plural>Account Activation Approvers</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>yuw5@nih.gov</sys_created_by>
+            <sys_created_on>2018-10-04 20:10:28</sys_created_on>
+            <sys_customer_update>false</sys_customer_update>
+            <sys_id>d915b900dbc1a340b86770c08c96198a</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Account Activation Approver</sys_name>
+            <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+            <sys_policy/>
+            <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+            <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+            <sys_update_name>sys_documentation_x_naci_account_act_account_activation_approver__en</sys_update_name>
+            <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+            <sys_updated_on>2018-10-04 20:10:28</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

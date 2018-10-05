@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Account Activation Approver" max_length="40" name="x_naci_account_act_account_activation_approver" type="collection">
+        <element label="Approver ID" max_length="100" name="approver_id" type="string"/>
+        <element label="Division" max_length="40" name="division" type="string"/>
+        <element label="Division full name" max_length="100" name="division_full_name" type="string"/>
+        <element label="Manager ID" max_length="100" name="manager_id" type="string"/>
+        <element label="Manager Name" max_length="100" name="manager_name" type="string"/>
+        <element label="Type" max_length="40" name="type" type="string"/>
+    </element>
+</database>
