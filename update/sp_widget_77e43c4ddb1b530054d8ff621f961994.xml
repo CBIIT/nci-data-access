@@ -39,8 +39,20 @@
 	};
 	
 	$scope.report = function(requestId){
-				alert("Under Construction!");
-			};
+				//alert("Under Construction!");
+
+		// Only pt supported (not mm or in)
+		var doc = new jsPDF();
+		doc.autoTable({
+        head: [[{content: 'DATE', rowSpan: 2},{content: 'R', colSpan: 2},{content: 'S', colSpan: 2}],
+					['r1', 'r2','s1','s2']],
+        body: [
+            ['1','David', 'david@example.com', 'Sweden','test'],
+            ['2','Castille', 'castille@example.com', 'Norway','test']
+        ]
+    });
+		doc.save('table.pdf');
+	};
 	
 	spUtil.recordWatch($scope, "sysapproval_approver", "", function() {  
 		spUtil.update($scope);
@@ -123,15 +135,15 @@
         <sys_created_on>2018-07-12 18:14:15</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>77e43c4ddb1b530054d8ff621f961994</sys_id>
-        <sys_mod_count>34</sys_mod_count>
+        <sys_mod_count>42</sys_mod_count>
         <sys_name>Account Activation SDSO reviewed Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_77e43c4ddb1b530054d8ff621f961994</sys_update_name>
-        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-24 21:00:13</sys_updated_on>
+        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-09 20:43:05</sys_updated_on>
         <template><![CDATA[<div class="row" id="sdso_reviewed_table" ng-if="c.data.sdsoReviewedData.length > 0">
 <div class="panel margin-bottom-small">
    <div class="panel-heading blue-panel" role="tab" id="heading_sdso_reviewed_Items">
@@ -194,7 +206,7 @@
             <!-- td class="ritm_cat_item">{{data.lastUpdate}}</td -->
             <td>
                <button ng-click="displayDetails(data.sysId);" class="btn btn-sm btn-primary" style="width: 70px; text-align: center;">View&#160;</button>
-               <!--<button class="btn btn-sm btn-primary" ng-click="report(data.requestId);" style="width: 70px; text-align: center;">Export</button>-->
+               <button ng-show="data.stage == 'Completed'" class="btn btn-sm btn-primary" ng-click="report(data.requestId);" style="width: 70px; text-align: center;">Export</button>
             </td>
          </tr>
       </table>

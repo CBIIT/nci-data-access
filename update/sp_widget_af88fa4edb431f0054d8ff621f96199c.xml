@@ -112,7 +112,23 @@
 				$('#content').css('overflow-y', 'auto');
 				$('#content').css('overflow-x', 'hide');
 		}
-	}	
+	};
+	
+	$scope.report = function(requestId){
+				//alert("Under Construction!");
+
+		// Only pt supported (not mm or in)
+		var doc = new jsPDF();
+		doc.autoTable({
+        head: [[{content: 'DATE', rowSpan: 2},{content: 'R', colSpan: 2},{content: 'S', colSpan: 2}],
+					['r1', 'r2','s1','s2']],
+        body: [
+            ['1','David', 'david@example.com', 'Sweden','test'],
+            ['2','Castille', 'castille@example.com', 'Norway','test']
+        ]
+    });
+		doc.save('table.pdf');
+	};
 	
 	spUtil.recordWatch($scope, "x_naci_account_act_account_activation_table", "", function(data) {  
 		spUtil.update($scope);
@@ -184,15 +200,15 @@
         <sys_created_on>2018-07-03 20:07:32</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>af88fa4edb431f0054d8ff621f96199c</sys_id>
-        <sys_mod_count>125</sys_mod_count>
+        <sys_mod_count>130</sys_mod_count>
         <sys_name>Account Activation PI submitted Page</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_af88fa4edb431f0054d8ff621f96199c</sys_update_name>
-        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-10-05 19:51:53</sys_updated_on>
+        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-09 20:40:20</sys_updated_on>
         <template><![CDATA[<div class="row" ng-if="c.data.submittedData.length > 0" id="submitted_table">
 <div  class="panel margin-bottom-small">
     <div class="panel-heading blue-panel" role="tab" id="heading_submittedItems">
@@ -251,9 +267,7 @@
                     <button ng-if="data.stage =='Waiting for Investigator Resubmission'" ng-click="resubmitProposal(data.sysId, data.number);" class="btn btn-sm btn-primary"
                         style="width: 70px; text-align: center;">Resubmit&#160;</button>
                     <button ng-if="data.stage != 'Completed'" ng-click="withdrawItem(data.sysId);" class="btn btn-sm btn-warning" style="width: 70px; text-align: center;">Withdraw&#160;</button> 
-                    <!--<a href="$sp.do?id=dceg_report_page&sys_id={{data.sysId}}" target="_BLANK"> -->
-                    <!--    <button class="btn btn-sm btn-primary" style="width: 70px; text-align: center;" ng-click="exportDoc(data.sysId);">Export</button> -->
-                    <!--</a> -->&#160;
+                    <button ng-show="data.stage == 'Completed'" class="btn btn-sm btn-primary" ng-click="report(data.requestId);" style="width: 70px; text-align: center;">Export</button>
                 </td>
             </tr>
         </table>

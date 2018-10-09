@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="m2m_sp_dependency_js_include">
+    <m2m_sp_dependency_js_include action="INSERT_OR_UPDATE">
+        <order>100</order>
+        <sp_dependency display_value="PDFGenerator">c8777ee5db05a740b86770c08c9619b3</sp_dependency>
+        <sp_js_include display_value="PDFGenerator_JS">9ce7beaddb05a740b86770c08c9619c8</sp_js_include>
+        <sys_class_name>m2m_sp_dependency_js_include</sys_class_name>
+        <sys_created_by>yuw5@nih.gov</sys_created_by>
+        <sys_created_on>2018-10-09 16:56:04</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>c288f2eddb05a740b86770c08c9619bc</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>PDFGenerator.PDFGenerator_JS</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>m2m_sp_dependency_js_include_c288f2eddb05a740b86770c08c9619bc</sys_update_name>
+        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-09 16:56:04</sys_updated_on>
+    </m2m_sp_dependency_js_include>
+</record_update>

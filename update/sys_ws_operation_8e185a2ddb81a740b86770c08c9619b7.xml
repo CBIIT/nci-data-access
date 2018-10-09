@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>getApproverList</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+
+	//var type = request.queryParams.name;
+	var list = [];
+	var gr = new GlideRecord('x_naci_account_act_account_activation_approver');
+		gr.orderBy('type');
+	gr.query();
+	while(gr.next()){
+		var item = {};
+		
+		item.abbr = gr.getDisplayValue('division');
+		item.value = gr.getDisplayValue('division_full_name');
+		item.manager_id = gr.getDisplayValue('manager_id');
+		item.manager_name = gr.getDisplayValue('manager_name');
+		item.approver = gr.getDisplayValue('approver_id');
+		list.push(item);
+	}
+    
+	return list;
+
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_naci_account_act/accountactivationscoped/getApproverList</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/getApproverList</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>yuw5@nih.gov</sys_created_by>
+        <sys_created_on>2018-10-09 14:44:44</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>8e185a2ddb81a740b86770c08c9619b7</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>getApproverList</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sys_ws_operation_8e185a2ddb81a740b86770c08c9619b7</sys_update_name>
+        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-09 14:44:44</sys_updated_on>
+        <web_service_definition display_value="accountActivationScoped">7e930e58db7e134054d8ff621f96195e</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

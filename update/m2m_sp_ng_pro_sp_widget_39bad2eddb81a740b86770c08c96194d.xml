@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="m2m_sp_ng_pro_sp_widget">
+    <m2m_sp_ng_pro_sp_widget action="INSERT_OR_UPDATE">
+        <sp_angular_provider display_value="accountActivationGetApproverList">78279ae9db81a740b86770c08c9619f7</sp_angular_provider>
+        <sp_widget display_value="Account Activation Form Scoped">69188980dbbedf0054d8ff621f9619c3</sp_widget>
+        <sys_class_name>m2m_sp_ng_pro_sp_widget</sys_class_name>
+        <sys_created_by>yuw5@nih.gov</sys_created_by>
+        <sys_created_on>2018-10-09 14:45:47</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>39bad2eddb81a740b86770c08c96194d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>accountActivationGetApproverList.Account Activation Form Scoped</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>m2m_sp_ng_pro_sp_widget_39bad2eddb81a740b86770c08c96194d</sys_update_name>
+        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-09 14:45:47</sys_updated_on>
+    </m2m_sp_ng_pro_sp_widget>
+</record_update>
