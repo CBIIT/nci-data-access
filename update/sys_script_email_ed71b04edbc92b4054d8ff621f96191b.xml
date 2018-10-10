@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_email">
+    <sys_script_email action="INSERT_OR_UPDATE">
+        <name>x_naci_account_act_account_activation_table_script_2</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[(function runMailScript(current, template, email, email_action, event) {
+	 template.print('Dear ' + current.name.toString() + ', <br/><br/>');
+	 var stage = current.stage.toString();
+	 var id = '';
+	 var role = '';
+	 if(current.stage.toString() == 'Waiting for DS Review' || current.stage.toString() == 'Rejected by SD/SO-Waiting for DS Review'){
+	   id = current.manager.toString();
+	   role = "Direct Supervisor";
+	 }else if(current.stage.toString() == 'Waiting for SD/SO Review'){
+	   id = current.sdso.toString();
+	   role = "Scientific Directors / Signing Official";	 
+	 }
+	 var user = new GlideRecord('sys_user');
+	     user.addQuery('sys_id', id);
+	     user.query();
+	     user.next();
+	var mName = user.name.toString();
+	var mEmail = user.email.toString();
+	
+	template.print('Your request has been submitted for ' + role + ' review. However, your request has not been reviewed in the past three weeks. Please contact ' + mName + '(<a href="mailto:' + mEmail + '">' + mEmail + '</a>) to request review.');
+
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-10-10 20:22:53</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>ed71b04edbc92b4054d8ff621f96191b</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>x_naci_account_act_account_activation_table_script_2</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sys_script_email_ed71b04edbc92b4054d8ff621f96191b</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-10 21:49:40</sys_updated_on>
+    </sys_script_email>
+</record_update>

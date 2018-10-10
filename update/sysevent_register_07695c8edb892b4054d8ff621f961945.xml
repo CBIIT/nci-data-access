@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sysevent_register">
+    <sysevent_register action="INSERT_OR_UPDATE">
+        <description>This event will triggle notification if approver (DS/SDSO) has not taken action on a request</description>
+        <event_name>x_naci_account_act.dbGaP_weekly_approver</event_name>
+        <fired_by>dbGaP Weekly Approver Reminder</fired_by>
+        <queue/>
+        <suffix>dbGaP_weekly_approver_reminder</suffix>
+        <sys_class_name>sysevent_register</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-10-10 18:39:25</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>07695c8edb892b4054d8ff621f961945</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>x_naci_account_act.dbGaP_weekly_approver</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sysevent_register_07695c8edb892b4054d8ff621f961945</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-10 19:12:27</sys_updated_on>
+        <table>x_naci_account_act_account_activation_table</table>
+    </sysevent_register>
+</record_update>

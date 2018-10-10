@@ -102,13 +102,16 @@
 								var item = {};
 								item.sysId = sysId;
 								item.number = number;
+								item.active = gr_items.active.toString();
 								item.name = name;
+															
 								item.title = title;
 								item.id_number = id_number;
 								item.stage = stage;
 								item.submitBy = submittedBy;
 								item.submitDate = submittedDate;
 								item.lastUpdate = lastUpdateDate;
+								
 								data.adminData.push(item);				 
 				}
 	}
@@ -119,7 +122,7 @@
         <sys_created_on>2018-07-12 19:48:53</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>fd9ac10ddb5b530054d8ff621f96192c</sys_id>
-        <sys_mod_count>17</sys_mod_count>
+        <sys_mod_count>27</sys_mod_count>
         <sys_name>account activation admin page scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -127,7 +130,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_fd9ac10ddb5b530054d8ff621f96192c</sys_update_name>
         <sys_updated_by>yuw5@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-10-09 15:56:13</sys_updated_on>
+        <sys_updated_on>2018-10-10 20:57:12</sys_updated_on>
         <template><![CDATA[<div class="row" id="admin_table" ng-if="c.data.adminData.length > 0">
 <div class="panel margin-bottom-small">
    <div class="panel-heading blue-panel" role="tab" id="heading_admin_Items">
@@ -172,7 +175,7 @@
          </tr>
          <tr dir-paginate="data in c.data.adminData|filter:search|orderBy:sortKey:reverse|itemsPerPage:pageSize" pagination-id="adminDataPagination">
             <td class="ritm_number">{{data.number}}</td>
-            <td class="ritm_cat_item">{{data.name}}</td>
+            <td class="ritm_cat_item">{{data.name}} <span ng-show="data.active == 'false'" style="color:red;"> (Inactive User)</span></td>
             <td class="ritm_cat_item">{{data.title}}</td>
             <td class="ritm_cat_item">{{data.id_number}}</td>
             <td class="ritm_cat_item" nowrap>
@@ -190,7 +193,7 @@
             <!--td class="ritm_cat_item">{{data.lastUpdate}}</td -->
             <td>
                <button ng-click="displayDetails(data.sysId);" class="btn btn-sm btn-primary" style="width: 70px; text-align: center;">View&#160;</button>
-               <button ng-show="data.stage == 'Completed'" class="btn btn-sm btn-primary" ng-click="report(data.requestId);" style="width: 70px; text-align: center;">Export</button>
+               <button ng-show="data.stage == 'Completed' && data.active == 'true'" class="btn btn-sm btn-primary" ng-click="report(data.requestId);" style="width: 70px; text-align: center;">Export</button>
             </td>
          </tr>
       </table>

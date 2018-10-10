@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>accountActivationFetchUserByIds</name>
+        <script><![CDATA[function accountActivationFetchUserByIds($http){
+	this.getUserList = function(sessionId, ids){
+		return new Promise(function(resolve, reject){
+			$http({
+				url: '/api/x_naci_account_act/accountactivationscoped/fetchUserByIds',
+				 method : "GET",
+				 beforeSend: function(xhr){ xhr.setRequestHeader('X-UserToken', sessionId); },
+				 headers: {'Content-Type': 'application/json'},
+				 params: {ids: ids}				
+			}).then(resolve, reject);
+		});
+	};
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>yuw5@nih.gov</sys_created_by>
+        <sys_created_on>2018-10-10 17:06:02</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>c5e34c46db85e740b86770c08c9619b1</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>accountActivationFetchUserByIds</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sp_angular_provider_c5e34c46db85e740b86770c08c9619b1</sys_update_name>
+        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-10 17:46:14</sys_updated_on>
+        <type>service</type>
+    </sp_angular_provider>
+</record_update>

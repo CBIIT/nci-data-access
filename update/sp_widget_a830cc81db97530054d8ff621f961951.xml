@@ -2,7 +2,7 @@
 <record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($scope, spUtil,accountactivationGetSubmittedRequestDataScoped, accountActivationcommentStringUitlScoped, accountActivationUtilScoped) {
+        <client_script><![CDATA[function($scope, spUtil,accountactivationGetSubmittedRequestDataScoped, accountActivationcommentStringUitlScoped, accountActivationUtilScoped,accountActivationFetchUserByIds) {
   /* widget controller */
   var c = this;
 	var sessionId = c.data.info.sessionId;
@@ -37,9 +37,58 @@
 		$('#proposalDetail').modal('show');		
 	};
 	
-	$scope.report = function(requestId){
-				alert("Under Construction!");
-			};
+	$scope.report = function(requestId, sdso, updatedDate){
+		var ids = requestId + '|' + sdso;
+		accountActivationFetchUserByIds.getUserList(sessionId,ids).then(function(res){
+			var tmp = res.data.result;
+			var requestor = {};
+			var sdsor = {};
+			tmp.forEach(function(elem){
+				if(elem.id == requestId){
+					requestor.name = elem.value;
+					requestor.id = elem.id_number;
+					requestor.email = elem.email;
+				}
+				else if(elem.id == sdso){
+					sdsor.name = elem.value;
+					sdsor.id = elem.id_number;
+					sdsor.email = elem.email;
+				}
+			});
+			var doc = new jsPDF('p', 'pt');
+			var body = [];
+			body.push({
+				date: updatedDate,
+				r_name:requestor.name,
+				r_id:requestor.id,
+				r_email:requestor.email,
+				s_name:sdsor.name,
+				s_id:sdsor.id,
+				s_email:sdsor.email
+			});
+			//var body = [{date:'10/12/2018',r_name:'Wu Ye',r_id:'234',r_email:'wuye@mail.nih.gov',s_name:'Tony Kerverage',s_id:'22',s_email:'tonyk@nih.gov'}];
+			var head = [{date:'date',r_name:'r_name',r_id:'r_id',r_email:'r_email',s_name:'s_name',s_id:'r_id',s_email:'s_email'},{date:'date',r_name:'r_name',r_id:'r_id',r_email:'r_email',s_name:'s_name',s_id:'r_id',s_email:'s_email'}];
+			head[0]['date'] = {content: 'DATE', rowSpan: 2, styles: {valign: 'middle', halign: 'center',cellWidth:70}};
+			head[0]['r_name'] = {content: 'REQUESTOR\'S', colSpan: 3, styles: {halign: 'center'}};
+			head[0]['s_name'] = {content: 'SIGNING OFFICAL\'S', colSpan: 3, styles: {halign: 'center'}};
+			head[1]['r_name'] = {content: 'NAME', colSpan: 1, styles: {halign: 'center',cellWidth:70}};
+			head[1]['r_id'] = {content: 'ID NUMBER', colSpan: 1, styles: {halign: 'center',cellWidth:70}};
+			head[1]['r_email'] = {content: 'EMAIL ADDRESS', colSpan: 1, styles: {halign: 'center'}};
+			head[1]['s_name'] = {content: 'NAME', colSpan: 1, styles: {halign: 'center',cellWidth:70}};
+			head[1]['s_id'] = {content: 'ID NUMBER', colSpan: 1, styles: {halign: 'center',cellWidth:70}};
+			head[1]['s_email'] = {content: 'EMAIL ADDRESS', colSpan: 1, styles: {halign: 'center'}};
+			doc.autoTable({
+					startY: 60,
+					head: head,
+					body: body,
+					headStyles: {fillColor: [11, 77, 134],lineWidth: 1, lineColor: 5,textColor: [255,255,255]},
+					bodyStyles: {lineWidth: 1, lineColor: 5}
+			});
+			doc.save('dbGap-report.pdf');
+		},function(error){
+			console.log(error);
+		});
+	};
 	
 	spUtil.recordWatch($scope, "x_naci_account_act_account_activation_table", "", function() {  
 		spUtil.update($scope);
@@ -75,6 +124,7 @@
 			gr_items.addQuery("short_description", "CBIIT Account Activation Application");
       //gr_items.addQuery('opened_by', userId);
       gr_items.addQuery('manager', userId);
+			gr_items.addQuery('active',true);
 			gr_items.orderByDesc('number');  
 			gr_items.query();
 			while (gr_items.next()){
@@ -112,6 +162,8 @@
             item.submitBy = submittedBy;
             item.submitDate = submittedDate;
             item.lastUpdate = lastUpdateDate;
+						item.requestor = gr_items.u_requested_for.toString();
+						item.sdso = gr_items.sdso.toString();
             data.dsReviewedData.push(item);				 
 				}
 			}
@@ -122,7 +174,7 @@
         <sys_created_on>2018-07-12 14:23:51</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>a830cc81db97530054d8ff621f961951</sys_id>
-        <sys_mod_count>30</sys_mod_count>
+        <sys_mod_count>36</sys_mod_count>
         <sys_name>Account Activation DS reviewed Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -130,7 +182,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_a830cc81db97530054d8ff621f961951</sys_update_name>
         <sys_updated_by>yuw5@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-10-09 15:56:32</sys_updated_on>
+        <sys_updated_on>2018-10-10 19:31:36</sys_updated_on>
         <template><![CDATA[<div class="row" id="ds_reviewed_table" ng-if="c.data.dsReviewedData.length > 0">
 <div class="panel margin-bottom-small">
    <div class="panel-heading blue-panel" role="tab" id="heading_ds_reviewed_Items">
@@ -193,7 +245,7 @@
             <!--td class="ritm_cat_item">{{data.lastUpdate}}</td -->
             <td>
                <button ng-click="displayDetails(data.sysId);" class="btn btn-sm btn-primary" style="width: 70px; text-align: center;">View&#160;</button>
-               <button ng-show="data.stage == 'Completed'" class="btn btn-sm btn-primary" ng-click="report(data.requestId);" style="width: 70px; text-align: center;">Export</button>
+               <button ng-show="data.stage == 'Completed'" class="btn btn-sm btn-primary" ng-click="report(data.requestor, data.sdso, data.lastUpdate);" style="width: 70px; text-align: center;">Export</button>
             </td>
          </tr>
       </table>

@@ -32,12 +32,12 @@
         <sys_created_by>zhoujim@nih.gov</sys_created_by>
         <sys_created_on>2018-10-09 20:58:17</sys_created_on>
         <sys_id>1effa36ddb09a740b86770c08c961986</sys_id>
-        <sys_mod_count>5</sys_mod_count>
-        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-10-09 21:01:02</sys_updated_on>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-10 18:07:50</sys_updated_on>
         <table>x_naci_account_act_account_activation_table</table>
         <timezone/>
-        <validated>false</validated>
+        <validated>true</validated>
         <workflow display_value="CBIIT_Data_Access_workflow">f01f8e6edb76930054d8ff621f96197c</workflow>
     </wf_workflow_version>
     <wf_workflow action="INSERT_OR_UPDATE">

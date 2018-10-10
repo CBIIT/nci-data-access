@@ -46,10 +46,6 @@
 
 	};
 	
-	$scope.report = function(requestId){
-		alert("Under Construction!");
-	};
-	
 	function hideError(){
 		$('#commentsText').css('background-color', '');
 		$('#errMsg').html("");
@@ -91,6 +87,7 @@
 	gr_items.addQuery('short_description', 'CBIIT Account Activation Application');
     //gr_items.addQuery('opened_by', userId);
     gr_items.addQuery('manager', userId);
+		gr_items.addQuery('active',true);
     gr_items.orderByDesc('number');
     gr_items.query();
 
@@ -141,7 +138,7 @@
         <sys_created_on>2018-07-10 19:45:13</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>a496f298db1f534054d8ff621f96193e</sys_id>
-        <sys_mod_count>47</sys_mod_count>
+        <sys_mod_count>51</sys_mod_count>
         <sys_name>Account Activate DS approval page scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -149,7 +146,7 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_a496f298db1f534054d8ff621f96193e</sys_update_name>
         <sys_updated_by>yuw5@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-10-09 15:55:41</sys_updated_on>
+        <sys_updated_on>2018-10-10 19:31:51</sys_updated_on>
         <template><![CDATA[<div class="row" id="ds_review_table" ng-if="c.data.dsData.length > 0">
 <p>
   The person(s) below is requesting permission to create an account which will allow them to apply for controlled-access data through dbGaP. As the Direct Supervisor, please review this request. <br/>
@@ -216,7 +213,7 @@
             <!--td class="ritm_cat_item">{{data.lastUpdate}}</td -->
             <td>
                <button ng-click="displayDetails(data.sysId);" class="btn btn-sm btn-primary" style="width: 70px; text-align: center;">View&#160;</button>
-               <button ng-show="data.stage == 'Completed'" class="btn btn-sm btn-primary" ng-click="report(data.requestId);" style="width: 70px; text-align: center;">Export</button>
+               <!--<button ng-show="data.stage == 'Completed'" class="btn btn-sm btn-primary" ng-click="report(data.requestor, data.sdso, data.lastUpdate);" style="width: 70px; text-align: center;">Export</button>-->
             </td>
          </tr>
       </table>

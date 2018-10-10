@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sysauto_script">
+    <sysauto_script action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <condition/>
+        <conditional>false</conditional>
+        <name>dbGaP inactive user</name>
+        <run_as display_value="Jim Zhou">7acff4a96f6f2100e04fd15eae3ee451</run_as>
+        <run_as_tz/>
+        <run_dayofmonth>1</run_dayofmonth>
+        <run_dayofweek>1</run_dayofweek>
+        <run_period/>
+        <run_start>2018-10-10 19:08:45</run_start>
+        <run_time>1970-01-01 17:00:00</run_time>
+        <run_type>weekly</run_type>
+        <script><![CDATA[var requestors = [];
+var inactiveList = [];
+var sysids = [];
+
+var gr_items = new GlideRecord("x_naci_account_act_account_activation_table");
+gr_items.addQuery("short_description", "CBIIT Account Activation Application");
+gr_items.query();
+while (gr_items.next()){
+	var sysId = gr_items.sys_id.toString();
+	var requestor = gr_items.u_requested_for.toString();
+	if(requestors.indexOf(requestor) == -1){
+		requestors.push(requestor);
+	}
+	sysids.push(sysId);
+}
+
+for(var i = 0; i< requestors.length; i++){
+	var user_item = new GlideRecord('sys_user');
+		user_item.addQuery('sys_id', requestors[i]);
+		user_item.query();
+		if(!user_item.hasNext()) { 
+			inactiveList.push(requestors[i]);
+		}
+}
+
+for(var j = 0; j < sysids.length; j++){
+	var gr3 = new GlideRecord('x_naci_account_act_account_activation_table');
+	gr3.addQuery('sys_id', sysids[j]);
+	gr3.query();
+	gr3.next();
+	var req = gr3.u_requested_for.toString();
+	if(inactiveList.indexOf(req) > -1){
+		gr3.active = false;
+	}
+	else{
+		gr3.active = true;
+	}
+	gr3.update();
+}
+
+
+]]></script>
+        <sys_class_name>sysauto_script</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-10-10 19:09:12</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>777060cedb892b4054d8ff621f96190f</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>dbGaP inactive user</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>sysauto_script_777060cedb892b4054d8ff621f96190f</sys_update_name>
+        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-10 20:43:27</sys_updated_on>
+        <upgrade_safe>false</upgrade_safe>
+    </sysauto_script>
+</record_update>
