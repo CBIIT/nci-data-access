@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="m2m_sp_dependency_js_include">
+    <m2m_sp_dependency_js_include action="INSERT_OR_UPDATE">
+        <order>100</order>
+        <sp_dependency display_value="dirPagination dbgap">bf4e94dadbc12b40b86770c08c96197b</sp_dependency>
+        <sp_js_include display_value="jspdf dbgap">93e1e09edbc12b40b86770c08c961945</sp_js_include>
+        <sys_class_name>m2m_sp_dependency_js_include</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-10-11 13:54:02</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>1702a45edbc12b40b86770c08c961908</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>dirPagination dbgap.jspdf dbgap</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_update_name>m2m_sp_dependency_js_include_1702a45edbc12b40b86770c08c961908</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-11 13:54:02</sys_updated_on>
+    </m2m_sp_dependency_js_include>
+</record_update>

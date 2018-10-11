@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sp_js_include">
+    <sp_js_include action="INSERT_OR_UPDATE">
+        <display_name>jspdf dbgap</display_name>
+        <source>local</source>
+        <sys_class_name>sp_js_include</sys_class_name>
+        <sys_created_by>zhoujim@nih.gov</sys_created_by>
+        <sys_created_on>2018-10-11 13:54:02</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>93e1e09edbc12b40b86770c08c961945</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>jspdf dbgap</sys_name>
+        <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
+        <sys_ui_script display_value="x_naci_account_act.jspdf_js">7a50205edbc12b40b86770c08c961958</sys_ui_script>
+        <sys_update_name>sp_js_include_93e1e09edbc12b40b86770c08c961945</sys_update_name>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-10-11 13:54:02</sys_updated_on>
+        <url/>
+    </sp_js_include>
+</record_update>
