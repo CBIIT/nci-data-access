@@ -6,12 +6,15 @@
         <script><![CDATA[(function runMailScript(current, template, email, email_action, event) {
 	 
 	   var id = '';
+	   var role = '';
 	   if(current.stage.toString() == 'Waiting for DS Review' || current.stage.toString() == 'Rejected by SD/SO-Waiting for DS Review'){
 		   id = current.manager.toString();
+		   role = 'Direct Supervisor';
 	   }else if(current.stage.toString() == 'Waiting for SD/SO Review'){
 		   id = current.sdso.toString();
+		   role = 'Signing Official';
 	   }
-	
+	  
 	   var user = new GlideRecord('sys_user');
 	       user.addQuery('sys_id', id);
 	       user.query();
@@ -29,8 +32,8 @@
 	   var requester_email = user1.email.toString();
 	
        template.print("This is an automated message from the dbGaP (Database of Genotype and Phenotypes) Account Request System. Do not reply back to this message or send email to <a href='mailto:" + requester_email + "'> " + requester_email +"</a> <br/><br/>");
-       template.print(name + " is requesting to create an account which will allow them to apply for controlled-access data through dbGaP. This is a reminder that the request was submitted more than a week ago. Please click the <a href='"+  dbgap_url+"'>dbGaP Account Activation </a> to review this request to create an account. <br/><br/>");
-       template.print("***NOTE: This is not an application to access controlled datasets stored in dbGaP. Once approved the requestor will need to submit a data access request for specific datasets ***");	
+       template.print(name + " is requesting permission to create an account which will allow them to apply for controlled-access data through dbGaP. As the " + role + ", Please click the <a href='"+  dbgap_url+"'>dbGaP Account Activation </a> to review the request. <br/><br/>");
+       template.print("***NOTE: This is not an application to access controlled datasets stored in dbGaP.***");	
       
 
 })(current, template, email, email_action, event);]]></script>
@@ -39,7 +42,7 @@
         <sys_created_on>2018-10-10 20:15:38</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>93cf2c8adbc92b4054d8ff621f9619e2</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>x_naci_account_act_account_activation_table_script_1</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -47,6 +50,6 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sys_script_email_93cf2c8adbc92b4054d8ff621f9619e2</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-10-10 21:20:49</sys_updated_on>
+        <sys_updated_on>2018-10-12 19:06:46</sys_updated_on>
     </sys_script_email>
 </record_update>

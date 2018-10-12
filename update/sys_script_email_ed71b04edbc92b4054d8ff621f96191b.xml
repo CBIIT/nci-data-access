@@ -22,7 +22,11 @@
 	var mName = user.name.toString();
 	var mEmail = user.email.toString();
 	
-	template.print('Your request has been submitted for ' + role + ' review. However, your request has not been reviewed in the past three weeks. Please contact ' + mName + '(<a href="mailto:' + mEmail + '">' + mEmail + '</a>) to request review.');
+	template.print('The person listed as your ' + role + ' has not viewed your request an account to access controlled-access data in the database of Genotypes and Phenotypes (dbGaP). Please contact ' + mName + '(<a href="mailto:' + mEmail + '">' + mEmail + '</a>) about reviewing your request.<br/><br/>');
+	template.print('Thank you, <br/><br/>');
+	template.print('NCI Office of Data Sharing<br/>');
+	template.print('Center for Biomedical Informatics and Information Technology (CBIIT) <br/>');
+	template.print('<a hred="mailto:NCIOfficeofDataSharing@mail.nih.gov">NCIOfficeofDataSharing@mail.nih.gov</a>');
 
 })(current, template, email, email_action, event);]]></script>
         <sys_class_name>sys_script_email</sys_class_name>
@@ -30,7 +34,7 @@
         <sys_created_on>2018-10-10 20:22:53</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>ed71b04edbc92b4054d8ff621f96191b</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>x_naci_account_act_account_activation_table_script_2</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
@@ -38,6 +42,6 @@
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sys_script_email_ed71b04edbc92b4054d8ff621f96191b</sys_update_name>
         <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-10-10 21:49:40</sys_updated_on>
+        <sys_updated_on>2018-10-12 19:18:07</sys_updated_on>
     </sys_script_email>
 </record_update>
