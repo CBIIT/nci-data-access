@@ -2,7 +2,7 @@
 <record_update sys_domain="global" table="sys_ui_module">
     <sys_ui_module action="INSERT_OR_UPDATE">
         <active>true</active>
-        <application display_value="Account Activation">2ff4c4c0dbb29f00f59974131f9619c5</application>
+        <application display_value="dbGaP Account Activation">2ff4c4c0dbb29f00f59974131f9619c5</application>
         <filter/>
         <name>Account Activation Saved Requests</name>
         <order/>
