@@ -13,17 +13,17 @@
         <sys_created_on>2018-09-24 16:59:19</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>8e19a9b8db38ab0054d8ff621f96194c</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>x_naci_account_act.dbgap_url</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sys_properties_8e19a9b8db38ab0054d8ff621f96194c</sys_update_name>
-        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-09-24 16:59:19</sys_updated_on>
+        <sys_updated_by>buhlnk@nih.gov</sys_updated_by>
+        <sys_updated_on>2018-12-14 16:24:08</sys_updated_on>
         <type>string</type>
-        <value>https://service-dev2.nci.nih.gov/dbgap-aa</value>
+        <value>https://service.cancer.gov/dbgap-aa</value>
         <write_roles/>
     </sys_properties>
     <sys_translated_text action="delete_multiple" query="documentkey=8e19a9b8db38ab0054d8ff621f96194c"/>
