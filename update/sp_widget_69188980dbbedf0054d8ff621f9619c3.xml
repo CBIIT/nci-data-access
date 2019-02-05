@@ -7,7 +7,11 @@
   var c = this;
   var sessionId = c.data.info.sessionId;
 	var userId = c.data.info.userId;
-	
+	var divisions = [];
+	accountActivationGetApproverList.getApproverList(c.data.info.sessionId).then(function(res) {
+					divisions = res.data.result;
+	});
+
 	$scope.form = {
 		name:"",
 		user_sys_id:"",
@@ -162,7 +166,7 @@
 				if(abbr.toUpperCase() == 'OD'){
 					abbr = temp[2];
 				}
-				var exist = accountActivationConstantScoped.checkDivision(abbr);
+				var exist = accountActivationConstantScoped.checkDivision(divisions, abbr);
 				if(!exist){
 				 $('#userCheckMessage').html("The Division is not NCI Division.");	
 				 $('#userCheckDiv').modal('show');					
@@ -535,15 +539,15 @@ fieldset.scheduler-border {
         <sys_created_on>2018-06-14 20:32:36</sys_created_on>
         <sys_customer_update>false</sys_customer_update>
         <sys_id>69188980dbbedf0054d8ff621f9619c3</sys_id>
-        <sys_mod_count>350</sys_mod_count>
+        <sys_mod_count>365</sys_mod_count>
         <sys_name>Account Activation Form Scoped</sys_name>
         <sys_package display_value="Account Activation" source="x_naci_account_act">cff40c40dbb29f00f59974131f961939</sys_package>
         <sys_policy/>
         <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
         <sys_scope display_value="Account Activation">cff40c40dbb29f00f59974131f961939</sys_scope>
         <sys_update_name>sp_widget_69188980dbbedf0054d8ff621f9619c3</sys_update_name>
-        <sys_updated_by>yuw5@nih.gov</sys_updated_by>
-        <sys_updated_on>2018-10-10 18:49:48</sys_updated_on>
+        <sys_updated_by>zhoujim@nih.gov</sys_updated_by>
+        <sys_updated_on>2019-02-05 18:21:38</sys_updated_on>
         <template><![CDATA[<div>
   <div id="permissionForm" class="modal fade" data-keyboard="false" data-backdrop="static" style="overflow-y:auto; overflow-x: auto;">   
 	<div class="modal-dialog1">
